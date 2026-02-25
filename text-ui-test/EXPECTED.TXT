@@ -8,6 +8,7 @@ Secure the Keys, Secure the Dream
 I am FinBro's brother, FinTrack Pro!
 What is your name?
 Nice to meet you, James Gosling!
+
 Hang tight... I have a few questions for you.
 What is the total amount that you and your partner have to pay for the downpayment? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
