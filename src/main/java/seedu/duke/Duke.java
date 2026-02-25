@@ -5,11 +5,12 @@ import java.time.Period;
 import java.util.Scanner;
 
 /**
- * FintrackPro is a CLI program that helps users estimate savings required for their share of a BTO downpayment.
+ * Duke is running Fintrackpro, a CLI program that helps users
+ * estimate savings required for their share of a BTO downpayment.
  */
-public class FintrackPro {
+public class Duke {
     /**
-     * Runs the FintrackPro program.
+     * Runs the Duke program which runs Fintrackpro
      */
     public static void main(String[] args) {
         String logo = """
@@ -54,9 +55,9 @@ public class FintrackPro {
         System.out.println("\nYou can now type anything you want");
         System.out.println("Type 'bye' to exit! \n");
 
-        while(true) {
+        while (true) {
             String input = in.nextLine();
-            if (input.equalsIgnoreCase("bye")){
+            if (input.equalsIgnoreCase("bye")) {
                 System.out.println("Goodbye " + name + ". Stay disciplined and get that house that you always wanted!");
                 break;
             }
