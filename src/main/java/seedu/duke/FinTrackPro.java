@@ -144,7 +144,18 @@ public class FinTrackPro {
 
     private void handleDelete(String userInput){
         String rest = userInput.substring("delete".length()).trim();
+
+        if (!rest.matches("\\d+")) {
+            ui.printLine("Format: delete <number-on-list> bruh its not that hard");
+            return;
+        }
+
         int index = Integer.parseInt(rest);
+
+        if (!expenseList.isValidIndex(index)) {
+            ui.printLine("Invalid index bro! do you even know how much you've spent?");
+            return;
+        }
 
         BigDecimal removed = expenseList.delete(index);
 
