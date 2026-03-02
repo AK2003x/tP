@@ -10,16 +10,16 @@ What is your name?
 Nice to meet you, James Gosling!
 
 Hang tight... I have a few questions for you.
-What is the total value  that you and your partner have to pay for the house? (in dollars)
+What is the total value that you and your partner have to pay for the house? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total value  that you and your partner have to pay for the house? (in dollars)
+What is the total value that you and your partner have to pay for the house? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total value  that you and your partner have to pay for the house? (in dollars)
+What is the total value that you and your partner have to pay for the house? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total value  that you and your partner have to pay for the house? (in dollars)
+What is the total value that you and your partner have to pay for the house? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total value  that you and your partner have to pay for the house? (in dollars)
-Sweeeett. Including legal fees, you will need $1,522.50
+What is the total value that you and your partner have to pay for the house? (in dollars)
+Sweeeett. Including legal fees, you will need $1,522.50 for the initial downpayment phase
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
 Deadline must be a future date. Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
@@ -40,4 +40,8 @@ You said: hello
 'salary' - view and update your monthly salary
 'savings' - view and update your total current savings
 'ratio' - view and update your individual BTO contribution share
+'list' - view all current expenses
+'goal' <amount> - view and update your monthly spending goal
+'clear' - wipe all current expenses from the list
+'summary' - generate your BTO readiness report based on your goals
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!

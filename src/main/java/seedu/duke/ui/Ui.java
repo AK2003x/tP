@@ -42,5 +42,9 @@ public class Ui {
         printLine("'salary' - view and update your monthly salary");
         printLine("'savings' - view and update your total current savings");
         printLine("'ratio' - view and update your individual BTO contribution share");
+        printLine("'list' - view all current expenses");
+        printLine("'goal' <amount> - view and update your monthly spending goal");
+        printLine("'clear' - wipe all current expenses from the list");
+        printLine("'summary' - generate your BTO readiness report based on your goals");
     }
 }

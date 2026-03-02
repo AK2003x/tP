@@ -21,6 +21,7 @@ public class ExpenseList {
         total = total.subtract(removed.getAmount());
         return removed;
     }
+
     public BigDecimal getTotal(){
         return total;
     }
@@ -35,4 +36,16 @@ public class ExpenseList {
         return expenses.size();
     }
 
+    public boolean isEmpty() {
+        return expenses.isEmpty();
+    }
+
+    public Expense get(int index) {
+        return expenses.get(index);
+    }
+
+    public void clear() {
+        expenses.clear();
+        total = BigDecimal.ZERO;
+    }
 }

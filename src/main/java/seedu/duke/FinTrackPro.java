@@ -35,14 +35,16 @@ public class FinTrackPro {
 
         // Initial goal setup
         BigDecimal goal = InputUtil.readMoney(ui, in,
-                "What is the total value  that you and your partner have to pay for "
+                "What is the total value that you and your partner have to pay for "
                         + "the house? (in dollars)");
 
         BigDecimal legalFees = goal.multiply(new BigDecimal("1.1"));
         BigDecimal totalRequired = goal.add(legalFees);
 
         ui.printLine("Sweeeett. Including legal fees, you will need "
-                + InputUtil.formatMoney(totalRequired));
+                + InputUtil.formatMoney(totalRequired) + " for the initial downpayment phase");
+
+        profile.setBtoGoal(totalRequired);
 
         // Deadline Handling
         LocalDate deadline = InputUtil.readFutureDate(
@@ -101,6 +103,18 @@ public class FinTrackPro {
             break;
         case "delete":
             handleDelete(userInput);
+            break;
+        case "list":
+            printList();
+            break;
+        case "goal":
+            handleGoal(userInput);
+            break;
+        case "clear":
+            handleClear(in);
+            break;
+        case "summary":
+            handleSummary();
             break;
         default:
             ui.printLine("You said: " + userInput);
@@ -164,6 +178,74 @@ public class FinTrackPro {
         ui.printLine("Deleted expense #" + index + ": $" + removed.getAmount());
         ui.printLine("Current Total: $" + expenseList.getTotal());
     }
+
+    private void handleClear(Scanner in) {
+        ui.printLine("WARNING: This will permanently delete ALL expenses. Are you sure? (Y/N)");
+        String response = in.nextLine().trim().toLowerCase();
+        if (response.equals("y")) {
+            expenseList.clear();
+            ui.printLine("Expense list has been wiped clean. Fresh start!");
+        } else {
+            ui.printLine("Clear cancelled. Your data is still there, bro.");
+        }
+    }
+
+    private void printList(){
+        if (expenseList.isEmpty()) {
+            ui.printLine("Your expense list is as empty as my wallet. Go spend some money!");
+            return;
+        }
+
+        ui.printLine("Here is your current expenditure list!");
+
+        for (int i = 0; i < expenseList.size(); i++) {
+            Expense expense = expenseList.get(i);
+            String formattedAmount = InputUtil.formatMoney(expense.getAmount());
+            ui.printLine((i + 1) + ". " + formattedAmount);
+        }
+
+        BigDecimal totalSpent = expenseList.getTotal();
+        ui.printLine("Total Expenditure: $" +  expenseList.getTotal());
+
+        BigDecimal goal = profile.getSpendingGoal();
+        if (totalSpent.compareTo(goal) > 0) {
+            ui.printLine("Alert: You've already exceeded your goal by "
+                    + InputUtil.formatMoney(totalSpent.subtract(goal)) + "!");
+        }
+    }
+
+    private void handleGoal(String userInput) {
+        String rest = userInput.substring("goal".length()).trim();
+
+        if (rest.isEmpty()) {
+            ui.printLine("Current spending goal: " + InputUtil.formatMoney(profile.getSpendingGoal()));
+            ui.printLine("To update, use: goal <amount>");
+            return;
+        }
+
+        BigDecimal newGoal;
+        try {
+            newGoal = new BigDecimal(rest);
+        } catch (NumberFormatException e) {
+            ui.printLine("Invalid amount! 'goal " + rest + "' is not a number, bro.");
+            return;
+        }
+
+        if (newGoal.compareTo(BigDecimal.ZERO) < 0) {
+            ui.printLine("Goal cannot be negative! You can't budget for negative money!!.");
+            return;
+        }
+
+        profile.setSpendingGoal(newGoal);
+        ui.printLine("Spending goal updated to: " + InputUtil.formatMoney(newGoal));
+
+        BigDecimal totalSpent = expenseList.getTotal();
+        if (totalSpent.compareTo(newGoal) > 0) {
+            ui.printLine("Alert: You've already exceeded this goal by "
+                    + InputUtil.formatMoney(totalSpent.subtract(newGoal)) + "!");
+        }
+    }
+
     private void handleSalary(Scanner in) {
         // Show previous input
         BigDecimal current = profile.getMonthlySalary();
@@ -200,5 +282,39 @@ public class FinTrackPro {
         } catch (NumberFormatException e) {
             ui.printLine("Invalid input. Ratio remains at " + (current * 100) + "%.");
         }
+    }
+
+    private void handleSummary() {
+        BigDecimal btoGoal = profile.getBtoGoal();
+        BigDecimal currentSavings = profile.getCurrentSavings();
+        BigDecimal monthlySalary = profile.getMonthlySalary();
+        BigDecimal totalSpent = expenseList.getTotal();
+
+        BigDecimal distance = btoGoal.subtract(currentSavings);
+        BigDecimal monthlySurplus = monthlySalary.subtract(totalSpent);
+
+        int percentage = 0;
+        if (btoGoal.compareTo(BigDecimal.ZERO) > 0) {
+            percentage = currentSavings.multiply(new BigDecimal("100"))
+                    .divide(btoGoal, 0, BigDecimal.ROUND_HALF_UP)
+                    .intValue();
+        }
+
+        String estimate;
+        if (distance.compareTo(BigDecimal.ZERO) <= 0) {
+            estimate = "Reached! Go get that BTO!";
+        } else if (monthlySurplus.compareTo(BigDecimal.ZERO) <= 0) {
+            estimate = "Infinite (Surplus is $0 or negative!)";
+        } else {
+            int months = distance.divide(monthlySurplus, 0, BigDecimal.ROUND_CEILING).intValue();
+            estimate = months + " months";
+        }
+
+        ui.printLine("======= BTO Readiness Report ====");
+        ui.printLine("Current Goal: " + InputUtil.formatMoney(btoGoal) + " (your share + fees)");
+        ui.printLine("Current Savings: " + InputUtil.formatMoney(currentSavings) + " (" + percentage + "% reached)");
+        ui.printLine("Distance to Goal: " + InputUtil.formatMoney(distance));
+        ui.printLine("Monthly Surplus: " + InputUtil.formatMoney(monthlySurplus));
+        ui.printLine("Estimated Goal Achievement: " + estimate);
     }
 }
