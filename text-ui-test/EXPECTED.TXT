@@ -7,32 +7,44 @@ Secure the Keys, Secure the Dream
 
 I am FinBro's brother, FinTrack Pro!
 What is your name?
+James Gosling
 Nice to meet you, James Gosling!
 
 Hang tight... I have a few questions for you.
 What is the total value  that you and your partner have to pay for the house? (in dollars)
+1384.091
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
 What is the total value  that you and your partner have to pay for the house? (in dollars)
+abc
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
 What is the total value  that you and your partner have to pay for the house? (in dollars)
+-100
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
 What is the total value  that you and your partner have to pay for the house? (in dollars)
+[empty input]
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
 What is the total value  that you and your partner have to pay for the house? (in dollars)
-Sweeeett. Including legal fees, you will need $1,522.50
+1384.09
+Sweeeett. Including legal fees, you will need $1,522.50 for the initial downpayment phase
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
+2024-01-01
 Deadline must be a future date. Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
+31-12-2026
 Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
+2026/10/10
 Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
+2027-10-02
 You have 1 years and 7 months remaining.
 
 Type 'help' to view my currently supported commands!
 Any non-command word would be echoed back to you you you
 
+hello
 You said: hello
+help
 'bye' - exit the program
 'help' - view all current commands
 'add' <value(to 2dp)> - add expense for the month
@@ -40,4 +52,9 @@ You said: hello
 'salary' - view and update your monthly salary
 'savings' - view and update your total current savings
 'ratio' - view and update your individual BTO contribution share
+'list' - view all current expenses
+'goal' <amount> - view and update your monthly spending goal
+'clear' - wipe all current expenses from the list
+'summary' - generate your BTO readiness report based on your goals
+bye
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!
