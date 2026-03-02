@@ -10,6 +10,7 @@ public class Profile {
     private BigDecimal monthlySalary;
     private BigDecimal currentSavings;
     private BigDecimal spendingGoal;
+    private BigDecimal btoGoal;
     private double contributionRatio;
 
     /**
@@ -20,6 +21,19 @@ public class Profile {
         this.currentSavings = BigDecimal.ZERO;
         this.contributionRatio = 0.5;
         this.spendingGoal = BigDecimal.ZERO;
+        this.btoGoal = BigDecimal.ZERO;
+    }
+
+    /**
+     * Updates the user's bto goal.
+     * @param btoGoal The bto goal amount.
+     */
+    public void setBtoGoal(BigDecimal btoGoal) {
+        this.btoGoal = btoGoal;
+    }
+
+    public BigDecimal getBtoGoal() {
+        return btoGoal;
     }
 
     /**

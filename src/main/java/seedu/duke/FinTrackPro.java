@@ -44,6 +44,8 @@ public class FinTrackPro {
         ui.printLine("Sweeeett. Including legal fees, you will need "
                 + InputUtil.formatMoney(totalRequired) + " for the initial downpayment phase");
 
+        profile.setBtoGoal(totalRequired);
+
         // Deadline Handling
         LocalDate deadline = InputUtil.readFutureDate(
                 ui,
