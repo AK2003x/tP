@@ -1,6 +1,6 @@
 package seedu.duke.categories;
 
-public class Miscellaneous implements Expenses{
+public class Miscellaneous implements Category {
     public String getTypeIcon() {
         return "[Misc]";
     }

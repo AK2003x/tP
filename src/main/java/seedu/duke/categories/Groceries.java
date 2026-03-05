@@ -1,6 +1,6 @@
 package seedu.duke.categories;
 
-public class Groceries implements Expenses{
+public class Groceries implements Category {
     public String getTypeIcon() {
         return "[Groceries]";
     }

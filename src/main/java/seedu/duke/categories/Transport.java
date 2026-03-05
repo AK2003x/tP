@@ -1,6 +1,6 @@
 package seedu.duke.categories;
 
-public class Transport implements Expenses {
+public class Transport implements Category {
     public String getTypeIcon() {
         return "[Transport]";
     }

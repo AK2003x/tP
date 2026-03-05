@@ -10,16 +10,19 @@ What is your name?
 Nice to meet you, James Gosling!
 
 Hang tight... I have a few questions for you.
-What is the total amount that you and your partner have to pay for the downpayment? (in dollars)
+What is the total value that you and your partner have to pay for the house? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total amount that you and your partner have to pay for the downpayment? (in dollars)
+What is the total value that you and your partner have to pay for the house? (in dollars)
 Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total amount that you and your partner have to pay for the downpayment? (in dollars)
-Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total amount that you and your partner have to pay for the downpayment? (in dollars)
-Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-What is the total amount that you and your partner have to pay for the downpayment? (in dollars)
-Sweeeett. Including 2.5% legal fees, you will need $29,725.00
+What is the total value that you and your partner have to pay for the house? (in dollars)
+What is your share of the contribution? (e.g., 0.6 for 60%):
+EH WRONG FORMAT! Enter a decimal between 0 and 1 (e.g., 0.5).
+What is your share of the contribution? (e.g., 0.6 for 60%):
+EH WRONG FORMAT! Enter a decimal between 0 and 1 (e.g., 0.5).
+What is your share of the contribution? (e.g., 0.6 for 60%):
+Total downpayment needed: $1,522.50
+Based on a 60.0% share...
+Your personal contribution needed: $913.50
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
 Deadline must be a future date. Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
@@ -27,7 +30,7 @@ Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
 Date format needs to be YYYY-MM-DD (e.g., 2026-12-31). Try again.
 When do you need to save this money by? (Enter in format YYYY-MM-DD)
-You have 1 years and 7 months remaining.
+You have 1 years and 6 months remaining.
 
 Type 'help' to view my currently supported commands!
 Any non-command word would be echoed back to you you you
@@ -35,4 +38,14 @@ Any non-command word would be echoed back to you you you
 You said: hello
 'bye' - exit the program
 'help' - view all current commands
+'add' <value(to 2dp)> - add expense for the month
+'delete' <index in list> - delete the expense in the specified index
+'salary' - view and update your monthly salary
+'savings' - view and update your total current savings
+'ratio' - view and update your individual BTO contribution share
+'list' - view all current expenses
+'goal' <amount> - view and update your monthly spending goal
+'clear' - wipe all current expenses from the list
+'summary' - generate your BTO readiness report based on your goals
+'reset' - Wipes all profile data and expenses to start fresh.
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!

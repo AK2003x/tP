@@ -1,6 +1,6 @@
 package seedu.duke.categories;
 
-public class Subscription implements Expenses{
+public class Subscription implements Category {
     public String getTypeIcon() {
         return "[Subscription]";
     }

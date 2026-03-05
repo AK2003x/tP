@@ -1,6 +1,6 @@
 package seedu.duke.categories;
 
-public interface Expenses {
+public interface Category {
     public String getTypeIcon();
     public String toString();
 }
