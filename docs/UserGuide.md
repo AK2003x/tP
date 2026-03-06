@@ -15,8 +15,8 @@ FinTrack Pro was created for individual students in a relationship who are plann
 
 ## Features 
 
-* <b>View all commands:</b> [help](#viewing-help-)
-* <b>Setting monthly salary:</b> [salary](#setting-monthly-salary-)
+* <b>View all commands:</b> [help](#viewing-help-help-)
+* <b>Setting monthly salary:</b> [salary](#setting-monthly-salary-salary)
 * <b>Setting current savings:</b> [savings](#setting-current-savings-savings)
 * <b>Setting downpayment goal:</b> [goal](#setting-downpayment-goal-goal)
 * <b>Setting ratio:</b> [ratio](#setting-ratio-ratio)
@@ -28,7 +28,12 @@ FinTrack Pro was created for individual students in a relationship who are plann
 * <b>Clearing all entries:</b> [clear](#clearing-all-entries-clear)
 * <b>Exiting the program:</b> [exit](#exiting-the-program-exit)
 
-### Viewing Help ```help ```
+Additional Help:
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+* [Enquiry](#enquiry)
+
+### Viewing Help: ```help ```
 Shows a message explaining how to access the help page, lists all commands. 
 
 <b>Format:</b> help <br>
