@@ -116,6 +116,7 @@ public class FinTrackPro {
         // 1. Name handling
         String name = ui.readLine(in, "What is your name?");
         name = name.isEmpty() ? "friend" : name.trim();
+        ui.printLine("");
         ui.greet(name);
 
         ui.printLine("");
@@ -123,18 +124,22 @@ public class FinTrackPro {
 
         // Prompt for monthly salary, current savings, total value of BTO & individual contribution ratio
         BigDecimal savings = InputUtil.readMoney(ui, in, "How much do you currently have in savings?");
+        ui.printLine("");
         profile.setCurrentSavings(savings);
 
         BigDecimal salary = InputUtil.readMoney(ui, in, "What is your monthly salary? (in dollars)");
+        ui.printLine("");
         profile.setMonthlySalary(salary);
 
         BigDecimal housePrice = InputUtil.readMoney(ui, in,
                 "What is the total value that you and your partner have to pay for "
                         + "the house? (in dollars)");
+        ui.printLine("");
 
         BigDecimal newRatio = InputUtil.readRatio(ui, in,
                 "What is your share of the contribution? (e.g., 0.6 for 60%):");
         profile.setContributionRatio(newRatio);
+        ui.printLine("");
 
         // Calculate individual share of user's downpayment
         BigDecimal downPayment = housePrice.multiply(new BigDecimal("0.025"));
@@ -145,11 +150,13 @@ public class FinTrackPro {
         ui.printLine("Total downpayment needed: " + InputUtil.formatMoney(totalDownpayment));
         ui.printLine("Based on a " + newRatio.multiply(new BigDecimal("100")) + "% share...");
         ui.printLine("Your personal contribution needed: " + InputUtil.formatMoney(yourShare));
+        ui.printLine("");
 
         profile.setBtoGoal(yourShare);
 
         // Deadline Handling
         LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by? (e.g., 2028-10-24)");
+        ui.printLine("");
         profile.setDeadline(deadline);
 
         LocalDate today = LocalDate.now();
@@ -384,22 +391,26 @@ public class FinTrackPro {
     }
 
     /**
-     * Displays the user's current savings and prompts for an updated value.
+     * Adds a specified amount to the user's current total savings.
      *
-     * <p>Uses {@link InputUtil#readMoney(Ui, Scanner, String)} for input parsing and validation.</p>
-     *
-     * @param in Scanner used to read the user's savings input.
+     * @param in Scanner used to read the user's deposit input.
      */
     private void handleSavings(Scanner in) {
-        // Show previous input
         BigDecimal current = profile.getCurrentSavings();
         ui.printLine("Current total savings: " + InputUtil.formatMoney(current));
 
-        // Prompt for update
-        BigDecimal newAmount = InputUtil.readMoney(ui, in, "Enter your new total savings:");
-        profile.setCurrentSavings(newAmount);
+        // Prompt for the amount to add
+        BigDecimal depositAmount = InputUtil.readMoney(ui, in, "Enter amount to add to your savings:");
 
-        ui.printLine("Savings successfully updated to: " + InputUtil.formatMoney(newAmount));
+        // Update profile by adding to the current balance
+        BigDecimal updatedSavings = current.add(depositAmount);
+        profile.setCurrentSavings(updatedSavings);
+
+        ui.printLine("");
+        ui.printLine("Transaction successful!");
+        ui.printLine("Added: " + InputUtil.formatMoney(depositAmount));
+        ui.printLine("New total savings: " + InputUtil.formatMoney(updatedSavings));
+        ui.printLine("");
     }
 
     /**
