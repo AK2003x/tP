@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 /**
  * Manages the user's personal financial data, including income, savings,
- * and specific targets for BTO downpayment planning.
+ * and specific targets for BTO down payment planning.
  */
 public class Profile {
     private String name = "friend";

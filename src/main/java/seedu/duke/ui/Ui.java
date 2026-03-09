@@ -78,8 +78,6 @@ public class Ui {
 
         // Daily Transaction Commands
         printLine("'add'      <amount> - add a new expense (e.g., add 5.50)");
-        printLine("'category' <index> <type> - assign a category to an expense");
-        printLine("[Valid types: FOOD, TRANSPORT, GROCERIES, SUBSCRIPTION, OTHER]");
         printLine("'list'     - view all current expenses and your total spent");
         printLine("'delete'   <index> - remove a specific expense from your list");
         printLine("");

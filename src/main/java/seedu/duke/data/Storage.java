@@ -51,9 +51,8 @@ public class Storage {
         // Save Expenses (E)
         for (int i = 0; i < expenseList.size(); i++) {
             Expense e = expenseList.get(i);
-            fw.write(String.format("E | %s | %s%n",
-                    e.getAmount(),
-                    e.getCategory()));
+            fw.write(String.format("E | %s ",
+                    e.getAmount()));
         }
 
         fw.close();
@@ -91,7 +90,6 @@ public class Storage {
                 profile.setDeadline(java.time.LocalDate.parse(parts[6]));
             } else if (parts[0].equals("E")) {
                 expenseList.add(new BigDecimal(parts[1]));
-                expenseList.get(expenseList.size() - 1).setCategory(parts[2]);
             }
         }
         s.close();
