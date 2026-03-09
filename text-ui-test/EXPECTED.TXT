@@ -29,6 +29,7 @@ You have 1 years and 6 months remaining.
 
 Type 'help' to view my currently supported commands!
 Any non-command word would be echoed back to you you you
+Type 'bye' to exit!
 
 You said: hello
 'help'    - view all current commands
@@ -36,8 +37,6 @@ You said: hello
 'bye'     - exit the program
 
 'add'      <amount> - add a new expense (e.g., add 5.50)
-'category' <index> <type> - assign a category to an expense
-[Valid types: FOOD, TRANSPORT, GROCERIES, SUBSCRIPTION, OTHER]
 'list'     - view all current expenses and your total spent
 'delete'   <index> - remove a specific expense from your list
 
@@ -56,10 +55,10 @@ Added expense: $5
 Current Total: $5
 Format: add <value(to 2dp)> bro! where is the MONEHHHH
 Amount cannot be negative bro who you trying to scam?
-Donezzzz. Category FOOD assigned to expense #1
-Format: category <number-on-list> <category> bruh its not that hard
-Invalid category! Valid categories: FOOD, GROCERIES, OTHER, SUBSCRIPTION, TRANSPORT
+You said: category 1 FOOD
+You said: category 1
+You said: category 1 HELLO
 Here is your current expenditure list!
-1. $5.00 [FOOD]
+1. $5.00
 Total Expenditure: $5
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!
