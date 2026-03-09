@@ -141,17 +141,14 @@ public class FinTrackPro {
         ui.printLine("");
 
         // Calculate individual share of user's downpayment
-        BigDecimal downPayment = housePrice.multiply(new BigDecimal("0.025"));
-        BigDecimal legalFees = downPayment.multiply(BigDecimal.valueOf(1.1));
-        BigDecimal totalDownpayment = downPayment.add(legalFees);
-        BigDecimal yourShare = totalDownpayment.multiply(newRatio);
+        BtoCalculator result = new BtoCalculator(housePrice, newRatio);
 
-        ui.printLine("Total downpayment needed: " + InputUtil.formatMoney(totalDownpayment));
+        ui.printLine("Total downpayment needed: " + InputUtil.formatMoney(result.totalDownpayment));
         ui.printLine("Based on a " + newRatio.multiply(new BigDecimal("100")) + "% share...");
-        ui.printLine("Your personal contribution needed: " + InputUtil.formatMoney(yourShare));
+        ui.printLine("Your personal contribution needed: " + InputUtil.formatMoney(result.yourShare));
         ui.printLine("");
 
-        profile.setBtoGoal(yourShare);
+        profile.setBtoGoal(result.yourShare);
 
         // Deadline Handling
         LocalDate deadline = InputUtil.readFutureDate(ui, in, "When do you need to save this money by?" +
