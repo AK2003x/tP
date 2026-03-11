@@ -5,6 +5,7 @@ import seedu.duke.data.Expense;
 import seedu.duke.data.ExpenseList;
 import seedu.duke.data.Storage;
 import seedu.duke.data.SummaryReport;
+import seedu.duke.exception.InvalidAmountException;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.InputUtil;
 
@@ -42,44 +43,46 @@ public class CommandHandler {
      * @param userInput Full command line entered by the user (starting with {@code add}).
      */
     public void handleAdd(String userInput) {
-        String rest = userInput.substring("add".length()).trim();
+        try {
+            String rest = userInput.substring("add".length()).trim();
 
-        // If there is no input after add
-        if (rest.isEmpty()){
-            ui.printLine("Format: add <value(to 2dp)> bro! where is the MONEHHHH");
+            // If there is no input after add
+            if (rest.isEmpty()) {
+                throw new InvalidAmountException(InvalidAmountException.ErrorReason.MISSING,
+                        "Format: add <value(to 2dp)> bro! where is the MONEHHHH");
+            }
+
+            BigDecimal amount;
+
+            try {
+                amount = new BigDecimal(rest);
+            } catch (NumberFormatException e) {
+                throw new InvalidAmountException(InvalidAmountException.ErrorReason.NON_NUMERIC,
+                        "Amount must be a valid number bro! What is this garbage!");
+            }
+
+            //Reject negative values
+            if (amount.compareTo(BigDecimal.ZERO) < 0) {
+                throw new InvalidAmountException(InvalidAmountException.ErrorReason.NEGATIVE,
+                        "Amount cannot be negative bro who you trying to scam?");
+            }
+
+            // Reject >2 decimal places
+            if (amount.scale() > 2) {
+                throw new InvalidAmountException(InvalidAmountException.ErrorReason.TOO_MANY_DP,
+                        "Amount must not exceed 2 decimal places bro we dont want your measly cents!");
+            }
+
+            expenseList.add(amount);
+
+            ui.printLine("Added expense: $" + amount);
+            ui.printLine("Current Total: $" + expenseList.getTotal());
             ui.printLine("");
-            return;
-        }
 
-        BigDecimal amount;
-
-        try{
-            amount = new BigDecimal(rest);
-        } catch (NumberFormatException e) {
-            ui.printLine("Amount must be a valid number bro! What is this garbage!");
+        } catch (InvalidAmountException e) {
+            ui.printLine(e.getMessage());
             ui.printLine("");
-            return;
         }
-
-        //Reject negative values
-        if (amount.compareTo(BigDecimal.ZERO) < 0) {
-            ui.printLine("Amount cannot be negative bro who you trying to scam?");
-            ui.printLine("");
-            return;
-        }
-
-        // Reject >2 decimal places
-        if (amount.scale() > 2) {
-            ui.printLine("Amount must not exceed 2 decimal places bro we dont want your measly cents!");
-            ui.printLine("");
-            return;
-        }
-
-        expenseList.add(amount);
-
-        ui.printLine("Added expense: $" + amount);
-        ui.printLine("Current Total: $" + expenseList.getTotal());
-        ui.printLine("");
     }
 
     /**
