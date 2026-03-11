@@ -9,14 +9,10 @@ public class InvalidAmountException extends Exception {
         TOO_MANY_DP     // scale > 2
     }
 
-    private final ErrorReason reason;
+    public final ErrorReason reason;
 
     public InvalidAmountException(ErrorReason reason, String message) {
         super(message);
         this.reason = reason;
-    }
-
-    public ErrorReason getReason() {
-        return reason;
     }
 }

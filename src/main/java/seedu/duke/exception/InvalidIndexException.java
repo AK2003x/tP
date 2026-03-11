@@ -3,17 +3,13 @@ package seedu.duke.exception;
 public class InvalidIndexException extends Exception {
     public enum ErrorReason {
         MISSING,        // nothing after 'add'
-        INVALID,       // amount < 0
+        INVALID,       // amount < 0 or non-numeric input
     }
 
-    private final ErrorReason reason;
+    public final ErrorReason reason;
 
     public InvalidIndexException(ErrorReason reason, String message) {
         super(message);
         this.reason = reason;
-    }
-
-    public ErrorReason getReason() {
-        return reason;
     }
 }
