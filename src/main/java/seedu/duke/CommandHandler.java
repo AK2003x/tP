@@ -6,6 +6,7 @@ import seedu.duke.data.ExpenseList;
 import seedu.duke.data.Storage;
 import seedu.duke.data.SummaryReport;
 import seedu.duke.exception.InvalidAmountException;
+import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.InputUtil;
 
@@ -99,28 +100,30 @@ public class CommandHandler {
      * @param userInput Full command line entered by the user (starting with {@code delete}).
      */
     public void handleDelete(String userInput) {
-        String rest = userInput.substring("delete".length()).trim();
+        try {
+            String rest = userInput.substring("delete".length()).trim();
 
-        // If there is no input after delete
-        if (rest.isEmpty()){
-            ui.printLine("Format: delete <index> bro! where is the INDEXXX");
+            // If there is no input after delete
+            if (rest.isEmpty()){
+                throw new InvalidIndexException(InvalidIndexException.ErrorReason.MISSING,
+                        "Format: delete <index> bro! where is the INDEXXX");
+            }
+
+            int index = Parser.parseIndex(rest);
+
+            if (!expenseList.isValidIndex(index)) {
+                throw new InvalidIndexException(InvalidIndexException.ErrorReason.INVALID,
+                        "Invalid index bro! do you even know how much you've spent?");
+            }
+
+            Expense removed = expenseList.delete(index);
+
+            ui.printLine("Deleted expense #" + index + ": $" + removed.getAmount());
+            ui.printLine("Current Total: $" + expenseList.getTotal());
             ui.printLine("");
-            return;
+        } catch (InvalidIndexException e) {
+            ui.printLine(e.getMessage());
         }
-
-        int index = Parser.parseIndex(rest);
-
-        if (!expenseList.isValidIndex(index)) {
-            ui.printLine("Invalid index bro! do you even know how much you've spent?");
-            ui.printLine("");
-            return;
-        }
-
-        Expense removed = expenseList.delete(index);
-
-        ui.printLine("Deleted expense #" + index + ": $" + removed.getAmount());
-        ui.printLine("Current Total: $" + expenseList.getTotal());
-        ui.printLine("");
     }
 
     /**
