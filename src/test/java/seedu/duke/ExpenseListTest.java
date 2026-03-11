@@ -99,5 +99,20 @@ public class ExpenseListTest {
 
         assertEquals(new BigDecimal("42.00"), removed.getAmount());
     }
+    /**
+     * Verifies that the remaining expenses preserve their original relative order
+     * after a middle item is deleted.
+     */
+    @Test
+    void delete_middleExpense_remainingOrderIsCorrect() {
+        expenseList.add(new BigDecimal("10.00"));
+        expenseList.add(new BigDecimal("20.00"));
+        expenseList.add(new BigDecimal("30.00"));
+
+        expenseList.delete(2); // remove $20.00
+
+        assertEquals(new BigDecimal("10.00"), expenseList.get(0).getAmount());
+        assertEquals(new BigDecimal("30.00"), expenseList.get(1).getAmount());
+    }
 
 }
