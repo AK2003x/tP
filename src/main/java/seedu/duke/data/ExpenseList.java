@@ -121,7 +121,7 @@ public class ExpenseList {
 
         // Invariant: entries stored in the list must never be null
         assert expense != null : "Retrieved expense should never be null.";
-        return expenses.get(index);
+        return expense;
     }
 
     /**
