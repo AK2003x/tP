@@ -3,6 +3,8 @@ package seedu.duke.data;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.logging.Logger;
+import seedu.duke.util.LoggerUtil;
 
 /**
  * Represents a snapshot of the user's BTO savings readiness.
@@ -11,6 +13,8 @@ import java.time.LocalDate;
  * All fields are immutable after instantiation.</p>
  */
 public class SummaryReport {
+    private static final Logger logger = LoggerUtil.getLogger(SummaryReport.class);
+
     public final String name;
     public final LocalDate deadline;
     public final BigDecimal btoGoal;
@@ -29,17 +33,28 @@ public class SummaryReport {
      * @param expenseList the user's current list of expenses.
      */
     public SummaryReport(Profile profile, ExpenseList expenseList) {
+        assert profile != null : "Profile cannot be null for report generation";
+        assert expenseList != null : "ExpenseList cannot be null for report generation";
+
+        logger.info("Generating SummaryReport for user: " + profile.getName());
+
         this.name = profile.getName();
         this.deadline = profile.getDeadline();
         this.btoGoal = profile.getBtoGoal();
         this.monthlySalary = profile.getMonthlySalary();
         this.currentSavings = profile.getCurrentSavings();
 
+        assert btoGoal.compareTo(BigDecimal.ZERO) >= 0 : "BTO Goal should not be negative";
+        assert monthlySalary.compareTo(BigDecimal.ZERO) >= 0 : "Salary should not be negative";
+
         this.totalExpenditure = expenseList.getTotal();
         this.distance = btoGoal.subtract(currentSavings);
         this.monthlySurplus = monthlySalary.subtract(totalExpenditure);
+
         this.percentage = computePercentage();
         this.estimate = computeEstimate();
+
+        logger.fine("Report values - Distance: " + distance + ", Surplus: " + monthlySurplus);
     }
 
     /**
@@ -50,10 +65,14 @@ public class SummaryReport {
      */
     private int computePercentage() {
         if (btoGoal.compareTo(BigDecimal.ZERO) > 0) {
-            return currentSavings.multiply(BigDecimal.valueOf(100))
+            int calcPercentage = currentSavings.multiply(BigDecimal.valueOf(100))
                     .divide(btoGoal, 0, RoundingMode.HALF_UP)
                     .intValue();
+
+            assert calcPercentage >= 0 : "Percentage calculation resulted in negative value";
+            return calcPercentage;
         }
+        logger.warning("BTO goal is zero; percentage set to 0.");
         return 0;
     }
 
@@ -66,12 +85,18 @@ public class SummaryReport {
      */
     private String computeEstimate() {
         if (distance.compareTo(BigDecimal.ZERO) <= 0) {
+            logger.info("Distance is zero or negative. Goal marked as reached.");
             return "Reached! Go get that BTO!";
         }
+
         if (monthlySurplus.compareTo(BigDecimal.ZERO) <= 0) {
+            logger.warning("Monthly surplus is non-positive; cannot estimate completion.");
             return "Infinite (Surplus is $0 or negative!)";
         }
+
         int months = distance.divide(monthlySurplus, 0, RoundingMode.CEILING).intValue();
+
+        assert months >= 0 : "Estimated months should be a positive value";
         return months + " months";
     }
 }

@@ -42,6 +42,8 @@ public class Profile {
      * @param deadline The new {@code LocalDate} to set as the savings deadline.
      */
     public void setDeadline(LocalDate deadline) {
+        assert deadline != null : "Deadline cannot be null";
+        assert deadline.isAfter(LocalDate.now()) : "Deadline must be in the future";
         this.deadline = deadline;
     }
 
@@ -51,6 +53,7 @@ public class Profile {
      * @param name The name to be associated with this profile.
      */
     public void setName(String name) {
+        assert name != null : "Name cannot be null";
         this.name = name;
     }
 
@@ -68,6 +71,8 @@ public class Profile {
      * @param btoGoal The calculated BTO goal amount.
      */
     public void setBtoGoal(BigDecimal btoGoal) {
+        assert btoGoal != null : "BTO goal cannot be null";
+        assert btoGoal.compareTo(BigDecimal.ZERO) >= 0 : "BTO goal cannot be negative";
         this.btoGoal = btoGoal;
     }
 
@@ -84,6 +89,8 @@ public class Profile {
      * @param monthlySalary The new monthly income.
      */
     public void setMonthlySalary(BigDecimal monthlySalary) {
+        assert monthlySalary != null : "Monthly salary cannot be null";
+        assert monthlySalary.compareTo(BigDecimal.ZERO) >= 0 : "Monthly salary cannot be negative";
         this.monthlySalary = monthlySalary;
     }
 
@@ -100,6 +107,7 @@ public class Profile {
      * @param currentSavings The new savings total.
      */
     public void setCurrentSavings(BigDecimal currentSavings) {
+        assert currentSavings != null : "Current savings cannot be null";
         this.currentSavings = currentSavings;
     }
 
@@ -116,6 +124,11 @@ public class Profile {
      * @param contributionRatio A decimal representing the share (e.g., 0.5 for 50%).
      */
     public void setContributionRatio(BigDecimal contributionRatio) {
+        assert contributionRatio != null : "Contribution ratio cannot be null";
+        // Ensure the ratio is between 0% and 100%
+        assert contributionRatio.compareTo(BigDecimal.ZERO) >= 0 &&
+                contributionRatio.compareTo(BigDecimal.ONE) <= 0
+                : "Contribution ratio must be between 0.0 and 1.0";
         this.contributionRatio = contributionRatio;
     }
 
