@@ -127,5 +127,7 @@ public class ExpenseList {
     public void clear() {
         expenses.clear();
         total = BigDecimal.ZERO;
+        // Post-clear invariant: total must be reset to exactly zero
+        assert total.compareTo(BigDecimal.ZERO) == 0 : "Total should be zero after clear.";
     }
 }
