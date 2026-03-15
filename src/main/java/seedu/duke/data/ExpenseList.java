@@ -23,17 +23,17 @@ public class ExpenseList {
      */
     public void add(BigDecimal amount){
         //Added to capture pre mutation state for post mutation assertions
-        int sizeBefore = expenses.size();
-        BigDecimal totalBefore = total;
+        int sizeBeforeAdd = expenses.size();
+        BigDecimal totalBeforeAdd = total;
 
         Expense expense = new Expense(amount);
         expenses.add(expense);
         total = total.add(amount);
         //Post add invariant: List must have grown by exacrtly ony entry
-        assert expenses.size() == sizeBefore + 1
+        assert expenses.size() == sizeBeforeAdd + 1
                 : "List size should have increaseed by 1 after add";
         // Post-add invariant: total must not have decreased
-        assert total.compareTo(totalBefore) >= 0
+        assert total.compareTo(totalBeforeAdd) >= 0
                 : "Total should not decrease after adding an expense.";
 
         // Post-add invariant: total must never be negative
@@ -50,6 +50,8 @@ public class ExpenseList {
      * @return The {@link Expense} object that was removed.
      */
     public Expense delete(int indexInList){
+        //Capture pre-mutation size to use in post delete assertions
+        int sizeBeforeDelete = expenses.size();
         int indexToDelete = indexInList - 1;
         Expense removed = expenses.remove(indexToDelete);
         total = total.subtract(removed.getAmount());
