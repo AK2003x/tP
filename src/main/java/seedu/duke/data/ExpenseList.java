@@ -55,9 +55,6 @@ public class ExpenseList {
         int indexToDelete = indexInList - 1;
         Expense removed = expenses.remove(indexToDelete);
         total = total.subtract(removed.getAmount());
-        // Post-delete invariant: removed expense must not be null
-        assert removed != null : "Removed expense should never be null.";
-
         // Post-delete invariant: list must have shrunk by exactly one entry
         assert expenses.size() == sizeBeforeDelete - 1
                 : "List size should have decreased by 1 after delete.";
