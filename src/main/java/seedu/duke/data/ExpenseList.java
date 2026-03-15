@@ -71,6 +71,9 @@ public class ExpenseList {
      * @return The total expenditure as a {@code BigDecimal}.
      */
     public BigDecimal getTotal(){
+        // Invariant: total should never be null or negative at any point
+        assert total != null : "Total should never be null.";
+        assert total.compareTo(BigDecimal.ZERO) >= 0 : "Total must never be negative.";
         return total;
     }
 
