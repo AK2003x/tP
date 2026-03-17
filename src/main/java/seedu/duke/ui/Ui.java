@@ -2,10 +2,12 @@ package seedu.duke.ui;
 
 import seedu.duke.data.SummaryReport;
 import seedu.duke.util.InputUtil;
+import seedu.duke.util.LoggerUtil;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * Handles all user-facing input and output operations for FinTrackPro.
@@ -22,13 +24,14 @@ import java.util.Scanner;
  * it is strictly responsible for communication with the user.</p>
  */
 public class Ui {
-
+    private static final Logger logger = LoggerUtil.getLogger(Ui.class);
     /**
      * Displays the welcome message and ASCII logo when the application starts.
      *
      * <p>This method is intended to be called once at application startup.</p>
      */
     public void showWelcome(){
+        logger.info("Displaying welcome message and ASCII logo.");
         String logo = """
             +---------+
             |   HDB   |
@@ -41,14 +44,19 @@ public class Ui {
     }
 
     public void greet(String name){
+        assert name != null : "Name should not be null";
+        logger.info("Greeting user: " + name);
         printLine("Nice to meet you, " + name + "!");
     }
 
     public void goodBye(String name){
+        assert name != null : "Name should not be null";
+        logger.info("Application exiting for user: " + name);
         printLine("Goodbye " + name + ". Stay disciplined and get that house that you always wanted!");
     }
 
     public void printLine(String message){
+        assert message != null : "Message should not be null";
         System.out.println(message);
     }
 
@@ -62,10 +70,16 @@ public class Ui {
      * @return The raw line entered by the user.
      */
     public String readLine(Scanner in, String prompt){
+        assert in != null : "Scanner should not be null";
         if (prompt != null && !prompt.isEmpty()){
+            logger.info("Displaying prompt to user: " + prompt);
             printLine(prompt);
         }
-        return in.nextLine();
+
+        String input = in.nextLine();
+        logger.fine("Raw user input received: [" + input + "]");
+        assert input != null : "Input read should not be null";
+        return input;
     }
 
     /**
@@ -75,6 +89,8 @@ public class Ui {
      * and brief descriptions of their purpose.</p>
      */
     public void showHelpMessage() {
+        logger.info("Displaying help message commands.");
+
         printLine("General Commands");
         printLine("'help'    - view all current commands");
         printLine("'summary' - generate your BTO readiness report based on your goals");
@@ -100,9 +116,17 @@ public class Ui {
      * @param report a {@link SummaryReport} containing the user's precomputed financial snapshot.
      */
     public void showSummaryReport(SummaryReport report) {
+        assert report.name != null : "Report name should not be null";
+        assert report.deadline != null : "Deadline should not be null";
+        assert report.currentSavings != null : "Current savings should not be null";
+        assert report.totalExpenditure != null : "Total expenditure should not be null";
+        assert report.estimate != null : "Estimate should not be null";
+
+        logger.info("Rendering SummaryReport for user: " + report.name);
         printLine("===== BTO Readiness Report =====");
         printLine("User: " + report.name);
         printLine("BTO Goal: " + InputUtil.formatMoney(report.btoGoal) + " (your share + fees)");
+
         LocalDate today = LocalDate.now();
         Period period = Period.between(today, report.deadline);
 
@@ -110,6 +134,8 @@ public class Ui {
         if (period.getDays() > 0) {
             monthsLeft++;
         }
+
+        assert monthsLeft >= 0 : "Months left should not be negative";
 
         printLine("Deadline: " + report.deadline + " (" + monthsLeft + " months)");
         printLine("");
@@ -122,6 +148,8 @@ public class Ui {
         printLine("Monthly Surplus: " + InputUtil.formatMoney(report.monthlySurplus));
         printLine("Estimated Goal Achievement: " + report.estimate);
         printLine("");
+
+        logger.info("SummaryReport display completed.");
     }
 
 }
