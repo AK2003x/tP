@@ -63,13 +63,17 @@ public class Expense {
         return category;
     }
     /**
-     * Returns a string representation of the expense amount, prefixed with a dollar sign.
+     * Returns a formatted string representation of this expense.
      *
-     * @return a {@code String} in the format {@code "$<amount>"}, e.g. {@code "$42.50"}
+     * <p>The output includes the category, name, and amount of the expense
+     * in a user-friendly format.</p>
+     *
+     * @return a {@code String} in the format {@code "[CATEGORY] name $amount"},
+     *         e.g. {@code "[FOOD] lunch $12.50"}
      */
     @Override
     public String toString() {
-        return "$" + amount ;
+        return "[" + category + "] " + name + " $" + amount;
     }
 
 }
