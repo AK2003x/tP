@@ -120,7 +120,7 @@ Deadline: 2027-08-06 (17 months)
 Current Savings: $1,000.00 (8% reached)
 Distance to Goal: $11,285.00
 
-Monthly Salary: $4,000.00
+Monthly Allowance: $4,000.00
 Total Expenditure: $30.00
 Monthly Surplus: $3,970.00
 Estimated Goal Achievement: 3 months
@@ -163,7 +163,7 @@ E | 30
 |--------------|--------------------|-------------------------------------------------------|
 | `P`          | profile marker     | tells the viewer this line represents a **Profile**   |
 | `nicholas`   | name               | user's name                                           |
-| `4000`       | monthly salary     | user earns **$4000/month**                            |
+| `4000`       | monthly allowance     | user earns **$4000/month**                            |
 | `1000`       | current savings    | currently saved **$1000**                             |
 | `12285.00`   | BTO goal           | amount needed for the **downpayment goal**            |
 | `0.6`        | contribution ratio | user is paying **60%** of the BTO cost                |

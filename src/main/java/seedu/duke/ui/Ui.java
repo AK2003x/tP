@@ -143,7 +143,7 @@ public class Ui {
         printLine("Current Savings: " + savingsLine);
         printLine("Distance to Goal: " + InputUtil.formatMoney(report.distance));
         printLine("");
-        printLine("Monthly Salary: " + InputUtil.formatMoney(report.monthlySalary));
+        printLine("Monthly Allowance: " + InputUtil.formatMoney(report.monthlyAllowance));
         printLine("Total Expenditure: " + InputUtil.formatMoney(report.totalExpenditure));
         printLine("Monthly Surplus: " + InputUtil.formatMoney(report.monthlySurplus));
         printLine("Estimated Goal Achievement: " + report.estimate);

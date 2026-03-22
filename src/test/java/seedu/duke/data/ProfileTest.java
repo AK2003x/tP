@@ -16,10 +16,10 @@ public class ProfileTest {
     }
 
     @Test
-    public void monthlySalary_setAndGet_correctValueStored() {
-        BigDecimal testSalary = new BigDecimal("5000.50");
-        profile.setMonthlySalary(testSalary);
-        assertEquals(testSalary, profile.getMonthlySalary());
+    public void monthlyAllowance_setAndGet_correctValueStored() {
+        BigDecimal testAllowance = new BigDecimal("5000.50");
+        profile.setMonthlyAllowance(testAllowance);
+        assertEquals(testAllowance, profile.getMonthlyAllowance());
     }
 
     @Test

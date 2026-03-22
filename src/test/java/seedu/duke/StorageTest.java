@@ -27,7 +27,7 @@ class StorageTest {
 
         Profile originalProfile = new Profile();
         originalProfile.setName("John Doe");
-        originalProfile.setMonthlySalary(new BigDecimal("5000"));
+        originalProfile.setMonthlyAllowance(new BigDecimal("5000"));
         originalProfile.setCurrentSavings(new BigDecimal("1000"));
         originalProfile.setBtoGoal(new BigDecimal("50000"));
         originalProfile.setContributionRatio(new BigDecimal("0.2"));
@@ -45,7 +45,7 @@ class StorageTest {
 
         // Compare original and loaded data
         assertEquals("John Doe", loadedProfile.getName());
-        assertEquals(new BigDecimal("5000"), loadedProfile.getMonthlySalary());
+        assertEquals(new BigDecimal("5000"), loadedProfile.getMonthlyAllowance());
         assertEquals(1, loadedExpenses.size());
         assertEquals(new BigDecimal("50"), loadedExpenses.get(0).getAmount());
     }

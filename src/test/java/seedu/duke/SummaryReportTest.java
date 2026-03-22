@@ -19,7 +19,7 @@ public class SummaryReportTest {
         profile.setName("Nick");
         profile.setBtoGoal(new BigDecimal("10000"));
         profile.setCurrentSavings(new BigDecimal("2000"));
-        profile.setMonthlySalary(new BigDecimal("4000"));
+        profile.setMonthlyAllowance(new BigDecimal("4000"));
         profile.setDeadline(LocalDate.of(2027,8,6));
 
         ExpenseList expenses = new ExpenseList();
@@ -38,7 +38,7 @@ public class SummaryReportTest {
         profile.setName("Nick");
         profile.setBtoGoal(new BigDecimal("10000"));
         profile.setCurrentSavings(new BigDecimal("12000"));
-        profile.setMonthlySalary(new BigDecimal("4000"));
+        profile.setMonthlyAllowance(new BigDecimal("4000"));
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
@@ -56,7 +56,7 @@ public class SummaryReportTest {
         profile.setName("Nick");
         profile.setBtoGoal(new BigDecimal("10000"));
         profile.setCurrentSavings(new BigDecimal("2000"));
-        profile.setMonthlySalary(new BigDecimal("4000"));
+        profile.setMonthlyAllowance(new BigDecimal("4000"));
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
@@ -74,7 +74,7 @@ public class SummaryReportTest {
         profile.setName("Nick");
         profile.setBtoGoal(new BigDecimal("10000"));
         profile.setCurrentSavings(new BigDecimal("2000"));
-        profile.setMonthlySalary(new BigDecimal("3000"));
+        profile.setMonthlyAllowance(new BigDecimal("3000"));
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
@@ -92,7 +92,7 @@ public class SummaryReportTest {
         profile.setName("Nick");
         profile.setBtoGoal(BigDecimal.ZERO);
         profile.setCurrentSavings(new BigDecimal("2000"));
-        profile.setMonthlySalary(new BigDecimal("4000"));
+        profile.setMonthlyAllowance(new BigDecimal("4000"));
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();
@@ -109,7 +109,7 @@ public class SummaryReportTest {
         profile.setName("Nick");
         profile.setBtoGoal(new BigDecimal("10000"));
         profile.setCurrentSavings(new BigDecimal("2000"));
-        profile.setMonthlySalary(new BigDecimal("4000"));
+        profile.setMonthlyAllowance(new BigDecimal("4000"));
         profile.setDeadline(LocalDate.of(2027, 8, 6));
 
         ExpenseList expenses = new ExpenseList();

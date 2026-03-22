@@ -120,7 +120,7 @@ public class FinTrackPro {
      * * <p>This method sequentially prompts for and initializes:
      * <ul>
      * <li>User's name</li>
-     * <li>Current liquid savings and monthly salary</li>
+     * <li>Current liquid savings and monthly allowance</li>
      * <li>Total BTO house price and the user's specific contribution ratio</li>
      * <li>Target deadline for the savings goal</li>
      * </ul>
@@ -146,15 +146,15 @@ public class FinTrackPro {
         ui.printLine("");
         ui.printLine("Hang tight... I have a few questions for you.");
 
-        // Prompt for monthly salary, current savings, total value of BTO & individual contribution ratio
+        // Prompt for monthly allowance, current savings, total value of BTO & individual contribution ratio
         BigDecimal savings = InputUtil.readMoney(ui, in, "How much do you currently have in savings?");
         ui.printLine("");
         profile.setCurrentSavings(savings);
         logger.info("Current savings recorded: " + savings);
 
-        BigDecimal salary = InputUtil.readMoney(ui, in, "What is your monthly salary? (in dollars)");
+        BigDecimal allowance = InputUtil.readMoney(ui, in, "What is your monthly allowance? (in dollars)");
         ui.printLine("");
-        profile.setMonthlySalary(salary);
+        profile.setMonthlyAllowance(allowance);
 
         BigDecimal housePrice = InputUtil.readMoney(ui, in,
                 "What is the total value that you and your partner have to pay for "

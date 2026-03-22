@@ -13,7 +13,7 @@ Nice to meet you, James Gosling!
 Hang tight... I have a few questions for you.
 How much do you currently have in savings?
 
-What is your monthly salary? (in dollars)
+What is your monthly allowance? (in dollars)
 
 What is the total value that you and your partner have to pay for the house? (in dollars)
 

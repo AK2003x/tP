@@ -272,7 +272,7 @@ public class CommandHandler {
      * <p>Calculates the following metrics from {@link Profile} and {@link ExpenseList}:
      * <ul>
      *   <li>Distance to goal (BTO goal - current savings)</li>
-     *   <li>Monthly surplus (monthly salary - total expenses)</li>
+     *   <li>Monthly surplus (monthly allowance - total expenses)</li>
      *   <li>Percentage progress towards the BTO goal</li>
      *   <li>Estimated months to reach the goal, or a status message if already reached
      *       or surplus is non-positive</li>

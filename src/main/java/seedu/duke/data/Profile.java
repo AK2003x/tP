@@ -9,17 +9,17 @@ import java.time.LocalDate;
  */
 public class Profile {
     private String name = "friend";
-    private BigDecimal monthlySalary;
+    private BigDecimal monthlyAllowance;
     private BigDecimal currentSavings;
     private BigDecimal btoGoal;
     private BigDecimal contributionRatio;
     private LocalDate deadline = LocalDate.now();
 
     /**
-     * Initializes a profile with zero Salary/Savings and a default 50/50 split ratio.
+     * Initialises a profile with zero Allowance/Savings and a default 50/50 split ratio.
      */
     public Profile() {
-        this.monthlySalary = BigDecimal.ZERO;
+        this.monthlyAllowance = BigDecimal.ZERO;
         this.currentSavings = BigDecimal.ZERO;
         this.contributionRatio = new BigDecimal("0.5");
         this.btoGoal = BigDecimal.ZERO;
@@ -85,21 +85,21 @@ public class Profile {
     }
 
     /**
-     * Updates the user's monthly salary.
-     * @param monthlySalary The new monthly income.
+     * Updates the user's monthly Allowance.
+     * @param monthlyAllowance The new monthly income.
      */
-    public void setMonthlySalary(BigDecimal monthlySalary) {
-        assert monthlySalary != null : "Monthly salary cannot be null";
-        assert monthlySalary.compareTo(BigDecimal.ZERO) >= 0 : "Monthly salary cannot be negative";
-        this.monthlySalary = monthlySalary;
+    public void setMonthlyAllowance(BigDecimal monthlyAllowance) {
+        assert monthlyAllowance != null : "Monthly allowance cannot be null";
+        assert monthlyAllowance.compareTo(BigDecimal.ZERO) >= 0 : "Monthly allowance cannot be negative";
+        this.monthlyAllowance = monthlyAllowance;
     }
 
     /**
-     * Gets the user's monthly salary.
-     * @return The monthly salary as a {@code BigDecimal}.
+     * Gets the user's monthly allowance.
+     * @return The monthly allowance as a {@code BigDecimal}.
      */
-    public BigDecimal getMonthlySalary() {
-        return monthlySalary;
+    public BigDecimal getMonthlyAllowance() {
+        return monthlyAllowance;
     }
 
     /**
@@ -143,7 +143,7 @@ public class Profile {
     public void reset() {
         this.name = "friend";
         this.btoGoal = BigDecimal.ZERO;
-        this.monthlySalary = BigDecimal.ZERO;
+        this.monthlyAllowance = BigDecimal.ZERO;
         this.currentSavings = BigDecimal.ZERO;
         this.contributionRatio = new BigDecimal("0.5");
     }
