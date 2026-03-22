@@ -59,10 +59,10 @@ public class ProfileTest {
         BigDecimal housePrice = new BigDecimal("400000");
         profile.setHousePrice(housePrice);
         profile.setContributionRatio(new BigDecimal("0.5"));
-        BigDecimal expectedGoal = new BigDecimal("5500.00");
+        BigDecimal expectedGoal = new BigDecimal("10500.00");
         assertEquals(expectedGoal, profile.getBtoGoal());
         profile.setContributionRatio(new BigDecimal("1.0"));
-        assertEquals(new BigDecimal("11000.00"), profile.getBtoGoal());
+        assertEquals(new BigDecimal("21000.00"), profile.getBtoGoal());
     }
 
     @Test
