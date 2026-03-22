@@ -18,9 +18,28 @@ public class Profile {
     private LocalDate deadline = LocalDate.now();
     private BigDecimal housePrice;
 
+    /**
+     * Sets the total purchase price of the BTO flat.
+     * This value serves as the base for calculating the total downpayment
+     * and the user's individual contribution goal.
+     *
+     * @param housePrice The total price of the HDB flat in dollars.
+     * Must be a non-negative value.
+     */
     public void setHousePrice(BigDecimal housePrice) {
-        assert housePrice != null && housePrice.compareTo(BigDecimal.ZERO) >= 0;
+        assert housePrice != null && housePrice.compareTo(BigDecimal.ZERO) >= 0
+                : "House price cannot be null or negative";
         this.housePrice = housePrice;
+    }
+
+    /**
+     * Returns the total purchase price of the BTO flat.
+     * This value is used as the base for all downpayment and goal calculations.
+     *
+     * @return The total house price as a {@code BigDecimal}.
+     */
+    public BigDecimal getHousePrice() {
+        return this.housePrice;
     }
 
     /**
