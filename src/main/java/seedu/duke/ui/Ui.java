@@ -4,6 +4,7 @@ import seedu.duke.data.SummaryReport;
 import seedu.duke.util.InputUtil;
 import seedu.duke.util.LoggerUtil;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
@@ -108,6 +109,30 @@ public class Ui {
         printLine("'clear'   - wipe all current expenses from the list");
         printLine("'reset'   - wipes all profile data and expenses to start fresh.");
         printLine("");
+    }
+
+    /**
+     * Displays the current monthly allowance and prompts the user to provide a new value.
+     * This provides context to the user before they perform an update to their profile.
+     *
+     * @param currentAllowance The existing monthly allowance stored in the User's profile.
+     */
+    public void promptForAllowance(BigDecimal currentAllowance) {
+        assert currentAllowance != null : "Current allowance cannot be null for display";
+        printLine("Current Monthly Allowance: " + InputUtil.formatMoney(currentAllowance));
+    }
+
+    /**
+     * Displays the current contribution ratio in both percentage and decimal formats,
+     * then prompts the user for a new decimal input.
+     *
+     * @param currentRatio The existing contribution ratio (0.0 to 1.0) from the User's profile.
+     */
+    public void promptForRatio(BigDecimal currentRatio) {
+        assert currentRatio != null : "Current ratio cannot be null for display";
+        // Convert 0.5 to 50 for the display string
+        BigDecimal percentage = currentRatio.multiply(new BigDecimal("100"));
+        printLine("Current Contribution Ratio: " + percentage.toPlainString() + "% (" + currentRatio + ")");
     }
 
     /**

@@ -273,6 +273,14 @@ public class FinTrackPro {
             logger.info("Executing savings command.");
             handler.handleSavings(in);
             break;
+        case "allowance":
+            logger.info("Executing allowance command.");
+            handler.handleAllowance(in);
+            break;
+        case "ratio":
+            logger.info("Executing ratio command.");
+            handler.handleRatio(in);
+            break;
         case "clear":
             logger.warning("User is attempting to clear all expenses");
             handler.handleClear(in);

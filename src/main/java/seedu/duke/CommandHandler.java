@@ -267,6 +267,43 @@ public class CommandHandler {
     }
 
     /**
+     * Displays the current monthly allowance and prompts the user to update it.
+     *
+     * @param in Scanner used to read the user's input.
+     */
+    public void handleAllowance(Scanner in) {
+        BigDecimal current = profile.getMonthlyAllowance();
+
+        ui.promptForAllowance(current);
+        BigDecimal newAllowance = InputUtil.readMoney(ui, in, "Enter new monthly allowance:");
+        ui.printLine("");
+
+        // Update and Log
+        profile.setMonthlyAllowance(newAllowance);
+        ui.printLine("Success! Your monthly allowance is now " + InputUtil.formatMoney(newAllowance));
+        ui.printLine("");
+    }
+
+    /**
+     * Displays the current contribution ratio and prompts the user to update it.
+     *
+     * @param in Scanner used to read the user's input.
+     */
+    public void handleRatio(Scanner in) {
+        BigDecimal current = profile.getContributionRatio();
+
+        // Show current state
+        ui.promptForRatio(current);
+        BigDecimal newRatio = InputUtil.readRatio(ui, in, "Enter new ratio (0.0 to 1.0):");
+        ui.printLine("");
+
+        // Update and Log
+        profile.setContributionRatio(newRatio);
+        ui.printLine("Success! Your contribution ratio is now " + newRatio);
+        ui.printLine("");
+    }
+
+    /**
      * Computes and displays a BTO Readiness Report based on the user's current financial profile.
      *
      * <p>Calculates the following metrics from {@link Profile} and {@link ExpenseList}:
