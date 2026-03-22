@@ -18,7 +18,7 @@ public class SummaryReport {
     public final String name;
     public final LocalDate deadline;
     public final BigDecimal btoGoal;
-    public final BigDecimal monthlySalary;
+    public final BigDecimal monthlyAllowance;
     public final BigDecimal currentSavings;
     public final int percentage;
     public final BigDecimal distance;
@@ -41,15 +41,15 @@ public class SummaryReport {
         this.name = profile.getName();
         this.deadline = profile.getDeadline();
         this.btoGoal = profile.getBtoGoal();
-        this.monthlySalary = profile.getMonthlySalary();
+        this.monthlyAllowance = profile.getMonthlyAllowance();
         this.currentSavings = profile.getCurrentSavings();
 
         assert btoGoal.compareTo(BigDecimal.ZERO) >= 0 : "BTO Goal should not be negative";
-        assert monthlySalary.compareTo(BigDecimal.ZERO) >= 0 : "Salary should not be negative";
+        assert monthlyAllowance.compareTo(BigDecimal.ZERO) >= 0 : "Allowance should not be negative";
 
         this.totalExpenditure = expenseList.getTotal();
         this.distance = btoGoal.subtract(currentSavings);
-        this.monthlySurplus = monthlySalary.subtract(totalExpenditure);
+        this.monthlySurplus = monthlyAllowance.subtract(totalExpenditure);
 
         this.percentage = computePercentage();
         this.estimate = computeEstimate();

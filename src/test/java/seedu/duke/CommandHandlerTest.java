@@ -81,4 +81,14 @@ class CommandHandlerTest {
     public void parseDeleteIndex_zeroIndex_throwsInvalidIndexException() {
         assertThrows(InvalidIndexException.class, ()->ch.parseDeleteIndex("0"));
     }
+
+    @Test
+    public void parseAmount_validAllowance_returnsBigDecimal() throws InvalidAmountException {
+        assertEquals(new BigDecimal("1200.00"), ch.parseAmount("1200.00"));
+    }
+
+    @Test
+    public void parseAmount_allowanceWithTooManyDecimals_throwsException() {
+        assertThrows(InvalidAmountException.class, () -> ch.parseAmount("1200.555"));
+    }
 }

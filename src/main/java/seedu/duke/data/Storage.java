@@ -34,7 +34,7 @@ public class Storage {
     /**
      * Saves the current financial state to a text file.
      *
-     * <p>Format for Profile: {@code P | name | salary | savings | btoGoal | ratio | deadline}</p>
+     * <p>Format for Profile: {@code P | name | allowance | savings | btoGoal | ratio | deadline}</p>
      *
      * <p>Format for Expenses: {@code E | name | amount | category}</p>
      *
@@ -53,7 +53,7 @@ public class Storage {
             // Save Profile (P)
             fw.write(String.format("P | %s | %s | %s | %s | %s | %s%n",
                     profile.getName(),
-                    profile.getMonthlySalary(),
+                    profile.getMonthlyAllowance(),
                     profile.getCurrentSavings(),
                     profile.getBtoGoal(),
                     profile.getContributionRatio(),
@@ -117,7 +117,7 @@ public class Storage {
                     }
 
                     profile.setName(parts[1]);
-                    profile.setMonthlySalary(new BigDecimal(parts[2]));
+                    profile.setMonthlyAllowance(new BigDecimal(parts[2]));
                     profile.setCurrentSavings(new BigDecimal(parts[3]));
                     profile.setBtoGoal(new BigDecimal(parts[4]));
                     profile.setContributionRatio(new BigDecimal(parts[5]));
