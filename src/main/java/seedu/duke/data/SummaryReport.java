@@ -87,7 +87,7 @@ public class SummaryReport {
      *
      * <p>Maps the current progress to an encouraging status message using specific
      * thresholds (100%, 70%, 50%, and 10%). This provides users with a quick
-     *  benchmark of their BTO downpayment progress.</p>
+     * benchmark of their BTO downpayment progress.</p>
      *
      * @param percentage The current percentage of the BTO goal reached.
      * @return A descriptive string indicating the user's readiness level and
