@@ -19,7 +19,8 @@ class CommandHandlerTest {
     Profile profile = new Profile();
     ExpenseList expenseList = new ExpenseList();
     Storage storage = new Storage("fintrack.txt");
-    CommandHandler ch = new CommandHandler(ui, profile, expenseList, storage);
+    RecurringExpenseList recurringExpenseList = new RecurringExpenseList();
+    CommandHandler ch = new CommandHandler(ui, profile, expenseList, recurringExpenseList , storage);
 
     @Test
     public void parseAmount_validInput_returnsValidAmount() throws InvalidAmountException {

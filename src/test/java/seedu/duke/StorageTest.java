@@ -5,9 +5,7 @@ import org.junit.jupiter.api.io.TempDir;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.duke.category.Category;
-import seedu.duke.data.Storage;
-import seedu.duke.data.Profile;
-import seedu.duke.data.ExpenseList;
+import seedu.duke.data.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -36,18 +34,28 @@ class StorageTest {
         ExpenseList originalExpenses = new ExpenseList();
         originalExpenses.add("Lunch", new BigDecimal("50"), Category.fromString("FOOD"));
 
+        RecurringExpenseList originalRecurringExpenses = new RecurringExpenseList();
+        originalRecurringExpenses.add(
+                new RecurringExpense("Netflix", new BigDecimal("30"), Category.fromString("ENTERTAINMENT"))
+        );
         // Save and then Load back into fresh objects
-        storage.save(originalProfile, originalExpenses);
+        storage.save(originalProfile, originalExpenses,originalRecurringExpenses );
 
         Profile loadedProfile = new Profile();
         ExpenseList loadedExpenses = new ExpenseList();
-        storage.load(loadedProfile, loadedExpenses);
+        RecurringExpenseList loadedRecurringExpenses = new RecurringExpenseList();
+        storage.load(loadedProfile, loadedExpenses, loadedRecurringExpenses);
 
         // Compare original and loaded data
         assertEquals("John Doe", loadedProfile.getName());
         assertEquals(new BigDecimal("5000"), loadedProfile.getMonthlyAllowance());
         assertEquals(1, loadedExpenses.size());
         assertEquals(new BigDecimal("50"), loadedExpenses.get(0).getAmount());
+
+        assertEquals(1, loadedRecurringExpenses.size());
+        assertEquals("Netflix", loadedRecurringExpenses.get(0).getName());
+        assertEquals(new BigDecimal("30"), loadedRecurringExpenses.get(0).getAmount());
+        assertEquals("ENTERTAINMENT", loadedRecurringExpenses.get(0).getCategory().getName());
     }
 
     @Test
@@ -55,9 +63,9 @@ class StorageTest {
         Storage storage = new Storage("non_existent_file.txt");
         Profile profile = new Profile();
         ExpenseList list = new ExpenseList();
-
+        RecurringExpenseList recurringList = new RecurringExpenseList();
         // Should return silently without modifying objects
-        storage.load(profile, list);
+        storage.load(profile, list, recurringList);
 
         // Assert profile is still default/empty
         assertEquals("friend", profile.getName());
