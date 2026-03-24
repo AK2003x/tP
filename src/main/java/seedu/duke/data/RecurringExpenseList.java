@@ -19,4 +19,16 @@ public class RecurringExpenseList {
     public RecurringExpense get(int index) {
         return recurringExpenses.get(index);
     }
+
+    public int size() {
+        return recurringExpenses.size();
+    }
+
+    public boolean isEmpty() {
+        return recurringExpenses.isEmpty();
+    }
+
+    public boolean isValidIndex(int inputIndex) {
+        return inputIndex >= 1 && inputIndex <= recurringExpenses.size();
+    }
 }
