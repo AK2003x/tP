@@ -21,6 +21,7 @@ import java.time.Period;
 import java.util.Scanner;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 /**
  * Main application controller for FinTrackPro.
@@ -51,7 +52,12 @@ public class FinTrackPro {
         this.storage = new Storage("fintrack.txt");
         this.handler = new CommandHandler(ui, profile, expenseList, recurringExpenseList, storage);
 
-        logger.info("FinTrackPro initialised successfully");
+        logState("startup", "run() entry", "storagePath=fintrack.txt");
+    }
+
+    private void logState(String state, String expectedNext, String values) {
+        String safeValues = Objects.requireNonNull(values);
+        logger.info("state=" + state + " | expected=" + expectedNext + " | " + safeValues);
     }
 
     /**
@@ -67,15 +73,22 @@ public class FinTrackPro {
      * </p>
      */
     public void run() {
-        logger.info("Application started.");
+        logState("run.start", "show welcome and load persisted data", "profileName=" + profile.getName());
         ui.showWelcome();
 
         // Load existing data
         try {
             storage.load(profile, expenseList, recurringExpenseList);
-            logger.info("Profile and expense data loaded successfully.");
+            logState("run.load.success", "check if initial setup is required",
+                    "profileName=" + profile.getName()
+                            + ", btoGoal=" + profile.getBtoGoal()
+                            + ", oneOffCount=" + expenseList.size()
+                            + ", recurringCount=" + recurringExpenseList.size());
         } catch (IOException e) {
-            logger.log(Level.WARNING, "Could not load previous data. Starting fresh.", e);
+            logger.log(Level.WARNING,
+                    "state=run.load.failed | expected=continue with fresh in-memory profile | reason="
+                            + e.getMessage(),
+                    e);
             ui.printLine("Warning: Could not load previous data. Starting fresh!");
         }
 
@@ -84,13 +97,18 @@ public class FinTrackPro {
 
         // Check if btoGoal is already set
         if (profile.getBtoGoal().compareTo(java.math.BigDecimal.ZERO) <= 0) {
-            logger.info("No existing BTO goal found. Starting initial setup.");
+            logState("run.profile.new", "perform initial setup workflow",
+                    "btoGoal=" + profile.getBtoGoal());
             name = performInitialSetup(in);
             profile.setName(name);
-            logger.info("Initial setup completed for user: " + name);
+            logState("run.profile.initialized", "enter command loop",
+                    "profileName=" + name
+                            + ", btoGoal=" + profile.getBtoGoal()
+                            + ", deadline=" + profile.getDeadline());
         } else {
             name = profile.getName();
-            logger.info("Existing profile found for user: " + name);
+            logState("run.profile.existing", "enter command loop",
+                    "profileName=" + name + ", btoGoal=" + profile.getBtoGoal());
             ui.printLine("Welcome back " + name + "! Loading your existing profile...");
         }
 
@@ -100,23 +118,31 @@ public class FinTrackPro {
         ui.printLine("Type 'bye' to exit!");
         ui.printLine("");
 
-        logger.info("Entering main command loop.");
+        logState("run.command-loop", "read command until bye",
+                "profileName=" + name
+                        + ", oneOffCount=" + expenseList.size()
+                        + ", recurringCount=" + recurringExpenseList.size());
         String userInput = ui.readLine(in, "");
         while (!userInput.equalsIgnoreCase("bye")) {
             handleCommand(userInput, in);
             userInput = ui.readLine(in, "");
         }
+        logState("run.command-loop.exit", "persist in-memory data", "exitCommand=bye");
 
         // Save everything before closing
         try {
             storage.save(profile, expenseList, recurringExpenseList);
-            logger.info("Profile and expense data saved successfully.");
+            logState("run.save.success", "shutdown ui and scanner",
+                    "profileName=" + profile.getName()
+                            + ", oneOffCount=" + expenseList.size()
+                            + ", recurringCount=" + recurringExpenseList.size());
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to save financial data.", e);
+            logger.log(Level.SEVERE,
+                    "state=run.save.failed | expected=shutdown still proceeds | reason=" + e.getMessage(), e);
             ui.printLine("Critical Error: Your financial data could not be saved!");
         }
 
-        logger.info("Application exiting for user: " + name);
+        logState("run.end", "process exits", "profileName=" + name);
         ui.goodBye(name);
         in.close();
     }
@@ -139,12 +165,12 @@ public class FinTrackPro {
      * @return The validated or default name of the user.
      */
     private String performInitialSetup(Scanner in) {
-        logger.info("Starting initial setup workflow.");
+        logState("setup.start", "collect name, finances and deadline", "scannerReady=true");
 
         // 1. Name handling
         String name = ui.readLine(in, "What is your name?");
         name = name.isEmpty() ? "friend" : name.trim();
-        logger.info("User name captured: " + name);
+        logState("setup.name.captured", "collect current savings", "name=" + name);
 
         ui.printLine("");
         ui.greet(name);
@@ -156,30 +182,31 @@ public class FinTrackPro {
         BigDecimal savings = InputUtil.readMoney(ui, in, "How much do you currently have in savings?");
         ui.printLine("");
         profile.setCurrentSavings(savings);
-        logger.info("Current savings recorded: " + savings);
+        logState("setup.savings.captured", "collect monthly allowance", "currentSavings=" + savings);
 
         BigDecimal allowance = InputUtil.readMoney(ui, in, "What is your monthly allowance? (in dollars)");
         ui.printLine("");
         profile.setMonthlyAllowance(allowance);
+        logState("setup.allowance.captured", "collect house price", "monthlyAllowance=" + allowance);
 
         BigDecimal housePrice = InputUtil.readMoney(ui, in,
                 "What is the total value that you and your partner have to pay for "
                         + "the house? (in dollars)");
         profile.setHousePrice(housePrice);
-        logger.info("House price recorded: " + housePrice);
+        logState("setup.house-price.captured", "collect contribution ratio", "housePrice=" + housePrice);
         ui.printLine("");
 
         BigDecimal newRatio = InputUtil.readRatio(ui, in,
                 "What is your share of the contribution? (e.g., 0.6 for 60%):");
         profile.setContributionRatio(newRatio);
-        logger.info("Contribution ratio recorded: " + newRatio);
+        logState("setup.ratio.captured", "calculate user BTO goal", "contributionRatio=" + newRatio);
 
         ui.printLine("");
 
         // Calculate individual share of user's downpayment
         BtoCalculator result = new BtoCalculator(housePrice, newRatio);
-        logger.info("BTO calculation completed. Total downpayment: "
-                + result.totalDownpayment + ", user share: " + result.yourShare);
+        logState("setup.bto-calculated", "persist goal and collect deadline",
+                "totalDownpayment=" + result.totalDownpayment + ", userShare=" + result.yourShare);
 
         ui.printLine("Total downpayment needed: " + InputUtil.formatMoney(result.totalDownpayment));
         ui.printLine("Based on a " + newRatio.multiply(new BigDecimal("100")) + "% share...");
@@ -193,7 +220,8 @@ public class FinTrackPro {
                 " (e.g., 2028-10-24)");
         ui.printLine("");
         profile.setDeadline(deadline);
-        logger.info("Deadline recorded: " + deadline);
+        logState("setup.deadline.captured", "compute timeline and monthly requirement",
+                "deadline=" + deadline + ", today=" + LocalDate.now());
 
         LocalDate today = LocalDate.now();
         Period period = Period.between(today, deadline);
@@ -207,7 +235,7 @@ public class FinTrackPro {
         BigDecimal remainingToSave = result.yourShare.subtract(savings);
 
         if (remainingToSave.compareTo(BigDecimal.ZERO) <= 0) {
-            logger.info("User has already met the savings goal.");
+            logState("setup.goal.already-met", "enter command loop", "remainingToSave=" + remainingToSave);
             ui.printLine("Nice! Based on your current savings, you have already met your goal.");
         } else {
 
@@ -225,14 +253,15 @@ public class FinTrackPro {
             BigDecimal monthlyNeeded = remainingToSave.divide(
                     BigDecimal.valueOf(monthsLeft), 2, RoundingMode.HALF_UP);
 
-            logger.fine("Remaining to save: " + remainingToSave
-                    + ", months left: " + monthsLeft
-                    + ", monthly needed: " + monthlyNeeded);
+            logState("setup.goal.in-progress", "enter command loop",
+                    "remainingToSave=" + remainingToSave
+                            + ", monthsLeft=" + monthsLeft
+                            + ", monthlyNeeded=" + monthlyNeeded);
 
             ui.printLine("Rounding it to " + monthsLeft + " months, you would need to save "
                     + InputUtil.formatMoney(monthlyNeeded) + "/month.");
         }
-        logger.info("Initial setup workflow completed.");
+        logState("setup.end", "caller stores name in profile", "name=" + name + ", btoGoal=" + profile.getBtoGoal());
         return name;
     }
 
@@ -249,67 +278,72 @@ public class FinTrackPro {
         assert userInput != null : "userInput should not be null";
         assert in != null : "Scanner should not be null";
 
-        logger.info("Received user input: " + userInput);
+        logState("command.received", "parse command token", "rawInput='" + userInput + "'");
 
         if (userInput.trim().isEmpty()) {
-            logger.warning("User entered empty input.");
+            logger.warning("state=command.invalid.empty | expected=prompt for non-empty command | rawInput=''");
             ui.printLine("Cannot process empty description!");
             return;
         }
         String command = Parser.parseCommand(userInput);
-        logger.info("Parsed command: " + command);
+        logState("command.parsed", "dispatch to command handler",
+                "command=" + command + ", rawInput='" + userInput + "'");
 
         switch (command) {
         case "add":
-            logger.info("Executing add command.");
+            logState("command.dispatch", "handler.handleAdd", "command=add");
             handler.handleAdd(userInput);
             break;
         case "delete":
-            logger.info("Executing delete command.");
+            logState("command.dispatch", "handler.handleDelete", "command=delete");
             handler.handleDelete(userInput);
             break;
         case "deleterecurring":
-            logger.info("Executing deleterecurring command.");
+            logState("command.dispatch", "handler.handleDeleteRecurring", "command=deleterecurring");
             handler.handleDeleteRecurring(userInput);
             break;
         case "list":
-            logger.info("Executing list command.");
+            logState("command.dispatch", "printList", "command=list");
             printList();
             break;
         case "help":
-            logger.info("Executing help command.");
+            logState("command.dispatch", "ui.showHelpMessage", "command=help");
             ui.showHelpMessage();
             break;
         case "savings":
-            logger.info("Executing savings command.");
+            logState("command.dispatch", "handler.handleSavings", "command=savings");
             handler.handleSavings(in);
             break;
         case "allowance":
-            logger.info("Executing allowance command.");
+            logState("command.dispatch", "handler.handleAllowance", "command=allowance");
             handler.handleAllowance(in);
             break;
         case "ratio":
-            logger.info("Executing ratio command.");
+            logState("command.dispatch", "handler.handleRatio", "command=ratio");
             handler.handleRatio(in);
             break;
         case "clear":
-            logger.warning("User is attempting to clear all expenses");
+            logger.warning(
+                    "state=command.dispatch.destructive | expected="
+                            + "handler.handleClear with confirmation | command=clear");
             handler.handleClear(in);
             break;
         case "summary":
-            logger.info("Executing summary command.");
+            logState("command.dispatch", "handler.handleSummary", "command=summary");
             handler.handleSummary();
             break;
         case "reset":
-            logger.warning("User attempting full financial reset");
+            logger.warning(
+                    "state=command.dispatch.destructive | expected="
+                            + "handler.handleReset with confirmation | command=reset");
             handler.handleReset(in);
             break;
         case "sort":
-            logger.info("Executing sort command.");
+            logState("command.dispatch", "handler.handleSort", "command=sort, rawInput='" + userInput + "'");
             handler.handleSort(userInput);
             break;
         default:
-            logger.warning("Unknown command entered. Echoing user input.");
+            logger.warning("state=command.unknown | expected=echo input back to user | rawInput='" + userInput + "'");
             ui.printLine("You said: " + userInput);
             ui.printLine("");
             break;
@@ -326,8 +360,10 @@ public class FinTrackPro {
      * If total expenditure exceeds the goal, prints an alert with the exceeded amount.</p>
      */
     private void printList(){
+        logState("list.start", "render recurring and one-off expenses", "oneOffCount=" + expenseList.size()
+                + ", recurringCount=" + recurringExpenseList.size());
         if (expenseList.isEmpty() && recurringExpenseList.isEmpty()) {
-            logger.info("Both expense lists requested, but both are empty.");
+            logState("list.empty", "return to command loop", "oneOffCount=0, recurringCount=0");
             ui.printLine("Your expense list is as empty as my wallet. Go spend some money!");
             ui.printLine("");
             return;
@@ -358,6 +394,10 @@ public class FinTrackPro {
         }
 
         BigDecimal combinedTotal = expenseList.getTotal().add(recurringExpenseList.getTotal());
+        logState("list.total.computed", "render total and return to command loop",
+                "oneOffTotal=" + expenseList.getTotal()
+                        + ", recurringTotal=" + recurringExpenseList.getTotal()
+                        + ", combinedTotal=" + combinedTotal);
         ui.printLine("Total Expenditure (One-off + Recurring): $" + combinedTotal);
         ui.printLine("");
     }
