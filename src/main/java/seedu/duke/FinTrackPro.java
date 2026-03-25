@@ -1,6 +1,10 @@
 package seedu.duke;
 
 import seedu.duke.data.Expense;
+import seedu.duke.data.ExpenseList;
+import seedu.duke.data.Profile;
+import seedu.duke.data.RecurringExpense;
+import seedu.duke.data.RecurringExpenseList;
 import seedu.duke.data.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.util.BtoCalculator;
@@ -8,8 +12,7 @@ import seedu.duke.util.InputUtil;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
-import seedu.duke.data.Profile;
-import seedu.duke.data.ExpenseList;
+
 import seedu.duke.util.LoggerUtil;
 
 import java.io.IOException;
@@ -35,6 +38,7 @@ public class FinTrackPro {
     private final Ui ui;
     private final Profile profile;
     private final ExpenseList expenseList;
+    private final RecurringExpenseList recurringExpenseList;
     private final Storage storage;
     private final CommandHandler handler;
 
@@ -43,8 +47,9 @@ public class FinTrackPro {
         this.ui = new Ui();
         this.profile = new Profile();
         this.expenseList = new ExpenseList();
+        this.recurringExpenseList = new RecurringExpenseList();
         this.storage = new Storage("fintrack.txt");
-        this.handler = new CommandHandler(ui, profile, expenseList, storage);
+        this.handler = new CommandHandler(ui, profile, expenseList, recurringExpenseList, storage);
 
         logger.info("FinTrackPro initialised successfully");
     }
@@ -67,7 +72,7 @@ public class FinTrackPro {
 
         // Load existing data
         try {
-            storage.load(profile, expenseList);
+            storage.load(profile, expenseList, recurringExpenseList);
             logger.info("Profile and expense data loaded successfully.");
         } catch (IOException e) {
             logger.log(Level.WARNING, "Could not load previous data. Starting fresh.", e);
@@ -104,7 +109,7 @@ public class FinTrackPro {
 
         // Save everything before closing
         try {
-            storage.save(profile, expenseList);
+            storage.save(profile, expenseList, recurringExpenseList);
             logger.info("Profile and expense data saved successfully.");
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Failed to save financial data.", e);
@@ -263,6 +268,10 @@ public class FinTrackPro {
             logger.info("Executing delete command.");
             handler.handleDelete(userInput);
             break;
+        case "deleterecurring":
+            logger.info("Executing deleterecurring command.");
+            handler.handleDeleteRecurring(userInput);
+            break;
         case "list":
             logger.info("Executing list command.");
             printList();
@@ -317,28 +326,39 @@ public class FinTrackPro {
      * If total expenditure exceeds the goal, prints an alert with the exceeded amount.</p>
      */
     private void printList(){
-        if (expenseList.isEmpty()) {
-            logger.info("Expense list requested, but list is empty.");
+        if (expenseList.isEmpty() && recurringExpenseList.isEmpty()) {
+            logger.info("Both expense lists requested, but both are empty.");
             ui.printLine("Your expense list is as empty as my wallet. Go spend some money!");
             ui.printLine("");
             return;
         }
 
-        logger.info("Printing expense list. Number of expenses: " + expenseList.size());
-        ui.printLine("Here is your current expenditure list!");
-
-        for (int i = 0; i < expenseList.size(); i++) {
-            Expense expense = expenseList.get(i);
-            String formattedAmount = InputUtil.formatMoney(expense.getAmount());
-            ui.printLine( (i + 1) +  ". " +
-                    expense.getName() + " " +
-                    formattedAmount + " " +
-                    "[" + expense.getCategory() + "]");
+        if (!recurringExpenseList.isEmpty()) {
+            ui.printLine("Here are your recurring monthly commitments!");
+            for (int i = 0; i < recurringExpenseList.size(); i++) {
+                RecurringExpense recurringExpense = recurringExpenseList.get(i);
+                ui.printLine((i + 1) + ". "
+                        + recurringExpense.getName() + " "
+                        + InputUtil.formatMoney(recurringExpense.getAmount()) + " "
+                        + "[" + recurringExpense.getCategory() + "]");
+            }
+            ui.printLine("");
         }
 
-        BigDecimal totalSpent = expenseList.getTotal();
-        logger.info("Total expenditure calculated: " + totalSpent);
-        ui.printLine("Total Expenditure: $" +  totalSpent);
+        if (!expenseList.isEmpty()) {
+            ui.printLine("Here is your current month's expenditure list!");
+            for (int i = 0; i < expenseList.size(); i++) {
+                Expense expense = expenseList.get(i);
+                ui.printLine((i + 1) + ". "
+                        + expense.getName() + " "
+                        + InputUtil.formatMoney(expense.getAmount()) + " "
+                        + "[" + expense.getCategory() + "]");
+            }
+            ui.printLine("");
+        }
+
+        BigDecimal combinedTotal = expenseList.getTotal().add(recurringExpenseList.getTotal());
+        ui.printLine("Total Expenditure (One-off + Recurring): $" + combinedTotal);
         ui.printLine("");
     }
 }

@@ -70,11 +70,16 @@ public class Ui {
      * @param prompt Prompt message displayed before reading input.
      * @return The raw line entered by the user.
      */
-    public String readLine(Scanner in, String prompt){
+    public String readLine(Scanner in, String prompt) {
         assert in != null : "Scanner should not be null";
-        if (prompt != null && !prompt.isEmpty()){
+        if (prompt != null && !prompt.isEmpty()) {
             logger.info("Displaying prompt to user: " + prompt);
             printLine(prompt);
+        }
+
+        if (!in.hasNextLine()) {
+            logger.warning("No more input available. Returning bye.");
+            return "bye";
         }
 
         String input = in.nextLine();
@@ -99,9 +104,12 @@ public class Ui {
         printLine("");
 
         printLine("Daily Transaction Commands");
-        printLine("'add'      <name> <amount> <category>- add a new expense (e.g., add lunch 5.50 FOOD)");
+        printLine("'add'      <name> <amount> <category><recurring> - " +
+                "add a new expense" +   "(e.g., add lunch 5.50 FOOD for not recurring and" +
+                " add lunch 5.50 FOOD recurring for recurring)");
         printLine("'list'     - view all current expenses and your total spent");
         printLine("'delete'   <index> - remove a specific expense from your list");
+        printLine("'deleterecurring' <index> - remove a recurring monthly expense");
         printLine("");
 
         printLine("Profile & Goal Management");
@@ -146,7 +154,6 @@ public class Ui {
         assert report.name != null : "Report name should not be null";
         assert report.deadline != null : "Deadline should not be null";
         assert report.currentSavings != null : "Current savings should not be null";
-        assert report.totalExpenditure != null : "Total expenditure should not be null";
         assert report.estimate != null : "Estimate should not be null";
 
         logger.info("Rendering SummaryReport for user: " + report.name);

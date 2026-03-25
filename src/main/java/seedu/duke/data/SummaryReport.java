@@ -35,9 +35,10 @@ public class SummaryReport {
      * @param profile     the user's financial profile.
      * @param expenseList the user's current list of expenses.
      */
-    public SummaryReport(Profile profile, ExpenseList expenseList) {
+    public SummaryReport(Profile profile, ExpenseList expenseList, RecurringExpenseList recurringExpenseList) {
         assert profile != null : "Profile cannot be null for report generation";
         assert expenseList != null : "ExpenseList cannot be null for report generation";
+        assert recurringExpenseList != null : "RecurringExpenseList cannot be null for report generation";
 
         logger.info("Generating SummaryReport for user: " + profile.getName());
 
@@ -50,7 +51,7 @@ public class SummaryReport {
         assert btoGoal.compareTo(BigDecimal.ZERO) >= 0 : "BTO Goal should not be negative";
         assert monthlyAllowance.compareTo(BigDecimal.ZERO) >= 0 : "Allowance should not be negative";
 
-        this.totalExpenditure = expenseList.getTotal();
+        this.totalExpenditure = expenseList.getTotal().add(recurringExpenseList.getTotal());
         this.distance = btoGoal.subtract(currentSavings);
         this.monthlySurplus = monthlyAllowance.subtract(totalExpenditure);
 

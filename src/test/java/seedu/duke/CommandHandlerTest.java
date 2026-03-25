@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.ExpenseList;
 import seedu.duke.data.Profile;
+import seedu.duke.data.RecurringExpenseList;
 import seedu.duke.data.Storage;
 import seedu.duke.exception.InvalidAmountException;
 import seedu.duke.exception.InvalidIndexException;
@@ -18,7 +19,8 @@ class CommandHandlerTest {
     Profile profile = new Profile();
     ExpenseList expenseList = new ExpenseList();
     Storage storage = new Storage("fintrack.txt");
-    CommandHandler ch = new CommandHandler(ui, profile, expenseList, storage);
+    RecurringExpenseList recurringExpenseList = new RecurringExpenseList();
+    CommandHandler ch = new CommandHandler(ui, profile, expenseList, recurringExpenseList , storage);
 
     @Test
     public void parseAmount_validInput_returnsValidAmount() throws InvalidAmountException {

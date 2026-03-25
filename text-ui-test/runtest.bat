@@ -25,6 +25,10 @@ if %errorlevel% == 0 (
     del ACTUAL_FILTERED.TXT EXPECTED_FILTERED.TXT
 ) else (
     echo Test failed!
+    echo.
+    echo ===== DIFF BELOW =====
+    FC ACTUAL_FILTERED.TXT EXPECTED_FILTERED.TXT
+    echo ===== END DIFF =====
     del ACTUAL_FILTERED.TXT EXPECTED_FILTERED.TXT
     exit /b 1
 )
