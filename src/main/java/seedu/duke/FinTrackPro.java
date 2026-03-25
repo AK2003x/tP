@@ -430,7 +430,6 @@ public class FinTrackPro {
             ui.printLine("Month " + currentMonth + " Total: " 
                     + InputUtil.formatMoney(expenseList.getTotal()));
             ui.printLine("");
-            totalAllMonths = totalAllMonths.add(expenseList.getTotal());
         } else if (currentMonth > 1 && hasArchivedExpenses) {
             // Current month has no expenses but previous months do
             ui.printLine("*** MONTH " + currentMonth + " EXPENSES");

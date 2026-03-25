@@ -1014,3 +1014,273 @@
 [2026-03-25 21:59:14] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit9320411491826129765\monthly_archives
 [2026-03-25 21:59:14] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit8540545060317002027\monthly_archives
 [2026-03-25 21:59:14] [WARNING] seedu.duke.data.MonthlyArchive - Skipping malformed archived expense line: this line is malformed
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - Index string rejected | reason: Index string does not match integer format
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseDeleteIndex rejected | reason: index -1 out of range, list size: 0
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseAmount rejected | reason: negative value -1
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseAmount rejected | reason: more than 2 decimal places, value: 1200.555
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: lunch | amount: $3.00 | category: FOOD | new total: $3.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: bus fare | amount: $2.00 | category: TRANSPORT | new total: $5.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: movie | amount: $10.00 | category: ENTERTAINMENT | new total: $15.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: electricity | amount: $50.00 | category: UTILITIES | new total: $65.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: misc | amount: $1.00 | category: OTHER | new total: $66.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: transport fare | amount: $5.00 | category: TRANSPORT | new total: $5.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: caifan lunch | amount: $4.00 | category: FOOD | new total: $9.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: movie | amount: $10.00 | category: ENTERTAINMENT | new total: $19.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: popcorn | amount: $6.00 | category: FOOD | new total: $25.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleSort executed | sort type: category
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleSort executed | sort type: recent
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseAmount rejected | reason: more than 2 decimal places, value: 7.009
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseDeleteIndex rejected | reason: empty input
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseAmount rejected | reason: non-numeric input 'hello'
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: lunch | amount: $10.50 | category: FOOD | new total: $10.50
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - handleAdd rejected | reason: insufficient arguments
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseDeleteIndex rejected | reason: index 2 out of range, list size: 0
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: transport fare | amount: $5.00 | category: TRANSPORT | new total: $5.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: caifan lunch | amount: $4.00 | category: FOOD | new total: $9.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: movie | amount: $10.00 | category: ENTERTAINMENT | new total: $19.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: popcorn | amount: $6.00 | category: FOOD | new total: $25.00
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - handleSort rejected | unknown argument: 
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseAmount rejected | reason: empty input
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - handleAdd rejected | reason: invalid category HELLO
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: transport fare | amount: $5.00 | category: TRANSPORT | new total: $5.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: caifan lunch | amount: $4.00 | category: FOOD | new total: $9.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: movie | amount: $10.00 | category: ENTERTAINMENT | new total: $19.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: popcorn | amount: $6.00 | category: FOOD | new total: $25.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleSort executed | sort type: category
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - Index string rejected | reason: Index string does not match integer format
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseDeleteIndex rejected | reason: index -1 out of range, list size: 0
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: transport fare | amount: $5.00 | category: TRANSPORT | new total: $5.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: caifan lunch | amount: $4.00 | category: FOOD | new total: $9.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: movie | amount: $10.00 | category: ENTERTAINMENT | new total: $19.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: popcorn | amount: $6.00 | category: FOOD | new total: $25.00
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - handleSort rejected | unknown argument: foo
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - parseDeleteIndex rejected | reason: index 0 out of range, list size: 0
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter date:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - readRatio unsuccessful | reason: invalid formatting
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter date:
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - readFutureDate unsuccessful | reason: date input is not a future date
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter date:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter amount:
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - readMoney unsuccessful | reason: invalid formatting
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter amount:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 0, formatted: $0.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 12250, formatted: $12,250.00
+[2026-03-25 22:02:45] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 10250.5, formatted: $10,250.50
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - readRatio unsuccessful | reason: out of specified bounds
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter ratio:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter amount:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter date:
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - readFutureDate unsuccessful | reason: invalid formatting
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter date:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter amount:
+[2026-03-25 22:02:45] [WARNING] seedu.duke.CommandHandler - readMoney unsuccessful | reason: invalid formatting
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter amount:
+[2026-03-25 22:02:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Enter amount:
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit16261768566436082206\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit3493487022437532321\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit3493487022437532321\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 1 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit13916107632848784457\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit2328401278957001065\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit2328401278957001065\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 1 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 2 expenses to: C:\Users\User\AppData\Local\Temp\junit2328401278957001065\monthly_archives\Month2
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 2 archived successfully with 1 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit15613586665830642429\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit16961828764422003835\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit11968470287154182158\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit16148865084059335914\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit17249691993463859018\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit17249691993463859018\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 1 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit10560081531650028539\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit10560081531650028539\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 0 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit13768497036272883020\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit5435545386267980612\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit15147040848675548373\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit15147040848675548373\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 1 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit11338874271759172437\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit9735449622046342952\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit3385035550649943355\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit1850163161060105538\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit1850163161060105538\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 0 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit14008799240878102124\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archiving Month 1 expenses to: C:\Users\User\AppData\Local\Temp\junit14008799240878102124\monthly_archives\Month1
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Month 1 archived successfully with 2 expenses
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit6702927220112230433\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit1846887245361393695\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit321626538968996259\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit745044947466404311\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit1405083196544167815\monthly_archives
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.MonthlyArchive - Archive directory created at: C:\Users\User\AppData\Local\Temp\junit13670161736458565469\monthly_archives
+[2026-03-25 22:02:45] [WARNING] seedu.duke.data.MonthlyArchive - Skipping malformed archived expense line: this line is malformed
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.Storage - Saving financial data to C:\Users\User\AppData\Local\Temp\junit16711871424763564074\test_data.txt
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.Storage - Save successful.
+[2026-03-25 22:02:45] [WARNING] seedu.duke.data.Storage - No save file found. Starting fresh.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:02:45] [WARNING] seedu.duke.data.SummaryReport - Monthly surplus is non-positive; cannot estimate completion.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:02:45] [WARNING] seedu.duke.data.SummaryReport - Monthly surplus is non-positive; cannot estimate completion.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Distance is zero or negative. Goal marked as reached.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:02:45] [WARNING] seedu.duke.data.SummaryReport - BTO goal is zero; percentage set to 0.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Distance is zero or negative. Goal marked as reached.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Distance is zero or negative. Goal marked as reached.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Distance is zero or negative. Goal marked as reached.
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: friend
+[2026-03-25 22:02:45] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: Nick
+[2026-03-25 22:11:15] [INFO] seedu.duke.FinTrackPro - state=startup | expected=run() entry | storagePath=fintrack.txt
+[2026-03-25 22:11:15] [INFO] seedu.duke.FinTrackPro - state=run.start | expected=show welcome and load persisted data | profileName=friend
+[2026-03-25 22:11:15] [INFO] seedu.duke.ui.Ui - Displaying welcome message and ASCII logo.
+[2026-03-25 22:11:15] [INFO] seedu.duke.FinTrackPro - state=run.load.success | expected=check if initial setup is required | profileName=friend, btoGoal=0, oneOffCount=0, recurringCount=0
+[2026-03-25 22:11:15] [INFO] seedu.duke.FinTrackPro - state=run.profile.new | expected=perform initial setup workflow | btoGoal=0
+[2026-03-25 22:11:15] [INFO] seedu.duke.FinTrackPro - state=setup.start | expected=collect name, finances and deadline | scannerReady=true
+[2026-03-25 22:11:15] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your name?
+[2026-03-25 22:11:26] [INFO] seedu.duke.FinTrackPro - state=setup.name.captured | expected=collect current savings | name=nichola
+[2026-03-25 22:11:26] [INFO] seedu.duke.ui.Ui - Greeting user: nichola
+[2026-03-25 22:11:26] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-03-25 22:11:28] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:11:28] [WARNING] seedu.duke.CommandHandler - readMoney unsuccessful | reason: invalid formatting
+[2026-03-25 22:11:28] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-03-25 22:11:28] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:11:28] [WARNING] seedu.duke.CommandHandler - readMoney unsuccessful | reason: invalid formatting
+[2026-03-25 22:11:28] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-03-25 22:11:28] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:11:28] [WARNING] seedu.duke.CommandHandler - readMoney unsuccessful | reason: invalid formatting
+[2026-03-25 22:11:28] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-03-25 22:11:28] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:11:28] [WARNING] seedu.duke.CommandHandler - readMoney unsuccessful | reason: invalid formatting
+[2026-03-25 22:11:28] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-03-25 22:11:28] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:11:30] [INFO] seedu.duke.FinTrackPro - state=startup | expected=run() entry | storagePath=fintrack.txt
+[2026-03-25 22:11:30] [INFO] seedu.duke.FinTrackPro - state=run.start | expected=show welcome and load persisted data | profileName=friend
+[2026-03-25 22:11:30] [INFO] seedu.duke.ui.Ui - Displaying welcome message and ASCII logo.
+[2026-03-25 22:11:30] [INFO] seedu.duke.FinTrackPro - state=run.load.success | expected=check if initial setup is required | profileName=friend, btoGoal=0, oneOffCount=0, recurringCount=0
+[2026-03-25 22:11:30] [INFO] seedu.duke.FinTrackPro - state=run.profile.new | expected=perform initial setup workflow | btoGoal=0
+[2026-03-25 22:11:30] [INFO] seedu.duke.FinTrackPro - state=setup.start | expected=collect name, finances and deadline | scannerReady=true
+[2026-03-25 22:11:30] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your name?
+[2026-03-25 22:11:36] [INFO] seedu.duke.FinTrackPro - state=setup.name.captured | expected=collect current savings | name=nicholas
+[2026-03-25 22:11:36] [INFO] seedu.duke.ui.Ui - Greeting user: nicholas
+[2026-03-25 22:11:36] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-03-25 22:11:38] [INFO] seedu.duke.FinTrackPro - state=setup.savings.captured | expected=collect monthly allowance | currentSavings=1000
+[2026-03-25 22:11:38] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your monthly allowance? (in dollars)
+[2026-03-25 22:11:40] [INFO] seedu.duke.FinTrackPro - state=setup.allowance.captured | expected=collect house price | monthlyAllowance=4000
+[2026-03-25 22:11:40] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is the total value that you and your partner have to pay for the house? (in dollars)
+[2026-03-25 22:11:43] [INFO] seedu.duke.FinTrackPro - state=setup.house-price.captured | expected=collect contribution ratio | housePrice=390000
+[2026-03-25 22:11:43] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your share of the contribution? (e.g., 0.6 for 60%):
+[2026-03-25 22:11:45] [INFO] seedu.duke.FinTrackPro - state=setup.ratio.captured | expected=calculate user BTO goal | contributionRatio=0.6
+[2026-03-25 22:11:45] [INFO] seedu.duke.FinTrackPro - state=setup.bto-calculated | expected=persist goal and collect deadline | totalDownpayment=20475.00, userShare=12285.00
+[2026-03-25 22:11:45] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 20475.00, formatted: $20,475.00
+[2026-03-25 22:11:45] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 12285.00, formatted: $12,285.00
+[2026-03-25 22:11:45] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: When do you need to save this money by? (e.g., 2028-10-24)
+[2026-03-25 22:11:48] [INFO] seedu.duke.FinTrackPro - state=setup.deadline.captured | expected=compute timeline and monthly requirement | deadline=2027-08-06, today=2026-03-25
+[2026-03-25 22:11:48] [INFO] seedu.duke.FinTrackPro - state=setup.goal.in-progress | expected=enter command loop | remainingToSave=11285.00, monthsLeft=17, monthlyNeeded=663.82
+[2026-03-25 22:11:48] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 663.82, formatted: $663.82
+[2026-03-25 22:11:48] [INFO] seedu.duke.FinTrackPro - state=setup.end | expected=caller stores name in profile | name=nicholas, btoGoal=12285.00
+[2026-03-25 22:11:48] [INFO] seedu.duke.FinTrackPro - state=run.profile.initialized | expected=enter command loop | profileName=nicholas, btoGoal=12285.00, deadline=2027-08-06
+[2026-03-25 22:11:48] [INFO] seedu.duke.FinTrackPro - state=run.command-loop | expected=read command until bye | profileName=nicholas, oneOffCount=0, recurringCount=0
+[2026-03-25 22:13:17] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='list'
+[2026-03-25 22:13:17] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=list, rawInput='list'
+[2026-03-25 22:13:17] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=printList | command=list
+[2026-03-25 22:13:17] [INFO] seedu.duke.FinTrackPro - state=list.start | expected=render recurring and one-off expenses | oneOffCount=0, recurringCount=0
+[2026-03-25 22:13:17] [INFO] seedu.duke.FinTrackPro - state=list.empty | expected=return to command loop | oneOffCount=0, recurringCount=0
+[2026-03-25 22:13:26] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='add girlfriend food 1000 food'
+[2026-03-25 22:13:26] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=add, rawInput='add girlfriend food 1000 food'
+[2026-03-25 22:13:26] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleAdd | command=add
+[2026-03-25 22:13:26] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: girlfriend food | amount: $1000 | category: FOOD | new total: $1000
+[2026-03-25 22:13:28] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='list'
+[2026-03-25 22:13:28] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=list, rawInput='list'
+[2026-03-25 22:13:28] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=printList | command=list
+[2026-03-25 22:13:28] [INFO] seedu.duke.FinTrackPro - state=list.start | expected=render recurring and one-off expenses | oneOffCount=1, recurringCount=0
+[2026-03-25 22:13:28] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-25 22:13:28] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-25 22:13:28] [INFO] seedu.duke.FinTrackPro - state=list.total.computed | expected=render total and return to command loop | totalAllMonths=1000, oneOffTotal=1000, recurringTotal=0, combinedTotal=2000
+[2026-03-25 22:13:28] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 2000, formatted: $2,000.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='summary'
+[2026-03-25 22:13:51] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=summary, rawInput='summary'
+[2026-03-25 22:13:51] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleSummary | command=summary
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - handleSummary executed | generating BTO readiness report
+[2026-03-25 22:13:51] [INFO] seedu.duke.data.SummaryReport - Generating SummaryReport for user: nicholas
+[2026-03-25 22:13:51] [INFO] seedu.duke.ui.Ui - Rendering SummaryReport for user: nicholas
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 12285.00, formatted: $12,285.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 11285.00, formatted: $11,285.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 663.82, formatted: $663.82
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 4000, formatted: $4,000.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 3000, formatted: $3,000.00
+[2026-03-25 22:13:51] [INFO] seedu.duke.ui.Ui - SummaryReport display completed.
+[2026-03-25 22:15:45] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='add movie 50 other'
+[2026-03-25 22:15:45] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=add, rawInput='add movie 50 other'
+[2026-03-25 22:15:45] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleAdd | command=add
+[2026-03-25 22:15:45] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: movie | amount: $50 | category: OTHER | new total: $1050
+[2026-03-25 22:15:48] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='list'
+[2026-03-25 22:15:48] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=list, rawInput='list'
+[2026-03-25 22:15:48] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=printList | command=list
+[2026-03-25 22:15:48] [INFO] seedu.duke.FinTrackPro - state=list.start | expected=render recurring and one-off expenses | oneOffCount=2, recurringCount=0
+[2026-03-25 22:15:48] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-25 22:15:48] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 50, formatted: $50.00
+[2026-03-25 22:15:48] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1050, formatted: $1,050.00
+[2026-03-25 22:15:48] [INFO] seedu.duke.FinTrackPro - state=list.total.computed | expected=render total and return to command loop | totalAllMonths=1050, oneOffTotal=1050, recurringTotal=0, combinedTotal=2100
+[2026-03-25 22:15:48] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 2100, formatted: $2,100.00
+[2026-03-25 22:17:41] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:17:41] [INFO] seedu.duke.FinTrackPro - state=run.command-loop.exit | expected=persist in-memory data | exitCommand=bye
+[2026-03-25 22:17:41] [INFO] seedu.duke.data.Storage - Saving financial data to fintrack.txt
+[2026-03-25 22:17:41] [INFO] seedu.duke.data.Storage - Save successful.
+[2026-03-25 22:17:42] [INFO] seedu.duke.FinTrackPro - state=startup | expected=run() entry | storagePath=fintrack.txt
+[2026-03-25 22:17:42] [INFO] seedu.duke.FinTrackPro - state=run.start | expected=show welcome and load persisted data | profileName=friend
+[2026-03-25 22:17:42] [INFO] seedu.duke.ui.Ui - Displaying welcome message and ASCII logo.
+[2026-03-25 22:17:42] [INFO] seedu.duke.FinTrackPro - state=run.load.success | expected=check if initial setup is required | profileName=nicholas, btoGoal=12285.00, oneOffCount=2, recurringCount=0
+[2026-03-25 22:17:42] [INFO] seedu.duke.FinTrackPro - state=run.profile.existing | expected=enter command loop | profileName=nicholas, btoGoal=12285.00
+[2026-03-25 22:17:42] [INFO] seedu.duke.FinTrackPro - state=run.command-loop | expected=read command until bye | profileName=nicholas, oneOffCount=2, recurringCount=0
+[2026-03-25 22:17:52] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='list'
+[2026-03-25 22:17:52] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=list, rawInput='list'
+[2026-03-25 22:17:52] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=printList | command=list
+[2026-03-25 22:17:52] [INFO] seedu.duke.FinTrackPro - state=list.start | expected=render recurring and one-off expenses | oneOffCount=2, recurringCount=0
+[2026-03-25 22:17:52] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-03-25 22:17:52] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 50, formatted: $50.00
+[2026-03-25 22:17:52] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1050, formatted: $1,050.00
+[2026-03-25 22:17:52] [INFO] seedu.duke.FinTrackPro - state=list.total.computed | expected=render total and return to command loop | totalAllMonths=0, oneOffTotal=1050, recurringTotal=0, combinedTotal=1050
+[2026-03-25 22:17:52] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1050, formatted: $1,050.00
+[2026-03-25 22:17:58] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='delete 1'
+[2026-03-25 22:17:58] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=delete, rawInput='delete 1'
+[2026-03-25 22:17:58] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleDelete | command=delete
+[2026-03-25 22:17:58] [INFO] seedu.duke.CommandHandler - handleDelete succeeded | index: 1 | removed: $1000 | new total: $50
+[2026-03-25 22:18:09] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='add friend food 2000 otehr'
+[2026-03-25 22:18:09] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=add, rawInput='add friend food 2000 otehr'
+[2026-03-25 22:18:09] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleAdd | command=add
+[2026-03-25 22:18:09] [WARNING] seedu.duke.CommandHandler - handleAdd rejected | reason: invalid category otehr
+[2026-03-25 22:18:16] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='add friend food 2000 other'
+[2026-03-25 22:18:16] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=add, rawInput='add friend food 2000 other'
+[2026-03-25 22:18:16] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=handler.handleAdd | command=add
+[2026-03-25 22:18:16] [INFO] seedu.duke.CommandHandler - handleAdd succeeded | name: friend food | amount: $2000 | category: OTHER | new total: $2050
+[2026-03-25 22:18:21] [INFO] seedu.duke.FinTrackPro - state=command.received | expected=parse command token | rawInput='list'
+[2026-03-25 22:18:21] [INFO] seedu.duke.FinTrackPro - state=command.parsed | expected=dispatch to command handler | command=list, rawInput='list'
+[2026-03-25 22:18:21] [INFO] seedu.duke.FinTrackPro - state=command.dispatch | expected=printList | command=list
+[2026-03-25 22:18:21] [INFO] seedu.duke.FinTrackPro - state=list.start | expected=render recurring and one-off expenses | oneOffCount=2, recurringCount=0
+[2026-03-25 22:18:21] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 50, formatted: $50.00
+[2026-03-25 22:18:21] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 2000, formatted: $2,000.00
+[2026-03-25 22:18:21] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 2050, formatted: $2,050.00
+[2026-03-25 22:18:21] [INFO] seedu.duke.FinTrackPro - state=list.total.computed | expected=render total and return to command loop | totalAllMonths=0, oneOffTotal=2050, recurringTotal=0, combinedTotal=2050
+[2026-03-25 22:18:21] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 2050, formatted: $2,050.00
+[2026-03-25 22:18:40] [WARNING] seedu.duke.ui.Ui - No more input available. Returning bye.
+[2026-03-25 22:18:40] [INFO] seedu.duke.FinTrackPro - state=run.command-loop.exit | expected=persist in-memory data | exitCommand=bye
+[2026-03-25 22:18:40] [INFO] seedu.duke.data.Storage - Saving financial data to fintrack.txt
