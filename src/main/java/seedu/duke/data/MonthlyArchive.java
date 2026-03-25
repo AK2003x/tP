@@ -94,7 +94,7 @@ public class MonthlyArchive {
         assert monthNumber > 0 : "Month number must be positive";
 
         File monthFile = getMonthFile(monthNumber);
-        ArrayList<ArchivedExpense> archivedExpenses = new ArrayList<>();
+        List<ArchivedExpense> archivedExpenses = new ArrayList<>();
 
         if (!monthFile.exists()) {
             return archivedExpenses;
@@ -149,38 +149,10 @@ public class MonthlyArchive {
     /**
      * Returns the path to the archive directory.
      *
-     * @return The absolute path to the monthly_archives directory.
+     * @return The path to the monthly_archives directory.
      */
     public String getArchiveDirectoryPath() {
         return archiveDirectoryPath;
     }
-
-    /**
-     * Immutable DTO for displaying archived monthly expense rows.
-     */
-    public static class ArchivedExpense {
-        private final String name;
-        private final String amount;
-        private final String category;
-
-        public ArchivedExpense(String name, String amount, String category) {
-            this.name = name;
-            this.amount = amount;
-            this.category = category;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getAmount() {
-            return amount;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-    }
 }
-
 

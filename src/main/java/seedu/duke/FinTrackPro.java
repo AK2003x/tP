@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.data.Expense;
 import seedu.duke.data.ExpenseList;
+import seedu.duke.data.ArchivedExpense;
 import seedu.duke.data.MonthlyArchive;
 import seedu.duke.data.Profile;
 import seedu.duke.data.RecurringExpense;
@@ -22,7 +23,6 @@ import java.time.Period;
 import java.util.Scanner;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -114,11 +114,6 @@ public class FinTrackPro {
             ui.printLine("Welcome back " + name + "! Loading your existing profile...");
         }
 
-        // Display current month
-        ui.printLine("");
-        ui.printLine("===============================================");
-        ui.printLine("Current Month: Month " + profile.getCurrentMonth());
-        ui.printLine("===============================================");
         ui.printLine("");
         ui.printLine("Type 'help' to view my currently supported commands!");
         ui.printLine("Any non-command word would be echoed back to you you you");
@@ -350,8 +345,7 @@ public class FinTrackPro {
             handler.handleSort(userInput);
             break;
         case "save":
-            logState("command.dispatch", "handler.handleSaveMonth",
-                    "command=save, month=" + profile.getCurrentMonth());
+            logger.info("state=command.dispatch | expected=handler.handleSaveMonth | command=save");
             handler.handleSaveMonth();
             break;
         default:
@@ -375,14 +369,11 @@ public class FinTrackPro {
         logState("list.start", "render recurring and one-off expenses", "oneOffCount=" + expenseList.size()
                 + ", recurringCount=" + recurringExpenseList.size());
 
-        boolean hasArchivedEntries = hasArchivedOneOffEntries(profile.getCurrentMonth());
-        if (!hasArchivedEntries && expenseList.isEmpty() && recurringExpenseList.isEmpty()) {
-            logState("list.empty", "return to command loop", "oneOffCount=0, recurringCount=0");
-            ui.printLine("Your expense list is as empty as my wallet. Go spend some money!");
-            ui.printLine("");
-            return;
-        }
+        MonthlyArchive archive = new MonthlyArchive(".");
+        int currentMonth = profile.getCurrentMonth();
+        BigDecimal totalAllMonths = BigDecimal.ZERO;
 
+        // Display recurring expenses (they're not month-specific)
         if (!recurringExpenseList.isEmpty()) {
             ui.printLine("Here are your recurring monthly commitments!");
             for (int i = 0; i < recurringExpenseList.size(); i++) {
@@ -395,68 +386,75 @@ public class FinTrackPro {
             ui.printLine("");
         }
 
-        for (int monthNumber = 1; monthNumber <= profile.getCurrentMonth(); monthNumber++) {
-            ui.printLine("*** MONTH " + monthNumber + " EXPENSES ***");
-            if (monthNumber < profile.getCurrentMonth()) {
-                printArchivedMonthEntries(monthNumber);
-            } else {
-                printCurrentMonthEntries();
+        // Display archived expenses from previous months
+        boolean hasArchivedExpenses = false;
+        for (int month = 1; month < currentMonth; month++) {
+            try {
+                java.util.List<ArchivedExpense> archivedExpenses = 
+                    archive.loadMonthlyExpenses(month);
+                
+                if (!archivedExpenses.isEmpty()) {
+                    hasArchivedExpenses = true;
+                    ui.printLine("*** MONTH " + month + " EXPENSES");
+                    BigDecimal monthTotal = BigDecimal.ZERO;
+                    
+                    for (int i = 0; i < archivedExpenses.size(); i++) {
+                        ArchivedExpense expense = archivedExpenses.get(i);
+                        ui.printLine((i + 1) + ". "
+                                + expense.getName() + " "
+                                + InputUtil.formatMoney(new BigDecimal(expense.getAmount())) + " "
+                                + "[" + expense.getCategory() + "]");
+                        monthTotal = monthTotal.add(new BigDecimal(expense.getAmount()));
+                    }
+                    ui.printLine("Month " + month + " Total: " 
+                            + InputUtil.formatMoney(monthTotal));
+                    ui.printLine("");
+                    totalAllMonths = totalAllMonths.add(monthTotal);
+                }
+            } catch (IOException e) {
+                logger.log(java.util.logging.Level.WARNING, 
+                    "Failed to load archived expenses for Month " + month, e);
             }
+        }
+
+        // Display current month's expenses
+        if (!expenseList.isEmpty()) {
+            ui.printLine("*** MONTH " + currentMonth + " EXPENSES");
+            for (int i = 0; i < expenseList.size(); i++) {
+                Expense expense = expenseList.get(i);
+                ui.printLine((i + 1) + ". "
+                        + expense.getName() + " "
+                        + InputUtil.formatMoney(expense.getAmount()) + " "
+                        + "[" + expense.getCategory() + "]");
+            }
+            ui.printLine("Month " + currentMonth + " Total: " 
+                    + InputUtil.formatMoney(expenseList.getTotal()));
+            ui.printLine("");
+            totalAllMonths = totalAllMonths.add(expenseList.getTotal());
+        } else if (currentMonth > 1 && hasArchivedExpenses) {
+            // Current month has no expenses but previous months do
+            ui.printLine("*** MONTH " + currentMonth + " EXPENSES");
+            ui.printLine("No expenses recorded yet.");
             ui.printLine("");
         }
 
-        BigDecimal combinedTotal = expenseList.getTotal().add(recurringExpenseList.getTotal());
-        logState("list.total.computed", "render total and return to command loop",
-                "oneOffTotal=" + expenseList.getTotal()
-                        + ", recurringTotal=" + recurringExpenseList.getTotal()
-                        + ", combinedTotal=" + combinedTotal);
-        ui.printLine("Total Expenditure (One-off + Recurring): $" + combinedTotal);
-        ui.printLine("");
-    }
-
-    private boolean hasArchivedOneOffEntries(int currentMonthNumber) {
-        MonthlyArchive archive = new MonthlyArchive(".");
-        for (int monthNumber = 1; monthNumber < currentMonthNumber; monthNumber++) {
-            if (archive.monthlyFileExists(monthNumber)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void printArchivedMonthEntries(int monthNumber) {
-        MonthlyArchive archive = new MonthlyArchive(".");
-        try {
-            List<MonthlyArchive.ArchivedExpense> archivedExpenses = archive.loadMonthlyExpenses(monthNumber);
-            if (archivedExpenses.isEmpty()) {
-                ui.printLine("No one-off expenses recorded.");
-                return;
-            }
-
-            for (int i = 0; i < archivedExpenses.size(); i++) {
-                MonthlyArchive.ArchivedExpense archivedExpense = archivedExpenses.get(i);
-                ui.printLine((i + 1) + ". "
-                        + archivedExpense.getName() + " $" + archivedExpense.getAmount() + " "
-                        + "[" + archivedExpense.getCategory() + "]");
-            }
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "Unable to load archived expenses for month " + monthNumber, e);
-            ui.printLine("Unable to load archived expenses for Month " + monthNumber + ".");
-        }
-    }
-
-    private void printCurrentMonthEntries() {
-        if (expenseList.isEmpty()) {
-            ui.printLine("No one-off expenses recorded.");
+        // If there are no expenses at all
+        if (!hasArchivedExpenses && expenseList.isEmpty()) {
+            logState("list.empty", "return to command loop", "oneOffCount=0, recurringCount=0");
+            ui.printLine("Your expense list is as empty as my wallet. Go spend some money!");
+            ui.printLine("");
             return;
         }
 
-        for (int i = 0; i < expenseList.size(); i++) {
-            Expense expense = expenseList.get(i);
-            ui.printLine((i + 1) + ". "
-                    + expense.getName() + " "
-                    + InputUtil.formatMoney(expense.getAmount()) + " "
-                    + "[" + expense.getCategory() + "]");
-        }
+        BigDecimal combinedTotal = expenseList.getTotal().add(recurringExpenseList.getTotal())
+                .add(totalAllMonths);
+        logState("list.total.computed", "render total and return to command loop",
+                "totalAllMonths=" + totalAllMonths
+                        + ", oneOffTotal=" + expenseList.getTotal()
+                        + ", recurringTotal=" + recurringExpenseList.getTotal()
+                        + ", combinedTotal=" + combinedTotal);
+        ui.printLine("Total Expenditure (All Months + Recurring): " 
+                + InputUtil.formatMoney(combinedTotal));
+        ui.printLine("");
     }
 }
