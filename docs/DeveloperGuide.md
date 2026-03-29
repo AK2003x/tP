@@ -265,6 +265,7 @@ An individual BTO budget planner for university students planning to apply for B
 
 2. **Category sort ordering**
     1. Test case: Compare FOOD → TRANSPORT → ENTERTAINMENT → UTILITIES → OTHER. Expected: Each preceding category compares as less than the next, confirming sort priority.
+
 ---
 
 ### Archive Expenses
