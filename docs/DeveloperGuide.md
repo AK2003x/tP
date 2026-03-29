@@ -1,6 +1,25 @@
 # 1. Developer Guide
+* **[Acknowledgements](#2-acknowledgements)**
+  * **[Frameworks and base code](#21-frameworks-and-base-code)**
+  * **[Third-party libraries](#22-third-party-libraries)**
+  * **[Educational resources](#23-educational-resources)**
+* **[Design & Implementation](#3-design--implementation)**
+* **[Product Scope](#4-product-scope)**
+  * **[Target user profile](#41-target-user-profile)**
+  * **[Value proposition](#42-value-proposition)**
+  * **[User stories](#43-user-stories)**
+* **[Non-Functional Requirements](#5-non-functional-requirements)**
+  * **[Performance and scalability](#51-performance-and-scalability)**
+  * **[Data integrity](#52-data-integrity)**
+  * **[Security and privacy](#53-security-and-privacy)**
+  * **[Usability](#54-usability)**
+  * **[Environment](#55-environment)**
+* **[Glossary](#6-glossary)**
+* **[Instructions For Manual Testing](#7-instructions-for-manual-testing)**
+  * **[Sorting expenses](#sorting-expenses)**
+  * **[Category validation](#category-validation)**
 
-## 2. Acknowledgements
+# 2. Acknowledgements
 
 ### 2.1 Frameworks and Base Code
 * **[AddressBook-Level 3 (AB3)](https://se-education.org/addressbook-level3/)**: FinTrack Pro's architectural patterns and initial codebase were adapted from the AddressBook-Level 3 project created by the **[SE-EDU initiative](https://se-education.org/)**.
