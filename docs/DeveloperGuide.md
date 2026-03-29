@@ -42,8 +42,15 @@
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ## 3.1 Architecture Diagram
 
+### Overview
+![Architecture Diagram](diagram/Architecture-Diagram.png)
 
-## 3.2 Category component
+
+## 3.2 UML Diagrams
+In this section, we will present the UML class diagrams, object diagrams and sequence diagrams to 
+illustrate how each main component of FinTrackPro integrates with the rest of the codebase.
+
+### Category component
 ![Class Diagram](diagram/Category-UML-Diagram.png)
 
 
