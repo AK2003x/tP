@@ -77,7 +77,7 @@ public class MonthlyArchive {
         try (FileWriter fw = new FileWriter(monthFile)) {
             for (int i = 0; i < expenseList.size(); i++) {
                 Expense e = expenseList.get(i);
-                fw.write(String.format("E| %s | %s | %s%n",
+                fw.write(String.format("E | %s | %s | %s%n",
                         e.getName(),
                         e.getAmount(),
                         e.getCategory()));
