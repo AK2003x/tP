@@ -17,51 +17,13 @@ FinTrack Pro was created for individual students in a relationship who are plann
 
 * <b>View all commands:</b> [help](#viewing-help-help)
 * <b>Add more savings:</b> [savings](#add-more-savings-savings)
+* <b>Update monthly allowance:</b> [allowance](#update-monthly-allowance-allowance)
+* <b>Update contribution ratio:</b> [ratio](#update-contribution-ratio-ratio)
 * <b>Adding an expense:</b> [add](#adding-an-expense-add)
 * <b>Listing all expenditures:</b> [list](#listing-all-entries-list)
 * <b>Sorting the expenditure list:</b> [sort](#sorting-the-expenditure-list-sort-keyword)
 * <b>Deleting an entry:</b> [delete](#deleting-an-entry-delete)
-* * <b>Deleting a recurring expense:</b> [deleterecurring](#deleting-a-recurring-entry-deleterecurring)
-* <b>Viewing financial summary:</b> [summary](#viewing-financial-summary-summary)
-* <b>Clearing all entries:</b> [clear](#clearing-all-entries-clear)
-* <b>Exiting the program:</b> [exit](#exiting-the-program-exit)
-* <b>Data Storage:</b> [storage](#data-storage)
-
-## Additional Help:
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
-* [Enquiry](#enquiry)
-
-### Viewing Help: ```help ```
-Shows a message explaining how to access the help page, lists all commands. 
-
-<b>Format:</b> help <br>
-<b>Example of Usage:</b> <br>
-<b>Expected Output:</b>
-```
-help# FinTrackPro User Guide
-
-## Introduction
-
-FinTrack Pro was created for individual students in a relationship who are planning to set aside finances for their share of a BTO downpayment.
-
-## Quick Start
-1. Ensure that you have Java 17 or above installed.
-2. Down the latest ```.jar``` file of FinTrackPro from [here](https://github.com/AY2526S2-CS2113-T14-2/tP/releases).
-3. Copy the file to the folder that you want to use as the home folder for your Task Manager.
-4. Open Terminal(Mac) or Windows Powershell(Windows), ```cd``` into the folder you put the jar file in, and use the ```java -jar FinTrackPro.jar``` command to run the application. 
-5. You should see something an introduction page asking for your name. 
-6. Type the command in the command line and press Enter to execute it.
-7. You can refer to the [Features](#features-) page for details of each command. Have fun!!
-
-## Features 
-
-* <b>View all commands:</b> [help](#viewing-help-help)
-* <b>Add more savings:</b> [savings](#add-more-savings-savings)
-* <b>Adding an expense:</b> [add](#adding-an-expense-add)
-* <b>Listing all expenditures:</b> [list](#listing-all-entries-list)
-* <b>Sorting the expenditure list:</b> [sort](#sorting-the-expenditure-list-sort-keyword)
-* <b>Deleting an entry:</b> [delete](#deleting-an-entry-delete)
+* <b>Deleting a recurring expense:</b> [deleterecurring](#deleting-a-recurring-entry-deleterecurring)
 * <b>Viewing financial summary:</b> [summary](#viewing-financial-summary-summary)
 * <b>Clearing all entries:</b> [clear](#clearing-all-entries-clear)
 * <b>Exiting the program:</b> [exit](#exiting-the-program-exit)
@@ -111,6 +73,40 @@ Added: $1,000.00
 New total savings: $2,000.00
 ```
 
+### Update monthly allowance: ```allowance```
+Updates your monthly allowance to a new value.<br>
+<b>Format:</b> ```allowance``` <br>
+<b>Example of Usage:</b> ```allowance```<br>
+<b>Expected Output:</b>
+```
+allowance
+Current Monthly Allowance: $4,000.00
+Enter new monthly allowance:
+5000
+
+Success! Your monthly allowance is now $5,000.00
+```
+<b>NOTE:</b>
+- Amount must be a non-negative number with at most 2 decimal places.
+- This replaces the existing allowance (it does not add to it).
+
+### Update contribution ratio: ```ratio```
+Updates your share of the BTO downpayment cost relative to your partner.<br>
+<b>Format:</b> ```ratio``` <br>
+<b>Example of Usage:</b> ```ratio```<br>
+<b>Expected Output:</b>
+```
+ratio
+Current Contribution Ratio: 60.0% (0.6)
+Enter new ratio (0.0 to 1.0):
+0.5
+
+Success! Your contribution ratio is now 0.5
+```
+<b>NOTE:</b>
+- Value must be between `0.0` (0%) and `1.0` (100%), with at most 2 decimal places.
+- Updating the ratio automatically recalculates your BTO goal. Run `summary` to see the updated goal.
+
 ### Adding an expense: ```add ```
 Adds a regular expense to your monthly tracker, with optional field recurring.<br>
 <b>Format:</b> ```add <NAME> <AMOUNT> <CATEGORY> <RECURRING>``` <br>
@@ -125,9 +121,9 @@ Recurring Total: $30
 Added expense: [FOOD] breakfast $25
 Month 1 Total: $25
 ```
-<b>NOTE:</b>  
-- The keyword `recurring` is optional.  
-- If omitted, the expense will be treated as a one-off expense.  
+<b>NOTE:</b>
+- The keyword `recurring` is optional.
+- If omitted, the expense will be treated as a one-off expense.
 
 ### Listing all entries: ```list```
 Shows a list of current month expenses, categorized by month, and recurring or not recurring.<br>
@@ -284,212 +280,21 @@ Watch this space for more updates!!
 
 ## Command Summary
 
-| Action                 | Format, Examples                          |
-|------------------------|-------------------------------------------|
-| Viewing Help           | `help`                                    |
-| Add more savings       | `savings` e.g. `savings`                  |
-| Add Expense            | `add NAME AMOUNT CATEGORY [recurring]`    |
-| List Entries           | `list`                                    |
-| Delete Entry           | `delete INDEX` e.g. `delete 2`            |
-| Delete Recurring       | `deleterecurring INDEX`                   |
-| View Financial Summary | `summary`                                 |
-| Clear All Data         | `clear`                                   |
-| Exit Program           | `bye`                                     |
-
-### Enquiry
-We hope that you found FinTrackPro useful and easy to use!
-General Commands
-'help'    - view all current commands
-'summary' - generate your BTO readiness report based on your goals
-'bye'     - exit the program
-
-Daily Transaction Commands
-'add'      <name> <amount> <category> <recurring> - add a new expense
-(e.g., add lunch 5.50 FOOD for not recurring and add lunch 5.50 FOOD recurring for recurring)
-..
-..
-```
-
-
-### Add more savings: ```savings```
-Add more savings from the initial saving count
-
-<b>Format:</b> ```savings``` <br>
-<b>NOTE:</b> When entering `amount`, it represents the additional amount of cash you want to add towards the goal.<br>
-<b>Example of Usage:</b> ```savings```<br>
-<b>Expected Output:</b>
-```
-savings
-Current total savings: $1,000.00
-Enter amount to add to your savings:
-1000
-
-Transaction successful!
-Added: $1,000.00
-New total savings: $2,000.00
-```
-
-### Adding an expense: ```add ```
-Adds a regular expense to your monthly tracker, with optional field recurring.<br>
-<b>Format:</b> ```add <NAME> <AMOUNT> <CATEGORY> <RECURRING>``` <br>
-<b>Example of Usage:</b> <br>
-```add netflix 30 entertainment recurring ```<br>
-```add breakfast 25 food``` <br>
-<b>Expected Output:</b>
-```
-Added recurring expense: [RECURRING][ENTERTAINMENT] netflix $30
-Recurring Total: $30
-
-Added expense: [FOOD] breakfast $25
-Month 1 Total: $25
-```
-
-### Listing all entries: ```list```
-Shows a list of current month expenses, categorized by month, and recurring or not recurring.<br>
-<b>Format:</b> ```list``` <br>
-<b>Example of Usage:</b> ```list```<br>
-<b>Expected Output:</b>
-```
-Here are your recurring monthly commitments!
-1. netflix $30.00 [ENTERTAINMENT]
-
-*** MONTH 1 EXPENSES
-1. breakfast $25.00 [FOOD]
-Month 1 Total: $25.00
-```
-
-### Sorting the expenditure list: ```sort <keyword>```
-Sorts the expenditure list by category or by recency. Valid keywords are `category` and `recent`.<br>
-<b>Format:</b> ```sort category``` or ```sort recent```<br>
-<b>Example of Usage:</b> ```sort category```<br>
-<b>Expected Output:</b>
-```
-sort category
-Expenses sorted by category.
-
-sort recent
-Expenses sorted by insertion order.
-```
-<b>NOTE:</b> Use `list` after sorting to view the updated order. Any keyword other than `category` or `recent` will be rejected with an error message.
-
-### Deleting an entry: ```delete```
-Deletes the specified entry from the tracker.<br>
-<b>Format:</b> ```delete INDEX``` <br>
-<b>Example of Usage:</b> ```delete 1```<br>
-<b>Expected Output:</b>
-```
-delete 1
-Deleted expense #1: $30
-Current Total: $15.90
-```
-
-### Viewing financial summary: ```summary```
-Displays a comprehensive overview of your financial status, including distance to goal.<br>
-<b>Format:</b> ```summary``` <br>
-<b>Example of Usage:</b> ```summary```<br>
-<b>Expected Output:</b>
-```
-===== BTO Readiness Report =====
-User: nicholas
-BTO Goal: $12,285.00 (your share + fees)
-Deadline: 2027-08-06 (17 months)
-
-Current Savings: $1,000.00 (8% reached)
-Distance to Goal: $11,285.00
-
-Monthly Allowance: $4,000.00
-Total Expenditure: $30.00
-Monthly Surplus: $3,970.00
-Estimated Goal Achievement: 3 months
-```
-
-### Clearing all entries: ```clear```
-Deletes all current data and resets the profile<br>
-<b>Format:</b> ```clear``` <br>
-<b>Example of Usage:</b> ```clear```<br>
-<b>Expected Output:</b>
-```
-Are you sure you want to clear all current data? (Y/N):
-(if Y) You have cleared all current data!
-(else) Cancelling clearing data!
-```
-
-### Exiting the program: ```bye```
-Exits the program<br>
-<b>Format:</b> ```bye``` <br>
-<b>Example of Usage:</b> ```bye``` <br>
-<b>Expected Output:</b>
-```
-Goodbye nicholas. Stay disciplined and get that house that you always wanted!
-```
-
-### Archive monthly expenditures: ```save```
-Saves the current month of expenditures into monthly_archives, and resets the expenditure to 0, simulating a new month.<br>
-<b>Format:</b> ```save``` <br>
-<b>Example of Usage:</b> ```save``` <br>
-<b>Expected Output:</b>
-```
-Month 1 expenses archived to 'monthly_archives'
-Transferred $3,975.00 of unspent allowance to savings
-Advanced to Month 2
-Current Savings: $4,975.00
-Monthly Allowance: $4,000.00
-```
-
-### Data Storage
-Stores the data in relative path as 'fintrack.txt'<br>
-<b>NOTE:</b> The saving of data into storage will only be done after you type 'bye'<br>
-<b>Expected Output:</b>
-```
-P | nicholas | 4000 | 1000 | 12285.00 | 0.6 | 2027-08-06
-E | 30
-```
-
-**Below is a table for the interpretation of the output in** `fintrack.txt`
-
-**Profile**
-
-| Field        | Value              | Meaning                                               |
-|--------------|--------------------|-------------------------------------------------------|
-| `P`          | profile marker     | tells the viewer this line represents a **Profile**   |
-| `nicholas`   | name               | user's name                                           |
-| `4000`       | monthly allowance     | user earns **$4000/month**                            |
-| `1000`       | current savings    | currently saved **$1000**                             |
-| `12285.00`   | BTO goal           | amount needed for the **downpayment goal**            |
-| `0.6`        | contribution ratio | user is paying **60%** of the BTO cost                |
-| `2027-08-06` | deadline           | goal date (ISO format `YYYY-MM-DD`)                   |
-
-**Expenditure**
-
-| Field        | Value              | Meaning                                               |
-|--------------|--------------------|-------------------------------------------------------|
-| `E`          | expenditure        | tells the viewer this line represents **Expenditure** |
-| `30`         | amount             | user has spent **$30** on a single expenditure        |
-
-## FAQ
-<b>Updated as of 15 March 2026</b>
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: At this point you cannot, your data will be saved on your local device. Just run the code again and
-you should not have to restart all your progress!
-
-Watch this space for more updates!!
-
-## Command Summary
-
-| Action                 | Format, Examples               |
-|------------------------|--------------------------------|
-| Viewing Help           | `help`                         |
-| Add more savings       | `savings` e.g. `savings`       |
-| Add Expense            | `add AMOUNT` e.g. `add 450`    |
-| List Entries           | `list`                         |
-| Delete Entry           | `delete INDEX` e.g. `delete 2` |
-| View Financial Summary | `summary`                      |
-| Clear All Data         | `clear`                        |
-| Exit Program           | `bye`                          |
+| Action                    | Format, Examples                          |
+|---------------------------|-------------------------------------------|
+| Viewing Help              | `help`                                    |
+| Add more savings          | `savings`                                 |
+| Update monthly allowance  | `allowance`                               |
+| Update contribution ratio | `ratio`                                   |
+| Add Expense               | `add NAME AMOUNT CATEGORY [recurring]`    |
+| List Entries              | `list`                                    |
+| Delete Entry              | `delete INDEX` e.g. `delete 2`            |
+| Delete Recurring          | `deleterecurring INDEX`                   |
+| View Financial Summary    | `summary`                                 |
+| Clear All Data            | `clear`                                   |
+| Exit Program              | `bye`                                     |
 
 ### Enquiry
 We hope that you found FinTrackPro useful and easy to use!
 
-Meanwhile, if you have any enquires/bugs that you might have found please email us [here!](mailto:e1406324@u.nus.edu) 
+Meanwhile, if you have any enquires/bugs that you might have found please email us [here!](mailto:e1406324@u.nus.edu)
