@@ -54,14 +54,17 @@ public class Storage {
 
         try (FileWriter fw = new FileWriter(filePath)) {
             // Save Profile (P)
-            fw.write(String.format("P | %s | %s | %s | %s | %s | %s | %d%n",
+            String housePriceStr = profile.getHousePrice() != null
+                    ? profile.getHousePrice().toPlainString() : "null";
+            fw.write(String.format("P | %s | %s | %s | %s | %s | %s | %d | %s%n",
                     profile.getName(),
                     profile.getMonthlyAllowance(),
                     profile.getCurrentSavings(),
                     profile.getBtoGoal(),
                     profile.getContributionRatio(),
                     profile.getDeadline(),
-                    profile.getCurrentMonth()));
+                    profile.getCurrentMonth(),
+                    housePriceStr));
 
             // Save Expenses (E)
             for (int i = 0; i < expenseList.size(); i++) {
@@ -171,6 +174,9 @@ public class Storage {
 
         if (parts.length >= 8) {
             profile.setCurrentMonth(Integer.parseInt(parts[7]));
+        }
+        if (parts.length >= 9 && !parts[8].trim().equals("null")) {
+            profile.setHousePrice(new BigDecimal(parts[8].trim()));
         }
     }
 

@@ -442,7 +442,7 @@ identifier that determines how the line is parsed:
 
 | Prefix | Record Type      | Format                                                              |
 |--------|------------------|---------------------------------------------------------------------|
-| `P`    | Profile          | `P \| Name \| Allowance \| Savings \| BtoGoal \| Ratio \| Deadline \| CurrentMonth` |
+| `P`    | Profile          | `P \| Name \| Allowance \| Savings \| BtoGoal \| Ratio \| Deadline \| CurrentMonth \| HousePrice` |
 | `E`    | One-off Expense  | `E \| Name \| Amount \| Category \| InsertionOrder`                |
 | `R`    | Recurring Expense| `R \| Name \| Amount \| Category`                                  |
 
@@ -454,7 +454,7 @@ with a `WARNING`-level log entry. This ensures that a single corrupted line does
 The object diagram below shows a concrete snapshot of the application's in-memory state after
 `Storage#load()` has successfully parsed the following `fintrack.txt` file:
 ```
-P | Alice | 2000.00 | 5000.00 | 25000.00 | 0.50 | 2028-10-24 | 3
+P | Alice | 2000.00 | 5000.00 | 25000.00 | 0.50 | 2028-10-24 | 3 | 500000.00
 E | Lunch | 5.50 | FOOD | 0
 E | Bus fare | 1.80 | TRANSPORT | 1
 R | Netflix | 10.90 | ENTERTAINMENT
@@ -465,8 +465,9 @@ R | Netflix | 10.90 | ENTERTAINMENT
 This snapshot illustrates three key design points:
 
 1. **Six mandatory Profile fields are restored** — name, allowance, savings, BTO goal, ratio, and
-   deadline are populated from the `P` line. The optional `currentMonth` field is also restored if
-   an 8th segment is present; otherwise it defaults to `1`.
+   deadline are populated from the `P` line. The optional `currentMonth` field is restored if an 8th
+   segment is present (defaulting to `1` otherwise), and `housePrice` is restored if a 9th segment
+   is present and not `null`.
 2. **Insertion order is preserved** — `e1` has `insertionOrder = 0` and `e2` has
    `insertionOrder = 1`, meaning a subsequent `sort recent` command will restore this exact sequence.
 3. **Recurring and one-off expenses are held separately** — `expenseList` and `recurringList` are
@@ -532,7 +533,9 @@ The following sequence of actions occurs during the load process:
    setters on **Profile**: `setName`, `setMonthlyAllowance`, `setCurrentSavings`, `setBtoGoal`,
    `setContributionRatio`, and `setDeadline`.
 4. If the line contains an 8th segment (`parts.length >= 8`), `profile.setCurrentMonth()` is also
-   called. Otherwise, the month counter remains at its default value of `1`.
+   called. Otherwise, the month counter remains at its default value of `1`. If a 9th segment is
+   present and not `"null"`, `profile.setHousePrice()` is called, restoring the value needed for
+   the `ratio` command to recalculate `btoGoal` after a restart.
 5. For lines starting with `E`, **Storage** delegates to `loadExpense`, which calls `expenseList.add()`
    with the preserved insertion order, restoring the original sort sequence.
 6. For lines starting with `R`, **Storage** delegates to `loadRecurring`, which adds a new
