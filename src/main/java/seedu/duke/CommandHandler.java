@@ -104,7 +104,7 @@ public class CommandHandler {
                         + " | category: " + args.category);
 
                 ui.printLine("Added recurring expense: " + recurringExpenseList.get(recurringExpenseList.size() - 1));
-                ui.printLine("Recurring Total: $" + recurringExpenseList.getTotal());
+                ui.printLine("Recurring Total: " + InputUtil.formatMoney(recurringExpenseList.getTotal()));
                 ui.printLine("");
                 return;
             }
@@ -120,7 +120,8 @@ public class CommandHandler {
                     + " | new total: $" + expenseList.getTotal());
 
             ui.printLine("Added expense: " + expenseList.get(expenseList.size() - 1));
-            ui.printLine("Month " + profile.getCurrentMonth() + " Total: $" + expenseList.getTotal());
+            ui.printLine("Month " + profile.getCurrentMonth() + " Total: "
+                    + InputUtil.formatMoney(expenseList.getTotal()));
             ui.printLine("");
 
         } catch (InvalidAmountException | InvalidCategoryException e) {
