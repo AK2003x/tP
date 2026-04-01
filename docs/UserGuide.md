@@ -2,12 +2,17 @@
 
 ## Introduction
 
-FinTrack Pro was created for individual students in a relationship who are planning to set aside finances for their share of a BTO downpayment.
+Welcome to FinTrackPro!
+FinTrackPro is a desktop app for university students planning to secure a Build-To-Order (BTO) flat.
+FinTrackPro turns messy finances into a clear, actionable downpayment plan—showing exactly how much you need to save 
+monthly and tracking your progress in real-time.
+Let's get started!
+
 
 ## Quick Start
 1. Ensure that you have Java 17 or above installed.
-2. Down the latest ```.jar``` file of FinTrackPro from [here](https://github.com/AY2526S2-CS2113-T14-2/tP/releases).
-3. Copy the file to the folder that you want to use as the home folder for your Task Manager.
+2. Download the latest ```.jar``` file of FinTrackPro from [here](https://github.com/AY2526S2-CS2113-T14-2/tP/releases).
+3. Copy the file to the folder that you want to use as the home folder for FinTrackPro.
 4. Open Terminal(Mac) or Windows Powershell(Windows), ```cd``` into the folder you put the jar file in, and use the ```java -jar FinTrackPro.jar``` command to run the application. 
 5. You should see something an introduction page asking for your name. 
 6. Type the command in the command line and press Enter to execute it.
@@ -24,9 +29,11 @@ FinTrack Pro was created for individual students in a relationship who are plann
 * <b>Sorting the expenditure list:</b> [sort](#sorting-the-expenditure-list-sort-keyword)
 * <b>Deleting an entry:</b> [delete](#deleting-an-entry-delete)
 * <b>Deleting a recurring expense:</b> [deleterecurring](#deleting-a-recurring-entry-deleterecurring)
-* <b>Viewing financial summary:</b> [summary](#viewing-financial-summary-summary)
+* <b>View financial summary:</b> [summary](#view-financial-summary-summary)
+* <b>Archive monthly expenditures:</b> [save](#archive-monthly-expenditures-save)
 * <b>Clearing all entries:</b> [clear](#clearing-all-entries-clear)
-* <b>Exiting the program:</b> [exit](#exiting-the-program-exit)
+* <b>Factory Reset:</b> [reset](#factory-reset-reset)
+* <b>Exiting the program:</b> [bye](#exiting-the-program-bye)
 * <b>Data Storage:</b> [storage](#data-storage)
 
 ## Additional Help:
@@ -34,11 +41,11 @@ FinTrack Pro was created for individual students in a relationship who are plann
 * [Command Summary](#command-summary)
 * [Enquiry](#enquiry)
 
-### Viewing Help: ```help ```
+### Viewing Help: ```help```
 Shows a message explaining how to access the help page, lists all commands. 
 
-<b>Format:</b> help <br>
-<b>Example of Usage:</b> <br>
+<b>Format:</b> ```help``` <br>
+<b>Example of Usage:</b> ```help``` <br>
 <b>Expected Output:</b>
 ```
 help
@@ -107,9 +114,9 @@ Success! Your contribution ratio is now 0.5
 - Value must be between `0.0` (0%) and `1.0` (100%), with at most 2 decimal places.
 - Updating the ratio automatically recalculates your BTO goal. Run `summary` to see the updated goal.
 
-### Adding an expense: ```add ```
+### Adding an expense: ```add```
 Adds a regular expense to your monthly tracker, with optional field recurring.<br>
-<b>Format:</b> ```add <NAME> <AMOUNT> <CATEGORY> <RECURRING>``` <br>
+<b>Format:</b> ```add <NAME> <AMOUNT> <CATEGORY> [RECURRING]``` <br>
 <b>Example of Usage:</b> <br>
 ```add netflix 30 entertainment recurring ```<br>
 ```add breakfast 25 food``` <br>
@@ -126,33 +133,67 @@ Month 1 Total: $25
 - If omitted, the expense will be treated as a one-off expense.
 
 ### Listing all entries: ```list```
-Shows a list of current month expenses, categorized by month, and recurring or not recurring.<br>
+Shows a consolidated view of all your recorded expenses, neatly categorized by recurring commitments, previous months' 
+archives, and the current month's one-off expenses.<br>
 <b>Format:</b> ```list``` <br>
 <b>Example of Usage:</b> ```list```<br>
 <b>Expected Output:</b>
 ```
 Here are your recurring monthly commitments!
-1. netflix $30.00 [ENTERTAINMENT]
+1. Netflix $30.00 [ENTERTAINMENT]
 
 *** MONTH 1 EXPENSES
-1. breakfast $25.00 [FOOD]
-   Month 1 Total: $25.00
+1. Chicken Rice $7.30 [FOOD]
+2. Pizza $10.00 [FOOD]
+3. Game $12.00 [ENTERTAINMENT]
+4. Movie $9.00 [ENTERTAINMENT]
+5. Project Materials $50.00 [OTHER]
+Month 1 Total: $88.30
+
+Total Expenditure (All Months + Recurring): $118.30
 ```
 
 ### Sorting the expenditure list: ```sort <keyword>```
-Sorts the expenditure list by category or by recency. Valid keywords are `category` and `recent`.<br>
-<b>Format:</b> ```sort category``` or ```sort recent```<br>
-<b>Example of Usage:</b> ```sort category```<br>
+Sorts the expenditure list by category or by recency. Valid keywords are `name`, `category` and `recent`.<br>
+<b>Format:</b> ```sort category``` or ``` sort name ``` or ```sort recent```<br>
+<b>Example of Usage:</b> ``` sort name ``` or ```sort category```<br>
 <b>Expected Output:</b>
 ```
-sort category
-Expenses sorted by category.
+> sort name
+Expenses sorted alphabetically by name.
+> list
+Here are your recurring monthly commitments!
+1. Netflix $30.00 [ENTERTAINMENT]
 
-sort recent
-Expenses sorted by insertion order.
+*** MONTH 1 EXPENSES
+1. Chicken Rice $7.30 [FOOD]
+2. Game $12.00 [ENTERTAINMENT]
+3. Movie $9.00 [ENTERTAINMENT]
+4. Pizza $10.00 [FOOD]
+5. Project Materials $50.00 [OTHER]
+Month 1 Total: $88.30
+
+Total Expenditure (All Months + Recurring): $118.30
+
+Total Expenditure (All Months + Recurring): $88.30
+
+> sort category
+Expenses sorted by category.
+> list
+Here are your recurring monthly commitments!
+1. Netflix $30.00 [ENTERTAINMENT]
+
+*** MONTH 1 EXPENSES
+1. Chicken Rice $7.30 [FOOD]
+2. Pizza $10.00 [FOOD]
+3. Game $12.00 [ENTERTAINMENT]
+4. Movie $9.00 [ENTERTAINMENT]
+5. Project Materials $50.00 [OTHER]
+Month 1 Total: $88.30
+
+Total Expenditure (All Months + Recurring): $118.30
 ```
-<b>NOTE:</b> Use `list` after sorting to view the updated order. Any keyword other than `category` or `recent` will be 
-rejected with an error message.
+<b>NOTE:</b> Sorting reorders the in-memory list immediately. Run `list` to see the updated order..
 
 ### Deleting an entry: ```delete```
 Deletes the specified entry from the tracker.<br>
@@ -160,16 +201,16 @@ Deletes the specified entry from the tracker.<br>
 <b>Example of Usage:</b> ```delete 1```<br>
 <b>Expected Output:</b>
 ```
-delete 1
+> delete 1
 Deleted expense #1: $30
 Current Total: $15.90
 ```
 <b>NOTE:</b>  
 - INDEX refers to the position in the current month’s expense list.  
-- Use `list` to view the correct index before deleting.  
+- Sorting reorders the in-memory list immediately. Run list to see the updated order.
 
 ### Deleting a recurring entry: ```deleterecurring```
-Deletes a recurring expense from the tracker.
+Deletes a recurring expense from the tracker.<br>
 <b>Format:</b> ```deleterecurring INDEX```  
 <b>Example of Usage:</b> ```deleterecurring 1```  
 <b>Expected Output:</b>
@@ -181,35 +222,50 @@ Recurring Total: $0.00
 - INDEX refers to the position in the recurring expense list.  
 - Use `list` to view recurring expenses and their indices.  
 
-### Viewing financial summary: ```summary```
-Displays a comprehensive overview of your financial status, including distance to goal.<br>
+### View financial summary: ```summary```
+Generates a comprehensive financial report based on your profile and current spending habits. Calculates your monthly 
+surplus, distance to your goal, and provides an estimate of how many months it will take to secure your downpayment.
+The Readiness Level reflects your percentage progress toward your BTO goal, ranging from `BARELY STARTED` to `READY`.<br>
 <b>Format:</b> ```summary``` <br>
-<b>Example of Usage:</b> ```summary```<br>
+<b>Example of Usage:</b> ```summary``` <br>
 <b>Expected Output:</b>
 ```
 ===== BTO Readiness Report =====
-User: nicholas
-BTO Goal: $12,285.00 (your share + fees)
-Deadline: 2027-08-06 (17 months)
+User: Jairus
+Readiness Level: ON TRACK
+BTO Goal: $25,000.00 (your share + fees)
+Deadline: 2028-10-24 (31 months)
 
-Current Savings: $1,000.00 (8% reached)
-Distance to Goal: $11,285.00
+Current Savings: $12,500.00 (50.00% reached)
+Distance to Goal: $12,500.00
+Adjusted Minimum Savings: $403.23 / month
 
-Monthly Allowance: $4,000.00
-Total Expenditure: $30.00
-Monthly Surplus: $3,970.00
-Estimated Goal Achievement: 3 months
+Monthly Allowance: $1,000.00
+Total Expenditure: $200.00
+Monthly Surplus (Allowance - Expenditure): $800.00
+Estimated Goal Achievement: 16 months
 ```
 
 ### Clearing all entries: ```clear```
-Deletes all current data and resets the profile<br>
+Wipes all one-off expenses for the current month.<br>
 <b>Format:</b> ```clear``` <br>
 <b>Example of Usage:</b> ```clear```<br>
 <b>Expected Output:</b>
 ```
-Are you sure you want to clear all current data? (Y/N):
-(if Y) You have cleared all current data!
-(else) Cancelling clearing data!
+WARNING: This will permanently delete ALL one-off expenses. Are you sure? (Input Y to clear)
+> Y
+Current month's one-off expenses have been wiped clean. Recurring expenses are kept.
+```
+
+### Factory Reset: ```reset```
+Completely erases all data inside FinTrackPro, including your profile, all one-off expenses, all recurring expenses, and all monthly archives. <br>
+<b>Format:</b> ```reset``` <br>
+<b>Example of Usage:</b> ```reset``` <br>
+<b>Expected Output:</b>
+```
+WARNING: This will wipe your profile and ALL expenses. Type 'Y' to continue: 
+> Y
+System reset successful. Please restart or type 'bye' to exit.
 ```
 
 ### Exiting the program: ```bye```
@@ -234,47 +290,67 @@ Current Savings: $4,975.00
 Monthly Allowance: $4,000.00
 ```
 <b>NOTE:</b>  
-- Only one-off expenses are cleared each month.  
-- Recurring expenses persist across months.  
+- Any unspent allowance (monthly allowance minus total expenses) is automatically transferred to your savings balance.
+- If your total expenses exceed your monthly allowance, no transfer occurs and an overspend message is shown.
 
 ### Data Storage
-Stores the data in relative path as 'fintrack.txt'<br>
-<b>NOTE:</b> The saving of data into storage will only be done after you type 'bye'<br>
+FinTrackPro data is saved in the hard disk automatically after any command that changes your data (e.g., add, delete, allowance, ratio). There is no need to save manually.
+<b>Data File Location:</b><br> Your data is securely saved locally on your computer in a file named fintrack.txt located in the same folder as your application.
+<b>Warning:</b><br> Advanced users can modify fintrack.txt directly. However, if the format is corrupted, FinTrackPro will safely skip the corrupted lines to prevent the app from crashing.
 <b>Expected Output:</b>
 ```
-P | nicholas | 4000 | 1000 | 12285.00 | 0.6 | 2027-08-06
-E | breakfast | 25.00 | FOOD
-R | netflix | 30.00 | ENTERTAINMENT
+P | Jairus | 1500 | 1000 | 18375.00 | 0.7 | 2028-10-10 | 1
+E | Chicken Rice | 7.3 | FOOD | 1
+E | Pizza | 10 | FOOD | 0
+E | Game | 12 | ENTERTAINMENT | 4
+E | Movie | 9 | ENTERTAINMENT | 2
+E | Project Materials | 50 | OTHER | 3
+R | Netflix | 30 | ENTERTAINMENT
 ```
 
 **Below is a table for the interpretation of the output in** `fintrack.txt`
 
-**Profile**
+**Profile (`P`)**
 
 | Field        | Value              | Meaning                                               |
 |--------------|--------------------|-------------------------------------------------------|
-| `P`          | profile marker     | tells the viewer this line represents a **Profile**   |
-| `nicholas`   | name               | user's name                                           |
-| `4000`       | monthly allowance     | user earns **$4000/month**                            |
-| `1000`       | current savings    | currently saved **$1000**                             |
-| `12285.00`   | BTO goal           | amount needed for the **downpayment goal**            |
-| `0.6`        | contribution ratio | user is paying **60%** of the BTO cost                |
-| `2027-08-06` | deadline           | goal date (ISO format `YYYY-MM-DD`)                   |
+| `P`          | profile marker     | tells the viewer this line represents a **Profile** |
+| `Jairus`     | name               | user's name                                           |
+| `1500`       | monthly allowance  | user has a **$1500/month** allowance                  |
+| `1000`       | current savings    | currently saved **$1000** |
+| `18375.00`   | BTO goal           | amount needed for the **downpayment goal** |
+| `0.7`        | contribution ratio | user is paying **70%** of the BTO cost                |
+| `2028-10-10` | deadline           | goal date (ISO format `YYYY-MM-DD`)                   |
+| `1`          | current month      | user is currently tracking month **1** of their data  |
 
-**Expenditure**
+**Expenditure (`E`)**
 
-| Field        | Value              | Meaning                                               |
-|--------------|--------------------|-------------------------------------------------------|
-| `E`          | expenditure        | tells the viewer this line represents **Expenditure** |
-| `30`         | amount             | user has spent **$30** on a single expenditure        |
+| Field          | Value              | Meaning                                                       |
+|----------------|--------------------|---------------------------------------------------------------|
+| `E`            | expenditure marker | tells the viewer this line represents a one-off **Expenditure**|
+| `Chicken Rice` | name               | description of the expense                                    |
+| `7.3`          | amount             | user spent **$7.30** on this item                             |
+| `FOOD`         | category           | category assigned to the expense                              |
+| `1`            | insertion order    | internal sequence tracker used to remember chronological order|
+
+**Recurring Expenditure (`R`)**
+
+| Field          | Value              | Meaning                                                       |
+|----------------|--------------------|---------------------------------------------------------------|
+| `R`            | recurring marker   | tells the viewer this line represents a **Recurring** expense |
+| `Netflix`      | name               | description of the recurring expense                          |
+| `30`           | amount             | user spends **$30.00** every month on this item               |
+| `ENTERTAINMENT`| category           | category assigned to the expense                              |
 
 ## FAQ
 <b>Updated as of 15 March 2026</b>
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: At this point you cannot, your data will be saved on your local device. Just run the code again and
-you should not have to restart all your progress!
+**A**: Because FinTrackPro prioritizes your privacy, your data is not stored in the cloud. 
+To transfer your data to a new computer, simply copy the `fintrack.txt` file from your current FinTrackPro folder and 
+paste it into the FinTrackPro folder on your new computer. When you run the `.jar` file on the new computer, it will 
+automatically load your existing progress!
 
 Watch this space for more updates!!
 
@@ -288,13 +364,16 @@ Watch this space for more updates!!
 | Update contribution ratio | `ratio`                                   |
 | Add Expense               | `add NAME AMOUNT CATEGORY [recurring]`    |
 | List Entries              | `list`                                    |
+| Sort Entries              | `sort KEYWORD` e.g. `sort category`       |
 | Delete Entry              | `delete INDEX` e.g. `delete 2`            |
 | Delete Recurring          | `deleterecurring INDEX`                   |
 | View Financial Summary    | `summary`                                 |
-| Clear All Data            | `clear`                                   |
+| Archive Month             | `save`                                    |
+| Clear Current Month       | `clear`                                   |
+| Factory Reset             | `reset`                                   |
 | Exit Program              | `bye`                                     |
 
 ### Enquiry
 We hope that you found FinTrackPro useful and easy to use!
 
-Meanwhile, if you have any enquires/bugs that you might have found please email us [here!](mailto:e1406324@u.nus.edu)
+Meanwhile, if you have any enquiries/bugs that you might have found please email us [here!](e1406324@u.nus.edu)
