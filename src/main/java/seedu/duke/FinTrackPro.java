@@ -24,6 +24,7 @@ import java.util.Scanner;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Main application controller for FinTrackPro.
@@ -37,6 +38,10 @@ import java.util.Objects;
  * {@code Profile} and {@code ExpenseList} instances.</p>
  */
 public class FinTrackPro {
+    private static final Set<String> EXACT_ONLY_COMMANDS = Set.of(
+            "help", "summary", "bye", "list", "savings", "allowance", "ratio", "save", "clear", "reset"
+    );
+
     private static final Logger logger = LoggerUtil.getLogger(FinTrackPro.class);
     private final Ui ui;
     private final Profile profile;
@@ -116,7 +121,7 @@ public class FinTrackPro {
 
         ui.printLine("");
         ui.printLine("Type 'help' to view my currently supported commands!");
-        ui.printLine("Any non-command word would be echoed back to you you you");
+        ui.printLine("If you enter an unknown command, I'll prompt you to use 'help'.");
         ui.printLine("Type 'bye' to exit!");
         ui.printLine("");
 
@@ -179,8 +184,18 @@ public class FinTrackPro {
         logState("setup.start", "collect name, finances and deadline", "scannerReady=true");
 
         // 1. Name handling
-        String name = ui.readLine(in, "What is your name?");
-        name = name.trim().isEmpty() ? "friend" : name.trim();
+        String name;
+        while (true) {
+            name = ui.readLine(in, "What is your name?").trim();
+            if (name.contains("|")) {
+                ui.printLine("Name cannot contain the '|' character. Try again.");
+                continue;
+            }
+            if (name.isEmpty()) {
+                name = "friend";
+            }
+            break;
+        }
         logState("setup.name.captured", "collect current savings", "name=" + name);
 
         ui.printLine("");
@@ -190,19 +205,21 @@ public class FinTrackPro {
         ui.printLine("Hang tight... I have a few questions for you.");
 
         // Prompt for monthly allowance, current savings, total value of BTO & individual contribution ratio
-        BigDecimal savings = InputUtil.readMoney(ui, in, "How much do you currently have in savings?");
+        BigDecimal savings = readConfirmedSetupMoney(in,
+                "How much do you currently have in savings?", "current savings");
         ui.printLine("");
         profile.setCurrentSavings(savings);
         logState("setup.savings.captured", "collect monthly allowance", "currentSavings=" + savings);
 
-        BigDecimal allowance = InputUtil.readMoney(ui, in, "What is your monthly allowance? (in dollars)");
+        BigDecimal allowance = readConfirmedSetupMoney(in,
+                "What is your monthly allowance? (in dollars)", "monthly allowance");
         ui.printLine("");
         profile.setMonthlyAllowance(allowance);
         logState("setup.allowance.captured", "collect house price", "monthlyAllowance=" + allowance);
 
-        BigDecimal housePrice = InputUtil.readMoney(ui, in,
+        BigDecimal housePrice = readConfirmedSetupMoney(in,
                 "What is the total value that you and your partner have to pay for "
-                        + "the house? (in dollars)");
+                        + "the house? (in dollars)", "house price");
         profile.setHousePrice(housePrice);
         logState("setup.house-price.captured", "collect contribution ratio", "housePrice=" + housePrice);
         ui.printLine("");
@@ -276,10 +293,34 @@ public class FinTrackPro {
         return name;
     }
 
+    private BigDecimal readConfirmedSetupMoney(Scanner in, String prompt, String label) {
+        while (true) {
+            BigDecimal amount = InputUtil.readMoney(ui, in, prompt);
+            String formatted = InputUtil.formatMoney(amount);
+            String confirmation = ui.readLine(in,
+                    "Confirm " + label + " as " + formatted + "? (Y to confirm, any key to re-enter)")
+                    .trim();
+
+            if (confirmation.equalsIgnoreCase("y")) {
+                return amount;
+            }
+
+            ui.printLine("No problem, let's enter your " + label + " again.");
+        }
+    }
+
+    static boolean requiresExactCommandInput(String command) {
+        return EXACT_ONLY_COMMANDS.contains(command);
+    }
+
+    static boolean isExactCommandInput(String userInput, String command) {
+        return userInput != null && userInput.trim().equalsIgnoreCase(command);
+    }
+
     /**
      * Parses and dispatches a single line of user input.
      *
-     * <p>If the input does not match a supported command, it is echoed back to the user.
+     * <p>If the input does not match a supported command, an error message is shown.
      * Empty/whitespace-only input is rejected.</p>
      *
      * @param userInput Raw line entered by the user.
@@ -299,6 +340,14 @@ public class FinTrackPro {
         String command = Parser.parseCommand(userInput);
         logState("command.parsed", "dispatch to command handler",
                 "command=" + command + ", rawInput='" + userInput + "'");
+
+        if (requiresExactCommandInput(command) && !isExactCommandInput(userInput, command)) {
+            logger.warning("state=command.invalid.extra-args | command=" + command
+                    + " | rawInput='" + userInput + "'");
+            ui.printLine("Did you mean \"" + command + "\"? Try again!");
+            ui.printLine("");
+            return;
+        }
 
         switch (command) {
         case "add":
@@ -358,8 +407,8 @@ public class FinTrackPro {
             handler.handleSaveMonth();
             break;
         default:
-            logger.warning("state=command.unknown | expected=echo input back to user | rawInput='" + userInput + "'");
-            ui.printLine("You said: " + userInput);
+            logger.warning("state=command.unknown | expected=show help hint to user | rawInput='" + userInput + "'");
+            ui.printLine("What is that command brooo? Type 'help' to know all of the commands and try again!");
             ui.printLine("");
             break;
         }
@@ -421,8 +470,11 @@ public class FinTrackPro {
                     totalAllMonths = totalAllMonths.add(monthTotal);
                 }
             } catch (IOException e) {
-                logger.log(java.util.logging.Level.WARNING, 
+                logger.log(java.util.logging.Level.WARNING,
                     "Failed to load archived expenses for Month " + month, e);
+            } catch (NumberFormatException e) {
+                logger.log(java.util.logging.Level.WARNING,
+                    "Corrupted amount in archive for Month " + month + ": " + e.getMessage(), e);
             }
         }
 

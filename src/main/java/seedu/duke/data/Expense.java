@@ -3,6 +3,7 @@ package seedu.duke.data;
 
 import java.math.BigDecimal;
 import seedu.duke.category.Category;
+import seedu.duke.util.InputUtil;
 
 /**
  * Represents an individual financial expense within the FinTrackPro system.
@@ -31,7 +32,7 @@ public class Expense {
         assert amount.compareTo(BigDecimal.ZERO) >= 0 : "Expense amount must be non-negative";
         //Invariant: Category Added should not be null
         assert category != null : "Expense category should not be null";
-        //Invariant: Insertion order should be more than 0
+        //Invariant: Insertion order must be non-negative (0 is valid for the first item)
         assert insertionOrder >= 0 : "Insertion order must be non-negative";
 
         this.name = name;
@@ -79,7 +80,7 @@ public class Expense {
      */
     @Override
     public String toString() {
-        return "[" + category + "] " + name + " $" + amount;
+        return "[" + category + "] " + name + " " + InputUtil.formatMoney(amount);
     }
 
     public int getInsertionOrder() {

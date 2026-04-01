@@ -446,6 +446,8 @@ identifier that determines how the line is parsed:
 | `E`    | One-off Expense  | `E \| Name \| Amount \| Category \| InsertionOrder`                |
 | `R`    | Recurring Expense| `R \| Name \| Amount \| Category`                                  |
 
+> **Note:** `HousePrice` is written as `null` if the user has not set a house price. The `Name` field in `P` and `E` lines cannot contain the `|` character, as it is reserved as the field delimiter.
+
 Lines that do not match any known prefix, or that are too short to be parsed safely, are silently skipped
 with a `WARNING`-level log entry. This ensures that a single corrupted line does not abort the entire load.
 

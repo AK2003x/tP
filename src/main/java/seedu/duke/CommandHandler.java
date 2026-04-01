@@ -104,7 +104,7 @@ public class CommandHandler {
                         + " | category: " + args.category);
 
                 ui.printLine("Added recurring expense: " + recurringExpenseList.get(recurringExpenseList.size() - 1));
-                ui.printLine("Recurring Total: $" + recurringExpenseList.getTotal());
+                ui.printLine("Recurring Total: " + InputUtil.formatMoney(recurringExpenseList.getTotal()));
                 ui.printLine("");
                 return;
             }
@@ -120,7 +120,8 @@ public class CommandHandler {
                     + " | new total: $" + expenseList.getTotal());
 
             ui.printLine("Added expense: " + expenseList.get(expenseList.size() - 1));
-            ui.printLine("Month " + profile.getCurrentMonth() + " Total: $" + expenseList.getTotal());
+            ui.printLine("Month " + profile.getCurrentMonth() + " Total: "
+                    + InputUtil.formatMoney(expenseList.getTotal()));
             ui.printLine("");
 
         } catch (InvalidAmountException | InvalidCategoryException e) {
@@ -194,10 +195,19 @@ public class CommandHandler {
             throw new InvalidAmountException("Expense name cannot be empty.\n");
         }
 
+        if (name.contains("|")) {
+            logger.warning("handleAdd rejected | reason: expense name contains reserved character '|'");
+            throw new InvalidAmountException("Expense name cannot contain the '|' character.\n");
+        }
+
         if (!Category.isValid(categoryString)) {
             logger.warning("handleAdd rejected | reason: invalid category " + categoryString);
             throw new InvalidCategoryException("Invalid category! Valid categories: " +
                     "FOOD, TRANSPORT, ENTERTAINMENT, UTILITIES, OTHER\n");
+        }
+
+        if (amountString.matches("-\\d+(\\.\\d+)?")) {
+            throw new InvalidAmountException("You cannot add a negative expenditure! Try again!\n");
         }
 
         if (!amountString.matches("\\d+(\\.\\d+)?")) {
@@ -321,7 +331,7 @@ public class CommandHandler {
         assert in != null : "Scanner should not be null";
 
         ui.printLine("WARNING: This will permanently delete ALL one-off expenses. Are you sure? (Input Y to clear)");
-        String response = in.nextLine().trim().toLowerCase();
+        String response = ui.readLine(in, "").trim().toLowerCase();
 
         if (response.equals("y")) {
             expenseList.clear();
@@ -453,7 +463,7 @@ public class CommandHandler {
         assert in != null : "Scanner should not be null";
 
         ui.printLine("WARNING: This will wipe your profile and ALL expenses. Type 'Y' to continue: ");
-        String response = in.nextLine().trim().toLowerCase();
+        String response = ui.readLine(in, "").trim().toLowerCase();
 
         if (response.equals("y")) {
             // Reset in-memory objects

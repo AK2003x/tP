@@ -72,9 +72,6 @@ public class InputUtil {
      *
      * <p>This method repeatedly prompts until valid input is received.</p>
      *
-     * <p>Note: The returned value represents 2.5% of the entered amount
-     * (calculated as amount × 0.025).</p>
-     *
      * @param ui UI component used for displaying prompts and messages.
      * @param in Scanner used to read user input.
      * @param prompt Prompt message shown to the user.
@@ -88,7 +85,7 @@ public class InputUtil {
         while (true) {
             String moneyString = ui.readLine(in, prompt).trim();
 
-            if (!moneyString.matches("\\d+(\\.\\d{1,2})?")) {
+            if (!moneyString.matches("-?\\d+(\\.\\d{1,2})?")) {
                 // Log at WARNING: user provided invalid format string which is rejected
                 logger.warning("readMoney unsuccessful | reason: invalid formatting");
                 ui.printLine("Bruh I need a valid amount like " +
@@ -97,6 +94,11 @@ public class InputUtil {
             }
 
             BigDecimal result = new BigDecimal(moneyString);
+            if (result.compareTo(BigDecimal.ZERO) < 0) {
+                logger.warning("readMoney unsuccessful | reason: negative amount");
+                ui.printLine("Negative amounts are not accepted. Please enter 0 or more.");
+                continue;
+            }
             assert result.compareTo(BigDecimal.ZERO) >= 0 : "readMoney: parsed amount must be non-negative";
             return result;
 
@@ -185,9 +187,8 @@ public class InputUtil {
         while (true) {
             String input = ui.readLine(in, prompt).trim();
 
-            // Regex: Digits followed by a dot and 1-2 digits.
-            // This prevents negative signs (-), symbols, and excessive decimals.
-            if (!input.matches("\\d+(\\.\\d{1,2})?")) {
+            // Accept numeric input first, then validate bounds and decimal precision explicitly.
+            if (!input.matches("-?\\d+(\\.\\d+)?")) {
                 // Log at WARNING: user provided invalid formatted string which is rejected
                 logger.warning("readRatio unsuccessful | reason: invalid formatting");
                 ui.printLine("EH WRONG FORMAT! Enter a decimal between 0 and 1 (e.g., 0.5).");
@@ -201,6 +202,12 @@ public class InputUtil {
                     // Log at WARNING: user provided out of bounds input which is rejected
                     logger.warning("readRatio unsuccessful | reason: out of specified bounds");
                     ui.printLine("Brother...Ratio must be between 0 and 1. Try again!");
+                    continue;
+                }
+
+                if (ratio.scale() > 2) {
+                    logger.warning("readRatio unsuccessful | reason: more than 2 decimal places");
+                    ui.printLine("Ratio can have at most 2 decimal places (e.g., 0.86). Try again.");
                     continue;
                 }
 
