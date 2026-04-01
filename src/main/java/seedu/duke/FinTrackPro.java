@@ -200,19 +200,21 @@ public class FinTrackPro {
         ui.printLine("Hang tight... I have a few questions for you.");
 
         // Prompt for monthly allowance, current savings, total value of BTO & individual contribution ratio
-        BigDecimal savings = InputUtil.readMoney(ui, in, "How much do you currently have in savings?");
+        BigDecimal savings = readConfirmedSetupMoney(in,
+                "How much do you currently have in savings?", "current savings");
         ui.printLine("");
         profile.setCurrentSavings(savings);
         logState("setup.savings.captured", "collect monthly allowance", "currentSavings=" + savings);
 
-        BigDecimal allowance = InputUtil.readMoney(ui, in, "What is your monthly allowance? (in dollars)");
+        BigDecimal allowance = readConfirmedSetupMoney(in,
+                "What is your monthly allowance? (in dollars)", "monthly allowance");
         ui.printLine("");
         profile.setMonthlyAllowance(allowance);
         logState("setup.allowance.captured", "collect house price", "monthlyAllowance=" + allowance);
 
-        BigDecimal housePrice = InputUtil.readMoney(ui, in,
+        BigDecimal housePrice = readConfirmedSetupMoney(in,
                 "What is the total value that you and your partner have to pay for "
-                        + "the house? (in dollars)");
+                        + "the house? (in dollars)", "house price");
         profile.setHousePrice(housePrice);
         logState("setup.house-price.captured", "collect contribution ratio", "housePrice=" + housePrice);
         ui.printLine("");
@@ -284,6 +286,22 @@ public class FinTrackPro {
         }
         logState("setup.end", "caller stores name in profile", "name=" + name + ", btoGoal=" + profile.getBtoGoal());
         return name;
+    }
+
+    private BigDecimal readConfirmedSetupMoney(Scanner in, String prompt, String label) {
+        while (true) {
+            BigDecimal amount = InputUtil.readMoney(ui, in, prompt);
+            String formatted = InputUtil.formatMoney(amount);
+            String confirmation = ui.readLine(in,
+                    "Confirm " + label + " as " + formatted + "? (Y to confirm, any key to re-enter)")
+                    .trim();
+
+            if (confirmation.equalsIgnoreCase("y")) {
+                return amount;
+            }
+
+            ui.printLine("No problem, let's enter your " + label + " again.");
+        }
     }
 
     /**
