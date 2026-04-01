@@ -336,10 +336,10 @@ components — `CommandHandler`, `SummaryReport`, `BtoCalculator` — read from 
 `BtoCalculator` encodes the HDB downpayment rules as a reusable calculation. Given a house price
 and contribution ratio, it computes two values at construction time:
 
-| Field              | Formula                                                        |
-|--------------------|----------------------------------------------------------------|
-| `totalDownpayment` | `housePrice × 0.025` (2.5% HDB downpayment) + 10% legal fees |
-| `yourShare`        | `totalDownpayment × contributionRatio`                         |
+| Field              | Formula                                                                                          |
+|--------------------|--------------------------------------------------------------------------------------------------|
+| `totalDownpayment` | `base = housePrice × 0.025`; `legalFees = base × 1.1`; `totalDownpayment = base + legalFees` (= `housePrice × 0.0525`) |
+| `yourShare`        | `totalDownpayment × contributionRatio`                                                           |
 
 Both values are rounded to 2 decimal places (HALF_UP). `yourShare` is stored in `Profile` as the
 user's `btoGoal` and is the target all savings progress is measured against. Calling
@@ -354,8 +354,9 @@ runs `performInitialSetup()` before entering the command loop. The steps are:
 1. The user is prompted for their **name**.
 2. The user provides their **current savings** and **monthly allowance** (validated by `InputUtil.readMoney()`).
 3. The user provides the **total house price** and their **contribution ratio** (0.0–1.0, validated by `InputUtil.readRatio()`).
-4. `BtoCalculator` computes the **total downpayment** (2.5% of house price + 10% legal fees) and the
-   user's **personal share** (total downpayment × ratio). This value is stored in `Profile` as `btoGoal`.
+4. `BtoCalculator` computes the **total downpayment** (base of 2.5% of house price, plus legal fees
+   equal to 110% of that base, totalling 5.25% of house price) and the user's **personal share**
+   (total downpayment × ratio). This value is stored in `Profile` as `btoGoal`.
 5. The user provides a **future deadline** (ISO `YYYY-MM-DD`, validated by `InputUtil.readFutureDate()`).
 6. The app displays the time remaining and the required monthly savings rate needed to meet the goal.
 
