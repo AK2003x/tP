@@ -15,33 +15,52 @@ needs to save and whether additional financing is required.
 ### Code Contributed for tP: [link](https://nus-cs2113-ay2526-s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2026-02-20T00%3A00%3A00&filteredFileName=)
 
 ---
-### Enhancements implemented: <br>
-I created the initial OOP structure which consisted of the following classes:
-- FinTrackPro: the main class which contains the main method and runs the program
-- UI: handles all interactions with the user, such as displaying messages and receiving input
-- InputUtil: handles all user input and parsing of commands
-whereby the InputUtil class, was placed in the ui package.
+### Enhancements Implemented
 
-This was the skeleton structure of the codebase, which was then enhanced and further partitioned by the rest of my teammates 
-with more classes, more OOP, and more functionality.
+**1. Core CLI Architecture (`FinTrackPro`, `Ui`, `InputUtil`)**
+- **What it does:** Established the initial OOP skeleton of the application by setting up
+  `FinTrackPro` (entry point and execution flow), `Ui` (user interaction), and
+  `InputUtil` (input parsing and validation support).
+- **Justification:** A stable project foundation was needed early so the rest of the team
+  could implement features in parallel without conflicting structure decisions.
+- **Highlights:** This baseline architecture defined clear class responsibilities from the
+  start and enabled later expansion into command handling, data models, storage, and
+  reporting components.
 
-Next, I added the `save` command into the CommandHandler to simulate adding expenditures month by month, and used MonthlyArchive 
-and ArchivedExpense to implement the functionality of saving the current month of expenditures.
+**2. `save` Command for Month Progression (`CommandHandler`)**
+- **What it does:** Implemented the `save` workflow that archives the current month's
+  expenditures, advances the app state to the next month, and supports month-by-month
+  budget simulation.
+- **Justification:** FinTrackPro's core user story requires tracking spending and savings
+  progression across multiple months, not just within a single static month.
+- **Highlights:** The command coordinates archive creation and month advancement through
+  existing domain objects, avoiding duplicate logic and keeping behavior centralized.
 
-Additionally, I added the JUnit testing classes under `test/java/seedu.duke/data`: 
-- BtoCalculatorTest
-- SummaryReportTest
-- InputUtilTest
-- MonthlyArchiveTest
-- ArchiveExpenseTest
+**3. Monthly Archive Domain (`MonthlyArchive`, `ArchivedExpense`)**
+- **What it does:** Added archive entities to persist month-specific expenditure snapshots,
+  allowing users to retain historical records while starting each new month with a clean
+  monthly expense state.
+- **Justification:** Without explicit archival modeling, old expenditure data would either
+  be lost on reset or incorrectly mixed with current-month data.
+- **Highlights:** The archive design separates current and historical expense concerns and
+  supports retrieval/display by month index (for example `Month1`, `Month2`, `Month3`).
 
-I also added Assertions for the following classes:
-- CommandHandler
-- FintrackPro
-- Parser
-- Ui
+**4. Test Coverage for Core Financial and Archive Flows**
+- **What it does:** Added/expanded JUnit coverage in `BtoCalculatorTest`,
+  `SummaryReportTest`, `InputUtilTest`, `MonthlyArchiveTest`, and `ArchiveExpenseTest`.
+- **Justification:** We needed to make sure that the inputs that future users give would always give an output, whether it would be a result or throwing an error that the user had committed. 
+The month progress and archival features are also critical to improve our application's testability, and so we needed it to be bug-prone, and ensure that our test cases have large branch, method, 
+and line coverage.
+- **Highlights:** Tests focus on correctness of calculations, validation, and archive
+  behavior to ensure month transitions remain reliable. 
 
-I added logging for the main class that was running our application, FinTrackPro.java as well.
+**5. Add Assertions and Runtime Logging**
+- **What it does:** Added assertions in `CommandHandler`, `FinTrackPro`, `Parser`, and
+  `Ui`, and integrated logging in `FinTrackPro` to record key runtime states.
+- **Justification:** Assertions provide fast failure for invalid assumptions, while good logging
+  we can pinpoint the exact source of error, improving debugging efficiency and post-run traceability for command execution issues. 
+- **Highlights:** The logging strategy emphasizes program state, expected behavior, and
+  values being passed through critical execution paths.
 
 ---
 ### Contributions to the UG: <br>
@@ -49,7 +68,8 @@ I created the initial User Guide which included all the commands that were in ou
 I edited it to fit what we actually implemented in v1.0. I updated it again to include the additional functions that I had
 implemented in v2.0, which was the save command. 
 
-**Contributions to the DG:** <br>
+---
+### Contributions to the DG: <br>
 I neatened the format of the DG so that it was clearly broken down into sections, and ensured consistency in the naming
 and formatting of each section.
 
