@@ -464,10 +464,24 @@ class CommandHandlerTest {
 
     @Test
     void handleRatio_tooManyDecimalsThenValid_updatesProfile() {
-        // "0.555" fails regex (3 dp), loops; "0.55" is accepted
+        // "0.555" is rejected for having more than 2 decimal places, then "0.55" is accepted
         Scanner in = new Scanner(new ByteArrayInputStream("0.555\n0.55\n".getBytes()));
         ch.handleRatio(in);
         assertEquals(new BigDecimal("0.55"), profile.getContributionRatio());
+    }
+
+    @Test
+    void handleRatio_manyDecimalPlacesThenValid_showsPrecisionMessageAndUpdatesProfile() {
+        CapturingUi testUi = new CapturingUi();
+        Profile testProfile = new Profile();
+        CommandHandler testHandler = new CommandHandler(testUi, testProfile,
+                new ExpenseList(), new RecurringExpenseList(), new Storage("fintrack.txt"));
+
+        Scanner in = new Scanner(new ByteArrayInputStream("0.8666666\n0.86\n".getBytes()));
+        testHandler.handleRatio(in);
+
+        assertEquals(new BigDecimal("0.86"), testProfile.getContributionRatio());
+        assertTrue(testUi.getLines().contains("Ratio can have at most 2 decimal places (e.g., 0.86). Try again."));
     }
 
     @Test

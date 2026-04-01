@@ -187,9 +187,8 @@ public class InputUtil {
         while (true) {
             String input = ui.readLine(in, prompt).trim();
 
-            // Regex: Digits followed by a dot and 1-2 digits.
-            // This prevents negative signs (-), symbols, and excessive decimals.
-            if (!input.matches("\\d+(\\.\\d{1,2})?")) {
+            // Accept numeric input first, then validate bounds and decimal precision explicitly.
+            if (!input.matches("-?\\d+(\\.\\d+)?")) {
                 // Log at WARNING: user provided invalid formatted string which is rejected
                 logger.warning("readRatio unsuccessful | reason: invalid formatting");
                 ui.printLine("EH WRONG FORMAT! Enter a decimal between 0 and 1 (e.g., 0.5).");
@@ -203,6 +202,12 @@ public class InputUtil {
                     // Log at WARNING: user provided out of bounds input which is rejected
                     logger.warning("readRatio unsuccessful | reason: out of specified bounds");
                     ui.printLine("Brother...Ratio must be between 0 and 1. Try again!");
+                    continue;
+                }
+
+                if (ratio.scale() > 2) {
+                    logger.warning("readRatio unsuccessful | reason: more than 2 decimal places");
+                    ui.printLine("Ratio can have at most 2 decimal places (e.g., 0.86). Try again.");
                     continue;
                 }
 
