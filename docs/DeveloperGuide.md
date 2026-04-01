@@ -154,7 +154,7 @@ in handling user commands and managing expense data.
 
 FinTrackPro serves as the main controller of the application. It coordinates between the user interface(Ui), the command
 processing component (CommandHandler), and the data storage structures (ExpenseList and RecurringExpenseList). It receives
-user input and delegates command execution accordingly
+user input and delegates command execution accordingly.
 
 CommandHandler is responsible for parsing and executing user commands such as adding, deleting, and sorting expenses. It 
 interacts with both ExpenseList and RecurringExpenseList to modify or retrieve data, and communicates results back to the user through the Ui.
@@ -244,7 +244,7 @@ CommandHandler delegates to ExpenseList by calling sortByCategory. ExpenseList i
 Java's sort with a comparator based on each Expense's category. During the sort, each
 Expense's getCategory is called to retrieve its Category, and Category's compareTo is
 then called to determine relative ordering based on each category's fixed sort priority
-as defined in the concrete subclass
+as defined in the concrete subclass.
 
 The sort is stable, meaning expenses within the same category retain their relative
 insertion order. No data is mutated beyond the reordering of the internal list.
@@ -405,9 +405,9 @@ The report assigns a "Readiness Level" to provide the user with immediate psycho
 | Progress Range | Readiness Level | Description                                        |
 |----------------|-----------------|----------------------------------------------------|
 | 100%           | READY           | Goal met; funds available for downpayment.         |
-| 70% – 99%      | SECURE          | High probability of meeting the goal early.        |
-| 50% – 70%      | ON TRACK        | Midway point reached; consistent saving required.  |
-| 10% – 50%      | MAKING PROGRESS | Foundations laid; spending habits may need review. |
+| ≥ 70% – < 100% | SECURE          | High probability of meeting the goal early.        |
+| ≥ 50% – < 70%  | ON TRACK        | Midway point reached; consistent saving required.  |
+| ≥ 10% – < 50%  | MAKING PROGRESS | Foundations laid; spending habits may need review. |
 | < 10%          | BARELY STARTED  | Initial phase; significant saving effort required. |
 
 #### Interaction Flow
@@ -438,6 +438,7 @@ on the data classes.
 #### Data Persistence Format
 The data is stored in a plain-text file using a pipe-delimited format. Each line is prefixed with a "Record Type" 
 identifier that determines how the line is parsed:
+
 | Prefix | Record Type      | Format                                                              |
 |--------|------------------|---------------------------------------------------------------------|
 | `P`    | Profile          | `P \| Name \| Allowance \| Savings \| BtoGoal \| Ratio \| Deadline \| CurrentMonth` |
@@ -587,7 +588,7 @@ An individual BTO budget planner for university students planning to apply for B
 | v2.0    | Regular User   | Add recurring monthly expenses          | Never be blindsided by hidden or automated costs that occur every month            |
 | v2.0    | Regular User   | Add comments to expenses                | Provide context for specific spending habits to better understand them later       |
 | v1.0    | Regular User   | Set a specific target date              | Know the monthly savings rate needed to meet my deadline                           |
-| v1.0    | Regular User   | Sort expenditure from highest to lowest | Know which expenditures are hindering me from reaching my downpayment goal         |
+| v2.0    | Regular User   | Sort expenses by category, name, or entry order | Organise my expense list to review and manage my spending habits                   |
 | v2.0    | Long Term User | Archive financial phases monthly        | Keep my dashboard uncluttered while preserving historical data                     |
 | v2.0    | Long Term User | Assign a financial readiness level      | Know how ready I am to pay off my share of the downpayment                         |
 | v1.0    | Long Term User | Have a local database                   | View all past inputs and historical data                                           |
@@ -595,7 +596,7 @@ An individual BTO budget planner for university students planning to apply for B
 
 # 5. Non-Functional Requirements
 
-##  5.1 Performance and scalability
+## 5.1 Performance and scalability
 * Response Time: Any command should return a result within 200 milliseconds under normal operating conditions.
 * Capacity: The system should be able to handle up to 1,000 unique expenditure entries and 5 years of archived monthly data without any perceptible degradation in performance or lag in CLI responsiveness.
 
@@ -618,7 +619,7 @@ An individual BTO budget planner for university students planning to apply for B
 
 * *BTO (Build-To-Order)* - a subsidized public housing option scheme in Singapore where new flats are constructed only after a sufficient number of units (typically 65-70%) have been pre-booked by applicants
 * *Contribution ratio* - the user's fractional share of the downpayment (0.0 to 1.0)
-* *Recurring expenses* - expenses that occur on a monthly basis following the same rates (eg Netflix subscription of $5.98/month), then you can run `add Netflix Subscription 5.98 entertainment recurring`
+* *Recurring expenses* - expenses that occur every month at a fixed rate (e.g. a Netflix subscription of $5.98/month)
 * *Adjusted Minimum Savings* - minimum amount you need to save per month given your distance to goal and number of months remaining till the deadline 
 * *Estimated Goal Achievement* - number of months you need to take to achieve your goal, given the current month's savings and distance to goal
 
@@ -640,6 +641,7 @@ prompted to establish a valid profile before testing profile-dependent commands.
    5. Test case: `add lunch -1 FOOD` Expected: Error shown for negative amount. No expense added.
    6. Test case: `add lunch abc FOOD` Expected: Error shown for invalid amount format. No expense added.
    7. Test case: `add lunch 5 HELLO` Expected: Error shown for invalid category. No expense added.
+   8. Test case: `add rent | utilities 100 UTILITIES` Expected: Error shown for reserved `|` character in name. No expense added.
 2. **Deleting a one-off expense**
    1. Prerequisites: At least one expense exists in the list.
    2. Test case: `delete 1` Expected: First expense removed. Total expenditure updated.
