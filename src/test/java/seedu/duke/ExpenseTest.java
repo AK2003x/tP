@@ -43,7 +43,7 @@ public class ExpenseTest {
         Expense expense = new Expense("free item", new BigDecimal("0"), Category.fromString("OTHER"), 1);
 
         assertEquals(new BigDecimal("0"), expense.getAmount());
-        assertEquals("[OTHER] free item $0", expense.toString());
+        assertEquals("[OTHER] free item $0.00", expense.toString());
     }
 
     @Test

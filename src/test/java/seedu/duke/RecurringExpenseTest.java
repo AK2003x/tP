@@ -57,6 +57,14 @@ public class RecurringExpenseTest {
     }
 
     @Test
+    void toString_noDecimalInput_stillShowsTwoDecimalPlaces() {
+        RecurringExpense recurringExpense =
+                new RecurringExpense("Rent", new BigDecimal("1200"), Category.fromString("OTHER"));
+
+        assertEquals("[RECURRING][OTHER] Rent $1,200.00", recurringExpense.toString());
+    }
+
+    @Test
     void constructor_nullName_throwsAssertionError() {
         assertThrows(AssertionError.class, () ->
                 new RecurringExpense(null, new BigDecimal("30.00"), Category.fromString("ENTERTAINMENT")));
