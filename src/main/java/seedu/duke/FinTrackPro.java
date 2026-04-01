@@ -24,6 +24,7 @@ import java.util.Scanner;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Main application controller for FinTrackPro.
@@ -37,6 +38,10 @@ import java.util.Objects;
  * {@code Profile} and {@code ExpenseList} instances.</p>
  */
 public class FinTrackPro {
+    private static final Set<String> EXACT_ONLY_COMMANDS = Set.of(
+            "help", "summary", "bye", "list", "savings", "allowance", "ratio", "save", "clear", "reset"
+    );
+
     private static final Logger logger = LoggerUtil.getLogger(FinTrackPro.class);
     private final Ui ui;
     private final Profile profile;
@@ -304,6 +309,14 @@ public class FinTrackPro {
         }
     }
 
+    static boolean requiresExactCommandInput(String command) {
+        return EXACT_ONLY_COMMANDS.contains(command);
+    }
+
+    static boolean isExactCommandInput(String userInput, String command) {
+        return userInput != null && command != null && userInput.trim().equalsIgnoreCase(command);
+    }
+
     /**
      * Parses and dispatches a single line of user input.
      *
@@ -327,6 +340,14 @@ public class FinTrackPro {
         String command = Parser.parseCommand(userInput);
         logState("command.parsed", "dispatch to command handler",
                 "command=" + command + ", rawInput='" + userInput + "'");
+
+        if (requiresExactCommandInput(command) && !isExactCommandInput(userInput, command)) {
+            logger.warning("state=command.invalid.extra-args | command=" + command
+                    + " | rawInput='" + userInput + "'");
+            ui.printLine("did you mean \"" + command + "\"? try again!");
+            ui.printLine("");
+            return;
+        }
 
         switch (command) {
         case "add":
