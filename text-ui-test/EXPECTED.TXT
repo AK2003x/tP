@@ -12,12 +12,16 @@ Nice to meet you, James Gosling!
 
 Hang tight... I have a few questions for you.
 How much do you currently have in savings?
-Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again.
-How much do you currently have in savings?
+Confirm current savings as $1,000.00? (Y to confirm, any key to re-enter)
 
 What is your monthly allowance? (in dollars)
+Confirm monthly allowance as $40,004,000.00? (Y to confirm, any key to re-enter)
+No problem, let's enter your monthly allowance again.
+What is your monthly allowance? (in dollars)
+Confirm monthly allowance as $4,000.00? (Y to confirm, any key to re-enter)
 
 What is the total value that you and your partner have to pay for the house? (in dollars)
+Confirm house price as $29,000.00? (Y to confirm, any key to re-enter)
 
 What is your share of the contribution? (e.g., 0.6 for 60%):
 
@@ -27,14 +31,14 @@ Your personal contribution needed: $913.50
 
 When do you need to save this money by? (e.g., 2028-10-24)
 
-You have 1 years and 5 months and 23 days remaining.
+You have 1 years and 5 months and 22 days remaining.
 Nice! Based on your current savings, you have already met your goal.
 
 Type 'help' to view my currently supported commands!
-Any non-command word would be echoed back to you you you
+If you enter an unknown command, I'll prompt you to use 'help'.
 Type 'bye' to exit!
 
-You said: hello
+Did you mean "help"? Try again!
 
 General Commands
 'help'    - view all current commands
@@ -53,111 +57,82 @@ Profile & Goal Management
 'sort'   <keyword> - sort the expenditure list by category, alphabetical order or recency (e.g sort name, sort recent, sort category)
 'savings'   - add a surplus amount to your existing savings
 'allowance' - update your monthly allowance
-'ratio'     - update your BTO contribution ratio (0.0 to 1.0)
+'ratio'     - update your BTO contribution ratio (0.0 to 1.0, max 2 dp)
 'save'      - archive current month's expenses and advance to next month
 'clear'   - wipe all current expenses from the list
 'reset'   - wipes all profile data and expenses to start fresh.
 
+Did you mean "summary"? Try again!
+
+===== BTO Readiness Report =====
+User: James Gosling
+Readiness Level: Ready - Time to sign that BTO!
+BTO Goal: $913.50 (your share + fees)
+Deadline: 2027-09-24 (18 months)
+
+Current Savings: $1,000.00 (109% reached)
+Distance to Goal: -$86.50
+Adjusted Minimum Savings: $0.00 / month
+
+Monthly Allowance: $4,000.00
+Total Expenditure: $0.00
+Monthly Surplus (Allowance - Expenditure): $4,000.00
+Estimated Goal Achievement: Reached! Go get that BTO!
+
+Did you mean "list"? Try again!
+
 Your one time off expense list is as empty as my wallet. Go spend some money!
 
-Current total savings: $2,000.00
+Did you mean "savings"? Try again!
+
+Current total savings: $1,000.00
+Enter amount to add to your savings:
+Negative amounts are not accepted. Please enter 0 or more.
 Enter amount to add to your savings:
 
 Transaction successful!
-Added: $500.00
-New total savings: $2,500.00
+Added: $100.00
+New total savings: $1,100.00
 
-Added expense: [FOOD] lunch $5
-Month 1 Total: $5
+Did you mean "allowance"? Try again!
 
-Format: add <name> <amount> <category>
+Current Monthly Allowance: $4,000.00
+Enter new monthly allowance:
+Negative amounts are not accepted. Please enter 0 or more.
+Enter new monthly allowance:
 
+Success! Your monthly allowance is now $100.00
 
-Amount must be a plain number.
+Did you mean "ratio"? Try again!
 
+Current Contribution Ratio: 60.0% (0.6)
+Enter new ratio (0.0 to 1.0):
+Ratio can have at most 2 decimal places (e.g., 0.86). Try again.
+Enter new ratio (0.0 to 1.0):
 
-Added recurring expense: [RECURRING][ENTERTAINMENT] netflix $30
-Recurring Total: $30
+Success! Your contribution ratio is now 0.86
 
-Added recurring expense: [RECURRING][UTILITIES] phone bill $20
-Recurring Total: $50
-
-Added expense: [TRANSPORT] grab home $20
-Month 1 Total: $25
-
-Added expense: [FOOD] hho $10
-Month 1 Total: $35
-
-You said: find food
-
-You said: find recurring
-
-Wrong argument la bro! Use 'sort name', 'sort category' or 'sort recent' ONLY!
-
-Wrong argument la bro! Use 'sort name', 'sort category' or 'sort recent' ONLY!
-
-Expenses sorted by category.
-
-Here are your recurring monthly commitments!
-1. netflix $30.00 [ENTERTAINMENT]
-2. phone bill $20.00 [UTILITIES]
-
-*** MONTH 1 EXPENSES
-1. lunch $5.00 [FOOD]
-2. hho $10.00 [FOOD]
-3. grab home $20.00 [TRANSPORT]
-Month 1 Total: $35.00
-
-Total Expenditure (All Months + Recurring): $85.00
-
-Expenses sorted by insertion order.
-
-Here are your recurring monthly commitments!
-1. netflix $30.00 [ENTERTAINMENT]
-2. phone bill $20.00 [UTILITIES]
-
-*** MONTH 1 EXPENSES
-1. lunch $5.00 [FOOD]
-2. grab home $20.00 [TRANSPORT]
-3. hho $10.00 [FOOD]
-Month 1 Total: $35.00
-
-Total Expenditure (All Months + Recurring): $85.00
-
-You said: nextmonth
-
-Here are your recurring monthly commitments!
-1. netflix $30.00 [ENTERTAINMENT]
-2. phone bill $20.00 [UTILITIES]
-
-*** MONTH 1 EXPENSES
-1. lunch $5.00 [FOOD]
-2. grab home $20.00 [TRANSPORT]
-3. hho $10.00 [FOOD]
-Month 1 Total: $35.00
-
-Total Expenditure (All Months + Recurring): $85.00
-
-Invalid index bro! do you even know how much you've spent?
-
-Invalid recurring expense index!
+You cannot add a negative expenditure! Try again!
 
 
-Deleted recurring expense #1: [RECURRING][ENTERTAINMENT] netflix $30
-Recurring Total: $20
+Did you mean "save"? Try again!
 
-Amount must be a plain number.
+Month 1 expenses archived to 'monthly_archives'
+Transferred $100.00 of unspent allowance to savings
+Advanced to Month 2
+Current Savings: $1,200.00
+Monthly Allowance: $100.00
 
+Did you mean "clear"? Try again!
 
-Here are your recurring monthly commitments!
-1. phone bill $20.00 [UTILITIES]
+WARNING: This will permanently delete ALL one-off expenses. Are you sure? (Input Y to clear)
+Clear cancelled. Your data is still there, bro.
 
-*** MONTH 1 EXPENSES
-1. lunch $5.00 [FOOD]
-2. grab home $20.00 [TRANSPORT]
-3. hho $10.00 [FOOD]
-Month 1 Total: $35.00
+Did you mean "reset"? Try again!
 
-Total Expenditure (All Months + Recurring): $55.00
+WARNING: This will wipe your profile and ALL expenses. Type 'Y' to continue: 
+Reset aborted. Your data is safe!
+
+Did you mean "bye"? Try again!
 
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!

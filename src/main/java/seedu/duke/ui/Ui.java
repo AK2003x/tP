@@ -118,7 +118,7 @@ public class Ui {
                 "(e.g sort name, sort recent, sort category)");
         printLine("'savings'   - add a surplus amount to your existing savings");
         printLine("'allowance' - update your monthly allowance");
-        printLine("'ratio'     - update your BTO contribution ratio (0.0 to 1.0)");
+        printLine("'ratio'     - update your BTO contribution ratio (0.0 to 1.0, max 2 dp)");
         printLine("'save'      - archive current month's expenses and advance to next month");
         printLine("'clear'   - wipe all current expenses from the list");
         printLine("'reset'   - wipes all profile data and expenses to start fresh.");

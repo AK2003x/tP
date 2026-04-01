@@ -3,6 +3,7 @@ package seedu.duke.data;
 
 import java.math.BigDecimal;
 import seedu.duke.category.Category;
+import seedu.duke.util.InputUtil;
 
 /**
  * Represents an individual financial expense within the FinTrackPro system.
@@ -79,7 +80,7 @@ public class Expense {
      */
     @Override
     public String toString() {
-        return "[" + category + "] " + name + " $" + amount;
+        return "[" + category + "] " + name + " " + InputUtil.formatMoney(amount);
     }
 
     public int getInsertionOrder() {

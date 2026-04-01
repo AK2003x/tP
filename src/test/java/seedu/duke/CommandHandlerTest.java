@@ -12,12 +12,28 @@ import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CommandHandlerTest {
+    private static class CapturingUi extends Ui {
+        private final List<String> lines = new ArrayList<>();
+
+        @Override
+        public void printLine(String message) {
+            lines.add(message);
+        }
+
+        public List<String> getLines() {
+            return lines;
+        }
+    }
+
     Ui ui = new Ui();
     Profile profile = new Profile();
     ExpenseList expenseList = new ExpenseList();
@@ -170,6 +186,18 @@ class CommandHandlerTest {
     public void handleAdd_invalidCategory_expenseNotAdded() {
         ch.handleAdd("add hello 5.00 HELLO");
         assertEquals(0, expenseList.size());
+    }
+
+    @Test
+    public void handleAdd_negativeAmount_showsSpecificMessage() {
+        CapturingUi testUi = new CapturingUi();
+        CommandHandler testHandler = new CommandHandler(testUi, new Profile(),
+                new ExpenseList(), new RecurringExpenseList(), new Storage("fintrack.txt"));
+
+        testHandler.handleAdd("add lunch -5.00 FOOD");
+
+        assertTrue(testUi.getLines().stream()
+                .anyMatch(line -> line.contains("You cannot add a negative expenditure! Try again!")));
     }
 
     @Test
@@ -343,7 +371,7 @@ class CommandHandlerTest {
 
     @Test
     void handleSavings_negativeInputThenValid_updatesProfile() {
-        // "-500" fails the readMoney regex (no leading digit pattern match), loops; "500.00" accepted
+        // "-500" is rejected as negative, then "500.00" is accepted
         Scanner in = new Scanner(new ByteArrayInputStream("-500\n500.00\n".getBytes()));
         ch.handleSavings(in);
         assertEquals(new BigDecimal("500.00"), profile.getCurrentSavings());
@@ -383,10 +411,24 @@ class CommandHandlerTest {
 
     @Test
     void handleAllowance_negativeInputThenValid_updatesProfile() {
-        // "-100" fails the readMoney regex, loops; "100.00" is accepted
+        // "-100" is rejected as negative, then "100.00" is accepted
         Scanner in = new Scanner(new ByteArrayInputStream("-100\n100.00\n".getBytes()));
         ch.handleAllowance(in);
         assertEquals(new BigDecimal("100.00"), profile.getMonthlyAllowance());
+    }
+
+    @Test
+    void handleAllowance_negativeInputThenValid_showsNegativeMessageAndUpdatesProfile() {
+        CapturingUi testUi = new CapturingUi();
+        Profile testProfile = new Profile();
+        CommandHandler testHandler = new CommandHandler(testUi, testProfile,
+                new ExpenseList(), new RecurringExpenseList(), new Storage("fintrack.txt"));
+
+        Scanner in = new Scanner(new ByteArrayInputStream("-100\n100.00\n".getBytes()));
+        testHandler.handleAllowance(in);
+
+        assertEquals(new BigDecimal("100.00"), testProfile.getMonthlyAllowance());
+        assertTrue(testUi.getLines().contains("Negative amounts are not accepted. Please enter 0 or more."));
     }
 
     @Test
@@ -422,10 +464,24 @@ class CommandHandlerTest {
 
     @Test
     void handleRatio_tooManyDecimalsThenValid_updatesProfile() {
-        // "0.555" fails regex (3 dp), loops; "0.55" is accepted
+        // "0.555" is rejected for having more than 2 decimal places, then "0.55" is accepted
         Scanner in = new Scanner(new ByteArrayInputStream("0.555\n0.55\n".getBytes()));
         ch.handleRatio(in);
         assertEquals(new BigDecimal("0.55"), profile.getContributionRatio());
+    }
+
+    @Test
+    void handleRatio_manyDecimalPlacesThenValid_showsPrecisionMessageAndUpdatesProfile() {
+        CapturingUi testUi = new CapturingUi();
+        Profile testProfile = new Profile();
+        CommandHandler testHandler = new CommandHandler(testUi, testProfile,
+                new ExpenseList(), new RecurringExpenseList(), new Storage("fintrack.txt"));
+
+        Scanner in = new Scanner(new ByteArrayInputStream("0.8666666\n0.86\n".getBytes()));
+        testHandler.handleRatio(in);
+
+        assertEquals(new BigDecimal("0.86"), testProfile.getContributionRatio());
+        assertTrue(testUi.getLines().contains("Ratio can have at most 2 decimal places (e.g., 0.86). Try again."));
     }
 
     @Test

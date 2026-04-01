@@ -112,6 +112,7 @@ Success! Your contribution ratio is now 0.5
 ```
 <b>NOTE:</b>
 - Value must be between `0.0` (0%) and `1.0` (100%), with at most 2 decimal places.
+- Inputs like `0.8666666` are rejected; use `0.86` instead.
 - Updating the ratio automatically recalculates your BTO goal. Run `summary` to see the updated goal.
 
 ### Adding an expense: ```add```
@@ -223,14 +224,15 @@ Recurring Total: $0
 ### View financial summary: ```summary```
 Generates a comprehensive financial report based on your profile and current spending habits. Calculates your monthly
 surplus, distance to your goal, and provides an estimate of how many months it will take to secure your downpayment.
-The Readiness Level reflects your percentage progress toward your BTO goal, ranging from `BARELY STARTED` to `READY`.<br>
+<br>The Readiness Level reflects your percentage progress toward your BTO goal, ranging from `Barely Started - Do start saving soon` to 
+`Ready - Time to sign that BTO!`.<br>
 <b>Format:</b> ```summary``` <br>
 <b>Example of Usage:</b> ```summary``` <br>
 <b>Expected Output:</b>
 ```
 ===== BTO Readiness Report =====
 User: Jairus
-Readiness Level: ON TRACK
+Readiness Level: Barely Started - Do start saving soon!
 BTO Goal: $25,000.00 (your share + fees)
 Deadline: 2028-10-24 (31 months)
 
@@ -276,7 +278,7 @@ Goodbye Jairus. Stay disciplined and get that house that you always wanted!
 ```
 
 ### Archive monthly expenditures: ```save```
-Saves the current month of expenditures into monthly_archives, and resets the expenditure to 0, simulating a new month.<br>
+Saves the current month of expenditures into `monthly_archives/` as `MonthN`, and resets the expenditure to 0, simulating a new month.<br>
 <b>Format:</b> ```save``` <br>
 <b>Example of Usage:</b> ```save``` <br>
 <b>Expected Output:</b>
@@ -292,9 +294,9 @@ Monthly Allowance: $4,000.00
 - If your total expenses exceed your monthly allowance, no transfer occurs and an overspend message is shown.
 
 ### Data Storage
-FinTrackPro data is saved in the hard disk automatically after any command that changes your data (e.g., add, delete, allowance, ratio). There is no need to save manually.
-<b>Data File Location:</b><br> Your data is securely saved locally on your computer in a file named fintrack.txt located in the same folder as your application.
-<b>Warning:</b><br> Advanced users can modify fintrack.txt directly. However, if the format is corrupted, FinTrackPro will safely skip the corrupted lines to prevent the app from crashing.
+FinTrackPro data is saved in the hard disk automatically after any command that changes your data (e.g., add, delete, allowance, ratio). There is no need to save manually.<br>
+<b>Data File Location:</b><br> Your data is securely saved locally on your computer in a file named fintrack.txt located in the same folder as your application. <br>
+<b>Warning:</b><br> Advanced users can modify fintrack.txt directly. However, if the format is corrupted, FinTrackPro will safely skip the corrupted lines to prevent the app from crashing. <br>
 <b>Expected Output:</b>
 ```
 P | Jairus | 1500 | 1000 | 18375.00 | 0.7 | 2028-10-10 | 1 | null
@@ -342,7 +344,7 @@ R | Netflix | 30 | ENTERTAINMENT
 | `ENTERTAINMENT`| category           | category assigned to the expense                              |
 
 ## FAQ
-<b>Updated as of 15 March 2026</b>
+<b>Updated as of 1st April 2026</b>
 
 **Q**: How do I transfer my data to another computer? 
 
@@ -355,24 +357,34 @@ Watch this space for more updates!!
 
 ## Command Summary
 
-| Action                    | Format, Examples                          |
-|---------------------------|-------------------------------------------|
-| Viewing Help              | `help`                                    |
-| Add more savings          | `savings`                                 |
-| Update monthly allowance  | `allowance`                               |
-| Update contribution ratio | `ratio`                                   |
-| Add Expense               | `add NAME AMOUNT CATEGORY [recurring]`    |
-| List Entries              | `list`                                    |
-| Sort Entries              | `sort KEYWORD` e.g. `sort category`       |
-| Delete Entry              | `delete INDEX` e.g. `delete 2`            |
-| Delete Recurring          | `deleterecurring INDEX`                   |
-| View Financial Summary    | `summary`                                 |
-| Archive Month             | `save`                                    |
-| Clear Current Month       | `clear`                                   |
-| Factory Reset             | `reset`                                   |
-| Exit Program              | `bye`                                     |
+### General Commands
+| Action                    | Format, Examples                                              |
+|---------------------------|---------------------------------------------------------------|
+| Viewing Help              | `help`                                                        |
+| View Financial Summary    | `summary`                                                     |
+| Exit Program              | `bye`                                                         |
+
+### Daily Transaction Commands
+| Action                    | Format, Examples                                 |
+|---------------------------|--------------------------------------------------|
+| Add Expense               | `add <name> <amount> <category> [recurring]`     |
+| List Entries              | `list`                                           |
+| Delete Entry              | `delete <index>` e.g. `delete 2`                 |
+| Delete Recurring          | `deleterecurring <index>` eg `deleterecurring 1` |
+
+### Other Commands
+| Action                    | Format, Examples                                                |
+|---------------------------|-----------------------------------------------------------------|
+| Sort Entries              | `sort <keyword>` e.g. `sort category` `sort recent` `sort name` |
+| Add more savings          | `savings`                                                       |
+| Update monthly allowance  | `allowance`                                                     |
+| Update contribution ratio | `ratio`                                                         |
+| Archive Month             | `save`                                                          |
+| Clear Current Month       | `clear`                                                         |
+| Factory Reset             | `reset`                                                         |
+
 
 ### Enquiry
 We hope that you found FinTrackPro useful and easy to use!
 
-Meanwhile, if you have any enquiries/bugs that you might have found please email us [here!](e1406324@u.nus.edu)
+Meanwhile, if you have any enquiries/bugs that you might have found please email us [here!](mailto:e1406324@u.nus.edu)

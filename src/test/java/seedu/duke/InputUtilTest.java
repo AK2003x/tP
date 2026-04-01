@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import seedu.duke.util.InputUtil;
 import seedu.duke.ui.Ui;
@@ -9,8 +10,23 @@ import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputUtilTest {
+    private static class CapturingUi extends Ui {
+        private final List<String> lines = new ArrayList<>();
+
+        @Override
+        public void printLine(String message) {
+            lines.add(message);
+        }
+
+        public List<String> getLines() {
+            return lines;
+        }
+    }
+
     @Test
     public void formatMoney_wholeNumber_correctCurrencyFormat() {
         String formatted = InputUtil.formatMoney(new BigDecimal("12250"));
@@ -70,6 +86,29 @@ public class InputUtilTest {
     }
 
     @Test
+    public void readMoney_negativeThenValid_showsNegativeMessageAndReturnsValidAmount() {
+        CapturingUi ui = new CapturingUi();
+        Scanner in = new Scanner("-100\n100.00\n");
+
+        BigDecimal result = InputUtil.readMoney(ui, in, "Enter amount:");
+
+        assertEquals(0, new BigDecimal("100.00").compareTo(result));
+        assertTrue(ui.getLines().contains("Negative amounts are not accepted. Please enter 0 or more."));
+    }
+
+    @Test
+    public void readMoney_invalidFormatThenValid_showsFormatMessageAndReturnsValidAmount() {
+        CapturingUi ui = new CapturingUi();
+        Scanner in = new Scanner("abc\n100.00\n");
+
+        BigDecimal result = InputUtil.readMoney(ui, in, "Enter amount:");
+
+        assertEquals(0, new BigDecimal("100.00").compareTo(result));
+        assertTrue(ui.getLines().contains(
+                "Bruh I need a valid amount like 10250 or 10250.50 (numbers only, max 2 dp). Try again."));
+    }
+
+    @Test
     public void readRatio_validHalf_returnsHalf() {
         Ui ui = new Ui();
         Scanner in = new Scanner("0.5\n");
@@ -111,12 +150,13 @@ public class InputUtilTest {
 
     @Test
     public void readRatio_tooManyDecimalPlacesThenValid_returnsValidRatio() {
-        Ui ui = new Ui();
+        CapturingUi ui = new CapturingUi();
         Scanner in = new Scanner("0.555\n0.55\n");
 
         BigDecimal result = InputUtil.readRatio(ui, in, "Enter ratio:");
 
         assertEquals(0, new BigDecimal("0.55").compareTo(result));
+        assertTrue(ui.getLines().contains("Ratio can have at most 2 decimal places (e.g., 0.86). Try again."));
     }
 
     @Test

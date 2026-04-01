@@ -3,6 +3,8 @@ package seedu.duke.data;
 
 import java.math.BigDecimal;
 import seedu.duke.category.Category;
+
+import seedu.duke.util.InputUtil;
 /**
  * Represents a recurring expense template.
  *
@@ -65,6 +67,6 @@ public class RecurringExpense {
      */
     @Override
     public String toString() {
-        return "[RECURRING]" + "[" + category + "] " + name + " $" + amount;
+        return "[RECURRING]" + "[" + category + "] " + name + " " + InputUtil.formatMoney(amount);
     }
 }
