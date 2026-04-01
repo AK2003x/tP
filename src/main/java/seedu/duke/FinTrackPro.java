@@ -344,7 +344,7 @@ public class FinTrackPro {
         if (requiresExactCommandInput(command) && !isExactCommandInput(userInput, command)) {
             logger.warning("state=command.invalid.extra-args | command=" + command
                     + " | rawInput='" + userInput + "'");
-            ui.printLine("did you mean \"" + command + "\"? try again!");
+            ui.printLine("Did you mean \"" + command + "\"? Try again!");
             ui.printLine("");
             return;
         }

@@ -35,10 +35,10 @@ You have 1 years and 5 months and 22 days remaining.
 Nice! Based on your current savings, you have already met your goal.
 
 Type 'help' to view my currently supported commands!
-Any non-command word would be echoed back to you you you
+If you enter an unknown command, I'll prompt you to use 'help'.
 Type 'bye' to exit!
 
-did you mean "help"? try again!
+Did you mean "help"? Try again!
 
 General Commands
 'help'    - view all current commands
@@ -62,7 +62,7 @@ Profile & Goal Management
 'clear'   - wipe all current expenses from the list
 'reset'   - wipes all profile data and expenses to start fresh.
 
-did you mean "summary"? try again!
+Did you mean "summary"? Try again!
 
 ===== BTO Readiness Report =====
 User: James Gosling
@@ -79,11 +79,11 @@ Total Expenditure: $0.00
 Monthly Surplus (Allowance - Expenditure): $4,000.00
 Estimated Goal Achievement: Reached! Go get that BTO!
 
-did you mean "list"? try again!
+Did you mean "list"? Try again!
 
 Your one time off expense list is as empty as my wallet. Go spend some money!
 
-did you mean "savings"? try again!
+Did you mean "savings"? Try again!
 
 Current total savings: $1,000.00
 Enter amount to add to your savings:
@@ -94,7 +94,7 @@ Transaction successful!
 Added: $100.00
 New total savings: $1,100.00
 
-did you mean "allowance"? try again!
+Did you mean "allowance"? Try again!
 
 Current Monthly Allowance: $4,000.00
 Enter new monthly allowance:
@@ -103,7 +103,7 @@ Enter new monthly allowance:
 
 Success! Your monthly allowance is now $100.00
 
-did you mean "ratio"? try again!
+Did you mean "ratio"? Try again!
 
 Current Contribution Ratio: 60.0% (0.6)
 Enter new ratio (0.0 to 1.0):
@@ -115,7 +115,7 @@ Success! Your contribution ratio is now 0.86
 You cannot add a negative expenditure! Try again!
 
 
-did you mean "save"? try again!
+Did you mean "save"? Try again!
 
 Month 1 expenses archived to 'monthly_archives'
 Transferred $100.00 of unspent allowance to savings
@@ -123,16 +123,16 @@ Advanced to Month 2
 Current Savings: $1,200.00
 Monthly Allowance: $100.00
 
-did you mean "clear"? try again!
+Did you mean "clear"? Try again!
 
 WARNING: This will permanently delete ALL one-off expenses. Are you sure? (Input Y to clear)
 Clear cancelled. Your data is still there, bro.
 
-did you mean "reset"? try again!
+Did you mean "reset"? Try again!
 
 WARNING: This will wipe your profile and ALL expenses. Type 'Y' to continue: 
 Reset aborted. Your data is safe!
 
-did you mean "bye"? try again!
+Did you mean "bye"? Try again!
 
 Goodbye James Gosling. Stay disciplined and get that house that you always wanted!
