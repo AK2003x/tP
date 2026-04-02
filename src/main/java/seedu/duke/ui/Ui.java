@@ -78,8 +78,9 @@ public class Ui {
         }
 
         if (!in.hasNextLine()) {
-            logger.warning("No more input available. Returning bye.");
-            return "bye";
+            logger.warning("Input stream closed (EOF). Exiting gracefully.");
+            printLine("\nInput stream closed. Exiting FinTrackPro...");
+            System.exit(0);
         }
 
         String input = in.nextLine();
