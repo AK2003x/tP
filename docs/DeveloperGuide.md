@@ -226,14 +226,11 @@ to different data structures depending on whether the recurring flag is present.
 The above sequence diagram illustrates how the system handles the deletion of a one-off expense.
 
 The interaction begins when the User enters the delete command. FinTrackPro receives the input and invokes
-handleCommand,
-which identifies the command and delegates execution to CommandHandler through handleDelete.
+handleCommand, which identifies the command and delegates execution to CommandHandler through handleDelete.
 
-Within CommandHandler, the input index is first validated using parseDeleteIndex. Once the index is confirmed to be
-valid,
-CommandHandler retrieves the current total expenditure from ExpenseList, deletes the selected Expense, and then
-retrieves
-the updated total.
+Within CommandHandler, the input index is first validated using parseDeleteIndex. Once the index is confirmed to be 
+valid, CommandHandler retrieves the current total expenditure from ExpenseList, deletes the selected Expense, and then
+retrieves the updated total.
 
 Finally, CommandHandler uses the Ui to display confirmation that the expense has been deleted together with the updated
 total expenditure.
@@ -702,6 +699,9 @@ clear downpayment plan - showing how much the individual needs to save and wheth
   the budget and expenses to the local database after every valid state-changing command.
 * Fault Tolerance: The application should not crash or corrupt the local database if the user inputs malformed data.
   Instead it should provide a clear, non-technical error message and maintain the previous valid state.
+* Graceful Shutdown on Stream Closure: If the standard input stream is unexpectedly closed, the application intercepts 
+  the End-of-File (EOF) signal and safely terminates using `System.exit(0)`. This prevents infinite exception loops and 
+  ensures the application closes cleanly without spamming the console.
 
 ## 5.3 Security and privacy
 
@@ -928,6 +928,11 @@ a valid profile before testing profile-dependent commands.
     3. Expected: Re-open the application and run `list`. The "tea" expense is visible, confirming the final save on exit
        was performed.
 
+5. **Handling unexpected stream closure (`Ctrl+C` / EOF)**
+    1. Prerequisites: Application is running and waiting for user input during the initial setup prompts.
+    2. Test case: Press `Ctrl+C` (Windows/Linux) or `Cmd+C` / `Ctrl+D` (Mac) to forcefully close the input stream.
+    3. Expected: The application detects the closed stream, prints a graceful exit message, and terminates immediately 
+       without throwing infinite exceptions or spamming the console.
 ---
 
 ### Summary Report (`summary`)
