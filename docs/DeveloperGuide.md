@@ -69,7 +69,7 @@ strategies employed in the development of FinTrackPro.
 
 * **[SE-EDU Guides](https://se-education.org/guides/)**: We referred to the various guides provided by the SE-EDU team
   for best practices in software documentation and testing.
-* **[CS2113 Module Website](https://nus-cs2113-ay2526s2.github.io/website/)**: Special thanks to the professors and
+* **[CS2113 Module Website](https://nus-cs2113-ay2526-s2.github.io/website/index.html)**: Special thanks to the professors and
   tutors of CS2113 for their guidance and feedback throughout the development lifecycle of v1.0 to v2.1.
 
 # 3. Design & Implementation
