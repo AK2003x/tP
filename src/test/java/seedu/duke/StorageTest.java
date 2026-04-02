@@ -239,6 +239,38 @@ class StorageTest {
     }
 
     @Test
+    void saveAndLoad_housePrice_isPersistedAndRestored(@TempDir Path tempDir) throws IOException {
+        Path tempFile = tempDir.resolve("houseprice_test.txt");
+        Storage storage = new Storage(tempFile.toString());
+
+        Profile original = createValidProfile("HouseTester");
+        original.setHousePrice(new BigDecimal("500000"));
+
+        storage.save(original, new ExpenseList(), new RecurringExpenseList());
+
+        Profile loaded = new Profile();
+        storage.load(loaded, new ExpenseList(), new RecurringExpenseList());
+
+        assertEquals(new BigDecimal("500000"), loaded.getHousePrice());
+    }
+
+    @Test
+    void saveAndLoad_housePrice_nullIsHandledGracefully(@TempDir Path tempDir) throws IOException {
+        Path tempFile = tempDir.resolve("houseprice_null_test.txt");
+        Storage storage = new Storage(tempFile.toString());
+
+        Profile original = createValidProfile("NullHouseTester");
+        // housePrice intentionally not set (remains null)
+
+        storage.save(original, new ExpenseList(), new RecurringExpenseList());
+
+        Profile loaded = new Profile();
+        storage.load(loaded, new ExpenseList(), new RecurringExpenseList());
+
+        assertEquals(null, loaded.getHousePrice());
+    }
+
+    @Test
     void save_multipleCalls_updatesFileProgressively(@TempDir Path tempDir) throws IOException {
         Path tempFile = tempDir.resolve("autosave_test.txt");
         Storage storage = new Storage(tempFile.toString());

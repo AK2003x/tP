@@ -394,7 +394,7 @@ This ensures that the `Ui` component remains clean, while the logic is encapsula
 | Distance to goal         | `btoGoal − currentSavings`                                     |
 | Monthly surplus          | `monthlyAllowance − (totalOneOffExpenses + recurringExpenses)` |
 | Percentage progress      | `(currentSavings / btoGoal) × 100` (capped at 100%)            |
-| Estimated months         | `distanceToGoal ÷ monthlySurplus` (only if surplus > 0)        |
+| Estimated months         | `distanceToGoal ÷ monthlySurplus` rounded up (ceiling), only if surplus > 0 |
 | Monthly required savings | `distanceToGoal ÷ monthsUntilDeadline`                         |
 | Readiness level          | A qualitative status mapped from the progress percentage.      |
 
@@ -630,9 +630,10 @@ An individual BTO budget planner for university students planning to apply for B
 
 # 7. Instructions for Manual Testing
 Before running any test case, ensure you are starting from a clean state by deleting
-`fintrack.txt` and any files in the `monthly_archives/` folder if they exist. Launch
-the application with `java -jar FinTrackPro.jar` and complete the initial setup when
-prompted to establish a valid profile before testing profile-dependent commands.
+`fintrack.txt` and any files in the `monthly_archives/` folder if they exist. Both are
+located in the same directory from which the JAR is run. Launch the application with
+`java -jar FinTrackPro.jar` and complete the initial setup when prompted to establish
+a valid profile before testing profile-dependent commands.
 
 ## 7.1 Test cases
 
@@ -782,7 +783,12 @@ prompted to establish a valid profile before testing profile-dependent commands.
    2. Test case: Manually edit `fintrack.txt` to remove the 8th pipe-delimited field (the currentMonth integer) from the `P` line. Start the application.
    3. Expected: Application loads successfully. The current month defaults to `1` without crashing.
 
---- 
+4. **Final save on clean exit (`bye`)**
+   1. Prerequisites: Application is running with a valid profile.
+   2. Test case: `add tea 3.00 FOOD`, then type `bye` to exit cleanly.
+   3. Expected: Re-open the application and run `list`. The "tea" expense is visible, confirming the final save on exit was performed.
+
+---
 
 ### Summary Report (`summary`)
 1. **Surplus and Estimation Accuracy**
