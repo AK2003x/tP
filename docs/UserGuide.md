@@ -202,8 +202,8 @@ Deletes the specified entry from the tracker.<br>
 <b>Expected Output:</b>
 ```
 > delete 1
-Deleted expense #1: $30
-Current Total: $15.90
+Deleted expense #1: $[OTHER] water $10.00
+Current Total: $0
 ```
 <b>NOTE:</b>
 - INDEX refers to the position in the current month’s expense list.

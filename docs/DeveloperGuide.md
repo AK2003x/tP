@@ -914,8 +914,7 @@ a valid profile before testing profile-dependent commands.
 2. **Handling corrupted data in fintrack.txt**
     1. Prerequisites: Application is closed.
     2. Test case: Manually edit `fintrack.txt` and change an expense amount to `abc`. Start the application.
-    3. Expected: Application starts normally. A warning log/message indicates that a corrupted line was skipped. Other
-       valid data is loaded successfully.
+    3. Expected: Application starts normally. Other valid data is loaded successfully.
 
 3. **Backward compatibility (Missing Month Data)**
     1. Prerequisites: Application is closed.
