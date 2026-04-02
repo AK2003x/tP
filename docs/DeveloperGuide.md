@@ -697,7 +697,7 @@ a valid profile before testing profile-dependent commands.
 
 ### Sorting expenses
 
-1. **Sorting by category**
+1. **Sorting by different keyword**
     1. Prerequisites: Multiple expenses of different categories in the list.
     2. Test case: `sort category` Expected: Expenses reordered in category priority: FOOD, TRANSPORT, ENTERTAINMENT, UTILITIES, OTHER.
     3. Test case: `sort recent` Expected: Expenses reordered back to insertion order.
