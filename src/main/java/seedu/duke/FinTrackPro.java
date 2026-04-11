@@ -108,6 +108,15 @@ public class FinTrackPro {
                     "btoGoal=" + profile.getBtoGoal());
             name = performInitialSetup(in);
             profile.setName(name);
+
+            try {
+                storage.save(profile, expenseList, recurringExpenseList);
+                logger.info("Initial profile saved to disk after setup.");
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "Failed to save after initial setup: " + e.getMessage(), e);
+                ui.printLine("Warning: Could not save your profile to disk.");
+            }
+
             logState("run.profile.initialized", "enter command loop",
                     "profileName=" + name
                             + ", btoGoal=" + profile.getBtoGoal()

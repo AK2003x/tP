@@ -243,3 +243,43 @@
 [2026-04-12 00:43:53] [INFO] seedu.duke.FinTrackPro - state=setup.end | expected=caller stores name in profile | name=Jairus, btoGoal=15750.00
 [2026-04-12 00:43:53] [INFO] seedu.duke.FinTrackPro - state=run.profile.initialized | expected=enter command loop | profileName=Jairus, btoGoal=15750.00, deadline=2028-10-10
 [2026-04-12 00:43:53] [INFO] seedu.duke.FinTrackPro - state=run.command-loop | expected=read command until bye | profileName=Jairus, oneOffCount=0, recurringCount=0
+[2026-04-12 00:53:27] [WARNING] seedu.duke.ui.Ui - Input stream closed (EOF). Exiting gracefully.
+[2026-04-12 00:53:32] [INFO] seedu.duke.FinTrackPro - state=startup | expected=run() entry | storagePath=fintrack.txt
+[2026-04-12 00:53:32] [INFO] seedu.duke.FinTrackPro - state=run.start | expected=show welcome and load persisted data | profileName=friend
+[2026-04-12 00:53:32] [INFO] seedu.duke.ui.Ui - Displaying welcome message and ASCII logo.
+[2026-04-12 00:53:32] [INFO] seedu.duke.FinTrackPro - state=run.load.success | expected=check if initial setup is required | profileName=friend, btoGoal=0, oneOffCount=0, recurringCount=0
+[2026-04-12 00:53:32] [INFO] seedu.duke.FinTrackPro - state=run.profile.new | expected=perform initial setup workflow | btoGoal=0
+[2026-04-12 00:53:32] [INFO] seedu.duke.FinTrackPro - state=setup.start | expected=collect name, finances and deadline | scannerReady=true
+[2026-04-12 00:53:32] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your name?
+[2026-04-12 00:53:40] [INFO] seedu.duke.FinTrackPro - state=setup.name.captured | expected=collect current savings | name=Jairus
+[2026-04-12 00:53:40] [INFO] seedu.duke.ui.Ui - Greeting user: Jairus
+[2026-04-12 00:53:40] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-04-12 00:53:44] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-04-12 00:53:44] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Confirm current savings as $1,000.00? (Y to confirm, any key to re-enter)
+[2026-04-12 00:53:46] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: How much do you currently have in savings?
+[2026-04-12 00:53:50] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 1000, formatted: $1,000.00
+[2026-04-12 00:53:50] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Confirm current savings as $1,000.00? (Y to confirm, any key to re-enter)
+[2026-04-12 00:53:51] [INFO] seedu.duke.FinTrackPro - state=setup.savings.captured | expected=collect monthly allowance | currentSavings=1000
+[2026-04-12 00:53:51] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your monthly allowance? (in dollars)
+[2026-04-12 00:53:53] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 200, formatted: $200.00
+[2026-04-12 00:53:53] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Confirm monthly allowance as $200.00? (Y to confirm, any key to re-enter)
+[2026-04-12 00:53:54] [INFO] seedu.duke.FinTrackPro - state=setup.allowance.captured | expected=collect house price | monthlyAllowance=200
+[2026-04-12 00:53:54] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is the total value that you and your partner have to pay for the house? (in dollars)
+[2026-04-12 00:53:58] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 500000, formatted: $500,000.00
+[2026-04-12 00:53:58] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: Confirm house price as $500,000.00? (Y to confirm, any key to re-enter)
+[2026-04-12 00:54:00] [INFO] seedu.duke.FinTrackPro - state=setup.house-price.captured | expected=collect contribution ratio | housePrice=500000
+[2026-04-12 00:54:00] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: What is your share of the contribution? (e.g., 0.6 for 60%):
+[2026-04-12 00:54:03] [INFO] seedu.duke.FinTrackPro - state=setup.ratio.captured | expected=calculate user BTO goal | contributionRatio=0.6
+[2026-04-12 00:54:03] [INFO] seedu.duke.FinTrackPro - state=setup.bto-calculated | expected=persist goal and collect deadline | totalDownpayment=26250.00, userShare=15750.00
+[2026-04-12 00:54:03] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 26250.00, formatted: $26,250.00
+[2026-04-12 00:54:03] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 15750.00, formatted: $15,750.00
+[2026-04-12 00:54:03] [INFO] seedu.duke.ui.Ui - Displaying prompt to user: When do you need to save this money by? (e.g., 2028-10-24)
+[2026-04-12 00:54:07] [INFO] seedu.duke.FinTrackPro - state=setup.deadline.captured | expected=compute timeline and monthly requirement | deadline=2028-10-10, today=2026-04-12
+[2026-04-12 00:54:07] [INFO] seedu.duke.FinTrackPro - state=setup.goal.in-progress | expected=enter command loop | remainingToSave=14750.00, monthsLeft=30, monthlyNeeded=491.67
+[2026-04-12 00:54:07] [INFO] seedu.duke.CommandHandler - formatMoney succeeded | amount: 491.67, formatted: $491.67
+[2026-04-12 00:54:07] [INFO] seedu.duke.FinTrackPro - state=setup.end | expected=caller stores name in profile | name=Jairus, btoGoal=15750.00
+[2026-04-12 00:54:07] [INFO] seedu.duke.data.Storage - Saving financial data to fintrack.txt
+[2026-04-12 00:54:07] [INFO] seedu.duke.data.Storage - Save successful.
+[2026-04-12 00:54:07] [INFO] seedu.duke.FinTrackPro - Initial profile saved to disk after setup.
+[2026-04-12 00:54:07] [INFO] seedu.duke.FinTrackPro - state=run.profile.initialized | expected=enter command loop | profileName=Jairus, btoGoal=15750.00, deadline=2028-10-10
+[2026-04-12 00:54:07] [INFO] seedu.duke.FinTrackPro - state=run.command-loop | expected=read command until bye | profileName=Jairus, oneOffCount=0, recurringCount=0
