@@ -138,6 +138,9 @@ Month 1 Total: $25
 - The keyword `recurring` is optional.
 - If omitted, the expense will be treated as a one-off expense.
 - Expense name cannot contain the `|` character, as it is reserved as the file delimiter.
+- Name should only contain standard English letters, numbers, and common punctuation (e.g., A–Z, a–z, 0–9, spaces, ., -, _)
+- Special Unicode characters (e.g., emojis or non-English symbols) are not supported
+  and may not be displayed or stored correctly
 
 ### Listing all entries: ```list```
 Shows a consolidated view of all your recorded expenses, neatly categorized by recurring commitments, previous months' 
