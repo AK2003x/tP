@@ -290,7 +290,7 @@ public class CommandHandler {
                             + " | removed: $" + removed.getAmount()
                             + " | new total: $" + expenseList.getTotal());
 
-            ui.printLine("Deleted expense #" + index + ": $" + removed);
+            ui.printLine("Deleted expense #" + index + ": " + removed);
             ui.printLine("Current Total: $" + expenseList.getTotal());
             ui.printLine("");
         } catch (InvalidIndexException e) {

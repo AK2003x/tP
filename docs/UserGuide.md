@@ -20,7 +20,7 @@ Let's get started!
 
 ## Notes about the command format
 - Words in `UPPER_CASE` are parameters to be supplied by the user. e.g. in `add <NAME> <AMOUNT> <CATEGORY>`, `NAME`, `AMOUNT` and `CATEGORY` are parameters.
-- Items in angle brackets `< >` are compulsory. e.g. `<NAME>` must be provided.
+- Items within angle brackets `< >` are compulsory. e.g. `<NAME>` means `NAME` must be provided.
 - Items in square brackets `[ ]` are optional. e.g. `[RECURRING]` can be omitted.
 - 
 ## Features
@@ -202,12 +202,12 @@ Total Expenditure (All Months + Recurring): $118.30
 
 ### Deleting an entry: ```delete```
 Deletes the specified entry from the tracker.<br>
-<b>Format:</b> ```delete INDEX``` <br>
+<b>Format:</b> ```delete <INDEX>``` <br>
 <b>Example of Usage:</b> ```delete 1```<br>
 <b>Expected Output:</b>
 ```
 > delete 1
-Deleted expense #1: $[OTHER] water $10.00
+Deleted expense #1: [OTHER] water $10.00
 Current Total: $0
 ```
 <b>NOTE:</b>
@@ -215,7 +215,7 @@ Current Total: $0
 
 ### Deleting a recurring entry: ```deleterecurring```
 Deletes a recurring expense from the tracker.<br>
-<b>Format:</b> ```deleterecurring INDEX```  
+<b>Format:</b> ```deleterecurring <INDEX>```  
 <b>Example of Usage:</b> ```deleterecurring 1```  
 <b>Expected Output:</b>
 ```
@@ -374,10 +374,10 @@ Watch this space for more updates!!
 
 | Action                    | Format, Examples                                 |
 |---------------------------|--------------------------------------------------|
-| Add Expense               | `add <name> <amount> <category> [recurring]`     |
+| Add Expense               | `add <NAME> <AMOUNT> <CATEGORY> [RECURRING]`     |
 | List Entries              | `list`                                           |
-| Delete Entry              | `delete <index>` e.g. `delete 2`                 |
-| Delete Recurring          | `deleterecurring <index>` eg `deleterecurring 1` |
+| Delete Entry              | `delete <INDEX>` e.g. `delete 2`                 |
+| Delete Recurring          | `deleterecurring <INDEX>` eg `deleterecurring 1` |
 
 ### Other Commands
 
