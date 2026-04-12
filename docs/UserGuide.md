@@ -20,7 +20,7 @@ Let's get started!
 
 ## Notes about the command format
 - Words in `UPPER_CASE` are parameters to be supplied by the user. e.g. in `add <NAME> <AMOUNT> <CATEGORY>`, `NAME`, `AMOUNT` and `CATEGORY` are parameters.
-- Items in angle brackets `< >` are compulsory. e.g. `<NAME>` must be provided.
+- Items within angle brackets `< >` are compulsory. e.g. `<NAME>` means `NAME` must be provided.
 - Items in square brackets `[ ]` are optional. e.g. `[RECURRING]` can be omitted.
 - 
 ## Features
@@ -137,7 +137,13 @@ Month 1 Total: $25
 <b>NOTE:</b>
 - The keyword `recurring` is optional.
 - If omitted, the expense will be treated as a one-off expense.
+- The command format is: `add <NAME> <AMOUNT> <CATEGORY> [RECURRING]` The system interprets the last numeric token before 
+  the category as the amount. Any earlier tokens, including numbers, are treated as part of the expense name. To avoid ambiguity, 
+  users should enter exactly one amount value.
 - Expense name cannot contain the `|` character, as it is reserved as the file delimiter.
+- Name should only contain standard English letters, numbers, and common punctuation (e.g., A–Z, a–z, 0–9, spaces, ., -, _)
+- Special Unicode characters (e.g., emojis or non-English symbols) are not supported
+  and may not be displayed or stored correctly
 
 ### Listing all entries: ```list```
 Shows a consolidated view of all your recorded expenses, neatly categorized by recurring commitments, previous months' 
@@ -202,12 +208,12 @@ Total Expenditure (All Months + Recurring): $118.30
 
 ### Deleting an entry: ```delete```
 Deletes the specified entry from the tracker.<br>
-<b>Format:</b> ```delete INDEX``` <br>
+<b>Format:</b> ```delete <INDEX>``` <br>
 <b>Example of Usage:</b> ```delete 1```<br>
 <b>Expected Output:</b>
 ```
 > delete 1
-Deleted expense #1: $[OTHER] water $10.00
+Deleted expense #1: [OTHER] water $10.00
 Current Total: $0
 ```
 <b>NOTE:</b>
@@ -215,7 +221,7 @@ Current Total: $0
 
 ### Deleting a recurring entry: ```deleterecurring```
 Deletes a recurring expense from the tracker.<br>
-<b>Format:</b> ```deleterecurring INDEX```  
+<b>Format:</b> ```deleterecurring <INDEX>```  
 <b>Example of Usage:</b> ```deleterecurring 1```  
 <b>Expected Output:</b>
 ```
@@ -374,10 +380,10 @@ Watch this space for more updates!!
 
 | Action                    | Format, Examples                                 |
 |---------------------------|--------------------------------------------------|
-| Add Expense               | `add <name> <amount> <category> [recurring]`     |
+| Add Expense               | `add <NAME> <AMOUNT> <CATEGORY> [RECURRING]`     |
 | List Entries              | `list`                                           |
-| Delete Entry              | `delete <index>` e.g. `delete 2`                 |
-| Delete Recurring          | `deleterecurring <index>` eg `deleterecurring 1` |
+| Delete Entry              | `delete <INDEX>` e.g. `delete 2`                 |
+| Delete Recurring          | `deleterecurring <INDEX>` eg `deleterecurring 1` |
 
 ### Other Commands
 
