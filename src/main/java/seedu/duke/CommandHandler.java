@@ -237,7 +237,8 @@ public class CommandHandler {
         assert userInput.startsWith("delete") : "Input should start with 'delete'";
 
         try {
-            String rest = userInput.substring("delete".length()).trim();
+            String rest = getString(userInput);
+
             int index = parseDeleteIndex(rest);
 
             BigDecimal oldTotal = expenseList.getTotal();
@@ -260,6 +261,22 @@ public class CommandHandler {
             ui.printLine(e.getMessage());
         }
     }
+
+    private static String getString(String userInput) throws InvalidIndexException {
+        String rest = userInput.substring("delete".length()).trim();
+        // Reject inputs with zero or more than one argument after "delete"
+        String[] tokens = rest.split("\\s+");
+        if (rest.isEmpty() || tokens.length != 1) {
+            throw new InvalidIndexException(
+                    """
+                            Wrong Format Bro!!!
+                            For one-off expenses: delete <index>
+                            For recurring expenses: deleterecurring <index>
+                            """);
+        }
+        return rest;
+    }
+
     /**
      * Handles the deletion of a recurring expense based on user input.
      *
